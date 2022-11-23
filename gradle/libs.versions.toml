@@ -1,10 +1,14 @@
 [versions]
 kotlin = "1.7.10"
+kotlinx-coroutines = "1.6.4"
 android = "7.3.1"
 androidx-compose = "2022.11.00"
+androidx-fragment = "1.5.4"
+androidx-lifecycle = "2.5.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -12,6 +16,10 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-material = { module = "androidx.compose.material:material" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose" } 
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
