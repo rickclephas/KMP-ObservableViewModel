@@ -5,16 +5,16 @@ import kotlin.random.Random
 
 class TimeTravelViewModel: KMMViewModel() {
 
-    private val viewModelScope = ViewModelScope(this)
+    override val viewModelScope = ViewModelScope(this)
     private val clockTime = Clock.time
 
     /**
      * A [StateFlow] that emits the actual time.
      */
     val actualTime = clockTime.map { formatTime(it) }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
+        .stateIn(viewModelScope, SharingStarted.Eagerly, "N/A")
 
-    private val _travelEffect = MutableStateFlow<TravelEffect?>(null)
+    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
     /**
      * A [StateFlow] that emits the applied [TravelEffect].
      */
@@ -26,14 +26,14 @@ class TimeTravelViewModel: KMMViewModel() {
      * @see stopTime
      */
     val isFixedTime = _travelEffect.map { it is TravelEffect.Fixed }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     /**
      * A [StateFlow] that emits the current time.
      */
     val currentTime = combine(clockTime, _travelEffect) { actualTime, travelEffect ->
         formatTime(actualTime + travelEffect)
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, "N/A")
 
     /**
      * Restarts the [currentTime] after has been previously stopped.

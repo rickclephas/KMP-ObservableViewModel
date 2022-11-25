@@ -16,6 +16,11 @@ kotlin {
         it.binaries.framework {
             baseName = "KMMViewModelSampleShared"
         }
+        it.compilations.getByName("main") {
+            cinterops.create("KMMViewModelCombine") {
+                includeDirs("$projectDir/src/nativeInterop/cinterop/KMMViewModelCombine")
+            }
+        }
     }
 
     sourceSets {

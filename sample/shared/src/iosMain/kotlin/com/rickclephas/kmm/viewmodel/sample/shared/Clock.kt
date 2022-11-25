@@ -1,9 +1,6 @@
 package com.rickclephas.kmm.viewmodel.sample.shared
 
-import platform.Foundation.NSDate
-import platform.Foundation.NSDateFormatter
-import platform.Foundation.date
-import platform.Foundation.timeIntervalSince1970
+import platform.Foundation.*
 
 internal actual fun epochSeconds(): Long = NSDate.date().timeIntervalSince1970().toLong()
 
@@ -12,4 +9,4 @@ private val timeFormatter = NSDateFormatter().apply {
 }
 
 internal actual fun formatTime(epochSeconds: Long): String =
-    timeFormatter.stringFromDate(NSDate(epochSeconds.toDouble()))
+    timeFormatter.stringFromDate(NSDate.dateWithTimeIntervalSince1970(epochSeconds.toDouble()))
