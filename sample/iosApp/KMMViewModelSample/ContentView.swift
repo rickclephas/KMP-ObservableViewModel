@@ -12,7 +12,7 @@ import KMMViewModelRick
 
 struct ContentView: View {
     
-    @ObservedObject(\.viewModelScope) var viewModel = TimeTravelViewModel()
+    @StateObject(\.viewModelScope) var viewModel = TimeTravelViewModel()
     
     private var isFixedTimeBinding: Binding<Bool> {
         Binding { viewModel.isFixedTimeValue } set: { isFixedTime in

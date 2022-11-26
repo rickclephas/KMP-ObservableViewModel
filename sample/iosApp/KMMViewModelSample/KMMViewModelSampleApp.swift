@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct KMMViewModelSampleApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                NavigationLink("GO!", destination: ContentView())
+            }
         }
     }
 }

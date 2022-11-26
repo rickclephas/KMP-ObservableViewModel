@@ -12,7 +12,7 @@ class TimeTravelViewModel: KMMViewModel() {
      * A [StateFlow] that emits the actual time.
      */
     val actualTime = clockTime.map { formatTime(it) }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, "N/A")
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
     private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
     /**
@@ -26,14 +26,14 @@ class TimeTravelViewModel: KMMViewModel() {
      * @see stopTime
      */
     val isFixedTime = _travelEffect.map { it is TravelEffect.Fixed }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     /**
      * A [StateFlow] that emits the current time.
      */
     val currentTime = combine(clockTime, _travelEffect) { actualTime, travelEffect ->
         formatTime(actualTime + travelEffect)
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, "N/A")
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
     /**
      * Restarts the [currentTime] after has been previously stopped.
