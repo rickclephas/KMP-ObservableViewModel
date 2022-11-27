@@ -1,11 +1,11 @@
 package com.rickclephas.kmm.viewmodel.sample.shared
 
+import com.rickclephas.kmm.viewmodel.*
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
 class TimeTravelViewModel: KMMViewModel() {
 
-    override val viewModelScope = ViewModelScope(this)
     private val clockTime = Clock.time
 
     /**

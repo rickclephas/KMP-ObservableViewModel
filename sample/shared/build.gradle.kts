@@ -16,17 +16,13 @@ kotlin {
         it.binaries.framework {
             baseName = "KMMViewModelSampleShared"
         }
-        it.compilations.getByName("main") {
-            cinterops.create("KMMViewModelCombine") {
-                includeDirs("$projectDir/src/nativeInterop/cinterop/KMMViewModelCombine")
-            }
-        }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
+                implementation("com.rickclephas.kmm:kmm-viewmodel-core")
             }
         }
         val commonTest by getting {

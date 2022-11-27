@@ -18,6 +18,13 @@ rootProject.name = "sample"
 include(":androidApp")
 include(":shared")
 
+includeBuild("..") {
+    dependencySubstitution {
+        substitute(module("com.rickclephas.kmm:kmm-viewmodel-core"))
+            .using(project(":kmm-viewmodel-core"))
+    }
+}
+
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {

@@ -7,19 +7,18 @@
 
 import SwiftUI
 import KMMViewModelSampleShared
-import CoreBluetooth
-import KMMViewModelRick
+import KMMViewModelSwiftUI
 
 struct ContentView: View {
     
-    @StateObject(\.viewModelScope) var viewModel = TimeTravelViewModel()
+    @StateViewModel(\.viewModelScope) var viewModel = TimeTravelViewModel()
     
     private var isFixedTimeBinding: Binding<Bool> {
         Binding { viewModel.isFixedTimeValue } set: { isFixedTime in
             if isFixedTime {
-                viewModel.viewModel.stopTime()
+                viewModel.stopTime()
             } else {
-                viewModel.viewModel.startTime()
+                viewModel.startTime()
             }
         }
     }
@@ -54,13 +53,13 @@ struct ContentView: View {
             Group {
                 Spacer().frame(height: 24)
                 Button("Time travel") {
-                    viewModel.viewModel.timeTravel()
+                    viewModel.timeTravel()
                 }
             }
             Group {
                 Spacer().frame(height: 24)
                 Button("Reset") {
-                    viewModel.viewModel.resetTime()
+                    viewModel.resetTime()
                 }
             }
             Spacer()
