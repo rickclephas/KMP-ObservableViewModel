@@ -16,9 +16,8 @@ public actual abstract class KMMViewModel {
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    public actual val viewModelScope: ViewModelScope by lazy {
-        ViewModelScopeImpl(WeakReference(this))
-    }
+    @Suppress("LeakingThis")
+    public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl(WeakReference(this))
 
     /**
      * Called when this VieModel is no longer used and will be destroyed.
