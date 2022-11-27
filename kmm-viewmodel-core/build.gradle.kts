@@ -59,8 +59,8 @@ kotlin {
                 dependsOn(appleTest)
             }
             it.compilations.getByName("main") {
-                cinterops.create("KMMViewModelCore") {
-                    includeDirs("$projectDir/src/nativeInterop/cinterop/KMMViewModelCore")
+                cinterops.create("KMMViewModelCoreObjC") {
+                    includeDirs("$projectDir/../KMMViewModelCoreObjC")
                 }
             }
         }

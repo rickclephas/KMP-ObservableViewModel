@@ -7,6 +7,7 @@
 
 import SwiftUI
 import KMMViewModelCore
+import KMMViewModelCoreObjC
 
 /// An `EnvironmentObject` property wrapper for `KMMViewModel`s.
 @propertyWrapper

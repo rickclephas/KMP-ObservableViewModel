@@ -1,6 +1,6 @@
 package com.rickclephas.kmm.viewmodel
 
-import com.rickclephas.kmm.viewmodel.cinterop.KMMVMViewModelScopeProtocol
+import com.rickclephas.kmm.viewmodel.objc.KMMVMViewModelScopeProtocol
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

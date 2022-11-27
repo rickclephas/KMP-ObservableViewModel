@@ -6,6 +6,7 @@
 //
 
 import Combine
+import KMMViewModelCoreObjC
 
 /// Creates an `ObservableObject` for the specified `KMMViewModel`.
 /// - Parameters:
