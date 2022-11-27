@@ -19,9 +19,9 @@ public struct EnvironmentViewModel<ViewModel>: DynamicProperty {
     public var wrappedValue: ViewModel { observableObject.viewModel }
     
     /// A projection of the observed `KMMViewModel` that creates bindings to its properties using dynamic member lookup.
-    public lazy var projectedValue: ObservableViewModel<ViewModel>.Projection = {
+    public var projectedValue: ObservableViewModel<ViewModel>.Projection {
         ObservableViewModel.Projection(observableObject)
-    }()
+    }
     
     /// Creates an `EnvironmentViewModel`.
     public init() { }
