@@ -60,6 +60,9 @@ public class ViewModelScopeImpl internal constructor(
     private var sendObjectWillChange: (() -> Unit)? = null
 
     override fun setSendObjectWillChange(sendObjectWillChange: () -> Unit) {
+        if (this.sendObjectWillChange != null) {
+            throw IllegalStateException("KMMViewModel can't be wrapped more than once")
+        }
         this.sendObjectWillChange = sendObjectWillChange
     }
 
