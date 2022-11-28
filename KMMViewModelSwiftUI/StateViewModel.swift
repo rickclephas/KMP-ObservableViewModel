@@ -12,7 +12,7 @@ import KMMViewModelCoreObjC
 /// A `StateObject` property wrapper for `KMMViewModel`s.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @propertyWrapper
-public struct StateViewModel<ViewModel>: DynamicProperty {
+public struct StateViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @StateObject private var observableObject: ObservableViewModel<ViewModel>
     
@@ -25,13 +25,8 @@ public struct StateViewModel<ViewModel>: DynamicProperty {
     }
     
     /// Creates a `StateViewModel` for the specified `KMMViewModel`.
-    /// - Parameters:
-    ///     - wrappedValue: The `KMMViewModel` to observe.
-    ///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
-    public init(
-        wrappedValue: @autoclosure @escaping () -> ViewModel,
-        _ keyPath: KeyPath<ViewModel, ViewModelScope>
-    ) {
-        self._observableObject = StateObject(wrappedValue: createObservableViewModel(for: wrappedValue(), with: keyPath))
+    /// - Parameter wrappedValue: The `KMMViewModel` to observe.
+    public init(wrappedValue: @autoclosure @escaping () -> ViewModel) {
+        self._observableObject = StateObject(wrappedValue: createObservableViewModel(for: wrappedValue()))
     }
 }

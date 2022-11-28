@@ -11,7 +11,7 @@ import KMMViewModelCoreObjC
 
 /// An `EnvironmentObject` property wrapper for `KMMViewModel`s.
 @propertyWrapper
-public struct EnvironmentViewModel<ViewModel>: DynamicProperty {
+public struct EnvironmentViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @EnvironmentObject private var observableObject: ObservableViewModel<ViewModel>
     
@@ -29,13 +29,8 @@ public struct EnvironmentViewModel<ViewModel>: DynamicProperty {
 
 public extension View {
     /// Supplies a `KMMViewModel` to a view subhierarchy.
-    /// - Parameters:
-    ///     - viewModel: The `KMMViewModel` to supply to a view subhierarchy.
-    ///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
-    func environmentViewModel<ViewModel>(
-        for viewModel: ViewModel,
-        with keyPath: KeyPath<ViewModel, ViewModelScope>
-    ) -> some View {
-        environmentObject(createObservableViewModel(for: viewModel, with: keyPath))
+    /// - Parameter viewModel: The `KMMViewModel` to supply to a view subhierarchy.
+    func environmentViewModel<ViewModel: KMMViewModel>(for viewModel: ViewModel) -> some View {
+        environmentObject(createObservableViewModel(for: viewModel))
     }
 }

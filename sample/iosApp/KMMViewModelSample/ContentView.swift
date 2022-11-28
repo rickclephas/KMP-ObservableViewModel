@@ -11,7 +11,7 @@ import KMMViewModelSwiftUI
 
 struct ContentView: View {
     
-    @StateViewModel(\.viewModelScope) var viewModel = TimeTravelViewModel()
+    @StateViewModel var viewModel = TimeTravelViewModel()
     
     private var isFixedTimeBinding: Binding<Bool> {
         Binding { viewModel.isFixedTimeValue } set: { isFixedTime in

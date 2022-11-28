@@ -9,26 +9,23 @@ import Combine
 import KMMViewModelCoreObjC
 
 /// Creates an `ObservableObject` for the specified `KMMViewModel`.
-/// - Parameters:
-///     - viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
-///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
-public func createObservableViewModel<ViewModel>(
-    for viewModel: ViewModel,
-    with keyPath: KeyPath<ViewModel, ViewModelScope>
+/// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
+public func createObservableViewModel<ViewModel: KMMViewModel>(
+    for viewModel: ViewModel
 ) -> ObservableViewModel<ViewModel> {
-    ObservableViewModel(viewModel, keyPath)
+    ObservableViewModel(viewModel)
 }
 
 /// An `ObservableObject` for a `KMMViewModel`.
-public final class ObservableViewModel<ViewModel>: ObservableObject {
+public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject {
     
     public let objectWillChange: ObservableViewModelPublisher
     
     private var _viewModel: ViewModel
     public var viewModel: ViewModel { _viewModel }
     
-    internal init(_ viewModel: ViewModel, _ keyPath: KeyPath<ViewModel, ViewModelScope>) {
-        objectWillChange = ObservableViewModelPublisher(viewModel[keyPath: keyPath])
+    internal init(_ viewModel: ViewModel) {
+        objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope)
         self._viewModel = viewModel
     }
     

@@ -15,6 +15,7 @@
 		1D44EF93292C066C00465C43 /* KMMViewModelSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF92292C066C00465C43 /* KMMViewModelSampleUITests.swift */; };
 		1D44EF95292C066C00465C43 /* KMMViewModelSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF94292C066C00465C43 /* KMMViewModelSampleUITestsLaunchTests.swift */; };
 		1DCF89AB2933929400A4C54A /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DCF89AA2933929400A4C54A /* KMMViewModelSwiftUI */; };
+		1DDAF2202935470A0049C114 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF21F2935470A0049C114 /* KMMViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		1D44EF92292C066C00465C43 /* KMMViewModelSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModelSampleUITests.swift; sourceTree = "<group>"; };
 		1D44EF94292C066C00465C43 /* KMMViewModelSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModelSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1DCF89A82933928600A4C54A /* KMM-ViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "KMM-ViewModel"; path = ../..; sourceTree = "<group>"; };
+		1DDAF21F2935470A0049C114 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				1D44EF79292C066B00465C43 /* ContentView.swift */,
 				1D44EF7B292C066C00465C43 /* Assets.xcassets */,
 				1D44EF7D292C066C00465C43 /* Preview Content */,
+				1DDAF21F2935470A0049C114 /* KMMViewModel.swift */,
 			);
 			path = KMMViewModelSample;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DDAF2202935470A0049C114 /* KMMViewModel.swift in Sources */,
 				1D44EF7A292C066B00465C43 /* ContentView.swift in Sources */,
 				1D44EF78292C066B00465C43 /* KMMViewModelSampleApp.swift in Sources */,
 			);

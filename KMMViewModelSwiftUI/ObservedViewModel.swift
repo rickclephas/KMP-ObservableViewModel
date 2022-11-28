@@ -11,7 +11,7 @@ import KMMViewModelCoreObjC
 
 /// An `ObservedObject` property wrapper for `KMMViewModel`s.
 @propertyWrapper
-public struct ObservedViewModel<ViewModel>: DynamicProperty {
+public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @ObservedObject private var observableObject: ObservableViewModel<ViewModel>
     
@@ -31,8 +31,8 @@ public struct ObservedViewModel<ViewModel>: DynamicProperty {
     /// - Parameters:
     ///     - wrappedValue: The `KMMViewModel` to observe.
     ///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
-    public init(wrappedValue: ViewModel, _ keyPath: KeyPath<ViewModel, ViewModelScope>) {
-        let observableObject = createObservableViewModel(for: wrappedValue, with: keyPath)
+    public init(wrappedValue: ViewModel) {
+        let observableObject = createObservableViewModel(for: wrappedValue)
         self.observableObject = observableObject
         self.projectedValue = ObservableViewModel.Projection(observableObject)
     }
