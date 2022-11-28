@@ -25,7 +25,9 @@ private class MutableStateFlowImpl<T>(
     override var value: T
         get() = stateFlow.value
         set(value) {
-            viewModelScope.sendObjectWillChange()
+            if (stateFlow.value != value) {
+                viewModelScope.sendObjectWillChange()
+            }
             stateFlow.value = value
         }
 
@@ -40,7 +42,9 @@ private class MutableStateFlowImpl<T>(
     }
 
     override fun compareAndSet(expect: T, update: T): Boolean {
-        viewModelScope.sendObjectWillChange()
+        if (stateFlow.value == expect && expect != update) {
+            viewModelScope.sendObjectWillChange()
+        }
         return stateFlow.compareAndSet(expect, update)
     }
 
