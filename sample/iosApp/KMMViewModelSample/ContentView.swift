@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import KMMViewModelSampleShared
 import KMMViewModelSwiftUI
 
 struct ContentView: View {
@@ -60,7 +59,7 @@ struct ContentView: View {
                 Spacer().frame(height: 24)
                 Button("Reset") {
                     viewModel.resetTime()
-                }
+                }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
             }
             Spacer()
         }

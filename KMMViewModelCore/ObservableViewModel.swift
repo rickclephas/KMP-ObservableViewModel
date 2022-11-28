@@ -25,7 +25,7 @@ public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObjec
     public var viewModel: ViewModel { _viewModel }
     
     internal init(_ viewModel: ViewModel) {
-        objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope)
+        objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
         self._viewModel = viewModel
     }
     
@@ -46,10 +46,14 @@ public final class ObservableViewModelPublisher: Publisher {
     internal weak var viewModelScope: ViewModelScope?
     
     private let publisher = ObservableObjectPublisher()
+    private var objectWillChangeCancellable: AnyCancellable? = nil
     
-    init(_ viewModelScope: ViewModelScope) {
+    init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
         self.viewModelScope = viewModelScope
         viewModelScope.setSendObjectWillChange { [weak self] in
+            self?.publisher.send()
+        }
+        objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
             self?.publisher.send()
         }
     }

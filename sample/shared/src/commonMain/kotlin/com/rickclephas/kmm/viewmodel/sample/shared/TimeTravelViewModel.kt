@@ -4,7 +4,7 @@ import com.rickclephas.kmm.viewmodel.*
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
-class TimeTravelViewModel: KMMViewModel() {
+open class TimeTravelViewModel: KMMViewModel() {
 
     private val clockTime = Clock.time
 
@@ -61,7 +61,7 @@ class TimeTravelViewModel: KMMViewModel() {
     /**
      * Resets the [currentTime] to [actualTime].
      */
-    fun resetTime() {
+    open fun resetTime() {
         _travelEffect.value = null
     }
 }
