@@ -63,7 +63,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your project:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "<version>")
+    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "<version>")
 ]
 ```
 
