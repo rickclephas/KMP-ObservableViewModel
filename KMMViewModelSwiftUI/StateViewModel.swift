@@ -24,10 +24,6 @@ public struct StateViewModel<ViewModel>: DynamicProperty {
         ObservableViewModel.Projection(observableObject)
     }
     
-    internal init(observableObject: @autoclosure @escaping () -> ObservableViewModel<ViewModel>) {
-        self._observableObject = SwiftUI.StateObject(wrappedValue: observableObject())
-    }
-    
     /// Creates a `StateViewModel` for the specified `KMMViewModel`.
     /// - Parameters:
     ///     - wrappedValue: The `KMMViewModel` to observe.
@@ -36,14 +32,6 @@ public struct StateViewModel<ViewModel>: DynamicProperty {
         wrappedValue: @autoclosure @escaping () -> ViewModel,
         _ keyPath: KeyPath<ViewModel, ViewModelScope>
     ) {
-        self.init(observableObject: createObservableViewModel(for: wrappedValue(), with: keyPath))
-    }
-}
-
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public extension StateViewModel {
-    /// Creates a `StateViewModel` for the specified `KMMViewModel` projection.
-    init(wrappedValue: ObservableViewModel<ViewModel>.Projection) {
-        self.init(observableObject: wrappedValue.observableObject)
+        self._observableObject = StateObject(wrappedValue: createObservableViewModel(for: wrappedValue(), with: keyPath))
     }
 }

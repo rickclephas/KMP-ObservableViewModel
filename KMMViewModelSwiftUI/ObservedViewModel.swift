@@ -21,9 +21,10 @@ public struct ObservedViewModel<ViewModel>: DynamicProperty {
     /// A projection of the observed `KMMViewModel` that creates bindings to its properties using dynamic member lookup.
     public var projectedValue: ObservableViewModel<ViewModel>.Projection
     
-    internal init(observableObject: ObservableViewModel<ViewModel>) {
-        self.observableObject = observableObject
-        projectedValue = ObservableViewModel.Projection(observableObject)
+    /// Creates an `ObservedViewModel` for the specified `KMMViewModel` projection.
+    public init(_ projectedValue: ObservableViewModel<ViewModel>.Projection) {
+        self.observableObject = projectedValue.observableObject
+        self.projectedValue = projectedValue
     }
     
     /// Creates an `ObservedViewModel` for the specified `KMMViewModel`.
@@ -31,13 +32,8 @@ public struct ObservedViewModel<ViewModel>: DynamicProperty {
     ///     - wrappedValue: The `KMMViewModel` to observe.
     ///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
     public init(wrappedValue: ViewModel, _ keyPath: KeyPath<ViewModel, ViewModelScope>) {
-        self.init(observableObject: createObservableViewModel(for: wrappedValue, with: keyPath))
-    }
-}
-
-public extension ObservedViewModel {
-    /// Creates an `ObservedViewModel` for the specified `KMMViewModel` projection.
-    init(wrappedValue: ObservableViewModel<ViewModel>.Projection) {
-        self.init(observableObject: wrappedValue.observableObject)
+        let observableObject = createObservableViewModel(for: wrappedValue, with: keyPath)
+        self.observableObject = observableObject
+        self.projectedValue = ObservableViewModel.Projection(observableObject)
     }
 }
