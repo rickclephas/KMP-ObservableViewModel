@@ -22,15 +22,14 @@ public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     public var projectedValue: ObservableViewModel<ViewModel>.Projection
     
     /// Creates an `ObservedViewModel` for the specified `KMMViewModel` projection.
+    /// - Parameter projectedValue: The `projectedValue` from e.g. `StateViewModel`.
     public init(_ projectedValue: ObservableViewModel<ViewModel>.Projection) {
         self.observableObject = projectedValue.observableObject
         self.projectedValue = projectedValue
     }
     
     /// Creates an `ObservedViewModel` for the specified `KMMViewModel`.
-    /// - Parameters:
-    ///     - wrappedValue: The `KMMViewModel` to observe.
-    ///     - keyPath: The key path to the `ViewModelScope` property of the ViewModel.
+    /// - Parameter wrappedValue: The `KMMViewModel` to observe.
     public init(wrappedValue: ViewModel) {
         let observableObject = createObservableViewModel(for: wrappedValue)
         self.observableObject = observableObject
