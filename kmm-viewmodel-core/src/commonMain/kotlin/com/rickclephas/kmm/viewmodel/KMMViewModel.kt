@@ -18,7 +18,7 @@ public expect abstract class KMMViewModel() {
     public val viewModelScope: ViewModelScope
 
     /**
-     * Called when this VieModel is no longer used and will be destroyed.
+     * Called when this ViewModel is no longer used and will be destroyed.
      */
     public open fun onCleared()
 }

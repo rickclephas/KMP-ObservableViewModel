@@ -37,9 +37,8 @@ private class MutableStateFlowImpl<T>(
     override val subscriptionCount: StateFlow<Int> =
         SubscriptionCountFlow(viewModelScope.subscriptionCount, stateFlow.subscriptionCount)
 
-    override suspend fun collect(collector: FlowCollector<T>): Nothing {
+    override suspend fun collect(collector: FlowCollector<T>): Nothing =
         stateFlow.collect(collector)
-    }
 
     override fun compareAndSet(expect: T, update: T): Boolean {
         if (stateFlow.value == expect && expect != update) {
@@ -49,9 +48,7 @@ private class MutableStateFlowImpl<T>(
     }
 
     @ExperimentalCoroutinesApi
-    override fun resetReplayCache() {
-        stateFlow.resetReplayCache()
-    }
+    override fun resetReplayCache() = stateFlow.resetReplayCache()
 
     // Same implementation as in StateFlowImpl, but we need to go through our own value property.
     // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/StateFlow.kt#L369

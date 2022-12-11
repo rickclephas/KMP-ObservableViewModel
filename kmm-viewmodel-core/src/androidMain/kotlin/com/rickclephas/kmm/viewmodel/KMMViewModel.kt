@@ -20,7 +20,7 @@ public actual abstract class KMMViewModel: ViewModel() {
     public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl(this)
 
     /**
-     * Called when this VieModel is no longer used and will be destroyed.
+     * Called when this ViewModel is no longer used and will be destroyed.
      */
     public actual override fun onCleared() { }
 }
