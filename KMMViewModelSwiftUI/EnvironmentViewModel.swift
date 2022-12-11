@@ -30,7 +30,13 @@ public struct EnvironmentViewModel<ViewModel: KMMViewModel>: DynamicProperty {
 public extension View {
     /// Supplies a `KMMViewModel` to a view subhierarchy.
     /// - Parameter viewModel: The `KMMViewModel` to supply to a view subhierarchy.
-    func environmentViewModel<ViewModel: KMMViewModel>(for viewModel: ViewModel) -> some View {
+    func environmentViewModel<ViewModel: KMMViewModel>(_ viewModel: ViewModel) -> some View {
         environmentObject(createObservableViewModel(for: viewModel))
+    }
+    
+    /// Supplies a `KMMViewModel` to a view subhierarchy.
+    /// - Parameter projectedValue: The `projectedValue` from e.g. `StateViewModel`.
+    func environmentViewModel<ViewModel: KMMViewModel>(_ projectedValue: ObservableViewModel<ViewModel>.Projection) -> some View {
+        environmentObject(projectedValue.observableObject)
     }
 }

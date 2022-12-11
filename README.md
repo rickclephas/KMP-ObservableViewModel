@@ -78,12 +78,12 @@ extension Kmm_viewmodel_coreKMMViewModel: KMMViewModel { }
 After that you can use your view model almost as if it were an `ObservableObject`.   
 Just use the view model specific property wrappers and functions:
 
-| `ObservableObject`      | `KMMViewModel`               |
-|-------------------------|------------------------------|
-| `@StateObject`          | `@StateViewModel`            |
-| `@ObservedObject`       | `@ObservedViewModel`         |
-| `@EnvironmentObject`    | `@EnvironmentViewModel`      |
-| `environmentObject(_:)` | `environmentViewModel(for:)` |
+| `ObservableObject`      | `KMMViewModel`             |
+|-------------------------|----------------------------|
+| `@StateObject`          | `@StateViewModel`          |
+| `@ObservedObject`       | `@ObservedViewModel`       |
+| `@EnvironmentObject`    | `@EnvironmentViewModel`    |
+| `environmentObject(_:)` | `environmentViewModel(_:)` |
 
 E.g. to use the `TimeTravelViewModel` as a `StateObject`:
 ```swift
