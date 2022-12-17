@@ -39,6 +39,19 @@ open class TimeTravelViewModel: KMMViewModel() {
 You need to use `viewModelScope` wherever possible to propagate state changes to iOS.  
 In other cases you can access the `ViewModelScope.coroutineScope` property directly.
 
+### KMP-NativeCoroutines
+
+Use the `@NativeCoroutinesState` annotation from KMP-NativeCoroutines
+to turn your `StateFlow`s into properties in Swift:
+
+```kotlin
+@NativeCoroutinesState
+val travelEffect = _travelEffect.asStateFlow()
+```
+
+Checkout the [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/dev-1.0/README.md)
+for more information and installation instructions for KMP-NativeCoroutines.
+
 ## Android
 
 Add the library to your Android module:
