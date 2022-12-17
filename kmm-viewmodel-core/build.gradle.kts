@@ -20,7 +20,9 @@ kotlin {
     val tvosArm64 = tvosArm64()
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
-    android()
+    android {
+        publishLibraryVariants("release")
+    }
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
