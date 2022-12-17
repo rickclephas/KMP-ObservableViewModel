@@ -65,15 +65,17 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 
 > **Note:** support for Jetpack Compose is coming soon.
 
-
 ## Swift
 
-Add the Swift package to your project:
+Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
     .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "<version>")
 ]
 ```
+
+Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
+`https://github.com/rickclephas/KMM-ViewModel.git`.
 
 Create a `KMMViewModel.swift` file with the following contents:
 ```swift
