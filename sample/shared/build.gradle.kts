@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.ksp)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.nativecoroutines)
 }
 
 kotlin {
@@ -19,6 +23,9 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
