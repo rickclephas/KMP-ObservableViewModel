@@ -41,7 +41,7 @@ In other cases you can access the `ViewModelScope.coroutineScope` property direc
 
 ### KMP-NativeCoroutines
 
-Use the `@NativeCoroutinesState` annotation from KMP-NativeCoroutines
+Use the `@NativeCoroutinesState` annotation from [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
 to turn your `StateFlow`s into properties in Swift:
 
 ```kotlin
@@ -51,6 +51,17 @@ val travelEffect = _travelEffect.asStateFlow()
 
 Checkout the [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/dev-1.0/README.md)
 for more information and installation instructions for KMP-NativeCoroutines.
+
+<details><summary>Alternative</summary>
+<p>
+
+Alternatively you can create extension properties in your iOS source-set yourself:
+```kotlin
+val TimeTravelViewModel.travelEffectValue: TravelEffect?
+    get() = travelEffect.value
+```
+</p>
+</details>
 
 ## Android
 
