@@ -1,0 +1,11 @@
+name: Cache Konan
+description: Caches Konan files
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v2
+      with:
+        path: ~/.konan
+        key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-konan-

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.library)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
+    `kmm-viewmodel-publish`
 }
 
 kotlin {
