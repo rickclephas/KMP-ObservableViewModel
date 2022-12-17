@@ -98,6 +98,7 @@ Just use the view model specific property wrappers and functions:
 E.g. to use the `TimeTravelViewModel` as a `StateObject`:
 ```swift
 import SwiftUI
+import KMMViewModelSwiftUI
 import shared // This should be your shared KMM module
 
 struct ContentView: View {
