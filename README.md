@@ -23,6 +23,10 @@ dependencies {
 
 Create your ViewModels almost as you would in Android:
 ```kotlin
+import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import com.rickclephas.kmm.viewmodel.stateIn
+
 // 1: use KMMViewModel instead of ViewModel
 open class TimeTravelViewModel: KMMViewModel() {
 
@@ -108,6 +112,7 @@ struct ContentView: View {
 
 It's also possible to subclass your view model in Swift:
 ```swift
+import Combine
 import shared // This should be your shared KMM module
 
 class TimeTravelViewModel: shared.TimeTravelViewModel {
