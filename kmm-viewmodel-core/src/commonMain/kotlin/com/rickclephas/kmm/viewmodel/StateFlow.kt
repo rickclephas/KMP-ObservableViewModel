@@ -1,5 +1,6 @@
 package com.rickclephas.kmm.viewmodel
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +19,7 @@ public expect fun <T> MutableStateFlow(
  */
 public expect fun <T> Flow<T>.stateIn(
     viewModelScope: ViewModelScope,
+    coroutineScope: CoroutineScope,
     started: SharingStarted,
     initialValue: T
 ): StateFlow<T>

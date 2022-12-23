@@ -90,6 +90,7 @@ private class SubscriptionCountFlow(
  */
 public actual fun <T> Flow<T>.stateIn(
     viewModelScope: ViewModelScope,
+    coroutineScope: CoroutineScope,
     started: SharingStarted,
     initialValue: T
 ): StateFlow<T> {
@@ -97,7 +98,7 @@ public actual fun <T> Flow<T>.stateIn(
     // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L135
     val scope = viewModelScope.asImpl()
     val state = MutableStateFlowImpl(scope, MutableStateFlow(initialValue))
-    val job = scope.coroutineScope.launchSharing(EmptyCoroutineContext, this, state, started, initialValue)
+    val job = coroutineScope.launchSharing(EmptyCoroutineContext, this, state, started, initialValue)
     return ReadonlyStateFlow(state, job)
 }
 
