@@ -73,4 +73,7 @@ kotlin {
 android {
     namespace = "com.rickclephas.kmm.viewmodel"
     compileSdk = 33
+    defaultConfig {
+        minSdk = 14
+    }
 }
