@@ -45,18 +45,16 @@ public final class ObservableViewModelPublisher: Publisher {
     
     internal weak var viewModelScope: ViewModelScope?
     
-    private let publisher: AnyPublisher<(), Never>
+    private let publisher = ObservableObjectPublisher()
     private var objectWillChangeCancellable: AnyCancellable? = nil
     
     init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
         self.viewModelScope = viewModelScope
-        let publisher = ObservableObjectPublisher()
-        self.publisher = publisher.receive(on: RunLoop.main).eraseToAnyPublisher()
-        viewModelScope.setSendObjectWillChange {
-            publisher.send()
+        viewModelScope.setSendObjectWillChange { [weak self] in
+            self?.publisher.send()
         }
-        objectWillChangeCancellable = objectWillChange.sink {
-            publisher.send()
+        objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
+            self?.publisher.send()
         }
     }
     
