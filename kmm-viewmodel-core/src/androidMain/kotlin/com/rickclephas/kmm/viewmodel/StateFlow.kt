@@ -1,7 +1,7 @@
 package com.rickclephas.kmm.viewmodel
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @see kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ public actual inline fun <T> MutableStateFlow(
 @Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T> Flow<T>.stateIn(
     viewModelScope: ViewModelScope,
-    coroutineScope: CoroutineScope,
+    coroutineContext: CoroutineContext,
     started: SharingStarted,
     initialValue: T
-): StateFlow<T> = stateIn(coroutineScope, started, initialValue)
+): StateFlow<T> = flowOn(coroutineContext).stateIn(viewModelScope.coroutineScope, started, initialValue)
