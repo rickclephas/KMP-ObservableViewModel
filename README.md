@@ -2,7 +2,15 @@
 
 A library that allows you to share ViewModels between Android and iOS.
 
-> **Warning**: this is still a WIP. Initial release coming soon 😁
+## Compatibility
+
+The latest version of the library uses Kotlin version `1.7.21`.  
+Compatibility versions for newer Kotlin versions are also available:
+
+| Version      | Version suffix    |   Kotlin   | Coroutines |
+|--------------|-------------------|:----------:|:----------:|
+| _latest_     | -kotlin-1.8.0-RC2 | 1.8.0-RC2  |   1.6.4    |
+| **_latest_** | **_no suffix_**   | **1.7.21** | **1.6.4**  |
 
 ## Kotlin
 
@@ -15,6 +23,10 @@ dependencies {
 
 Create your ViewModels almost as you would in Android:
 ```kotlin
+import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import com.rickclephas.kmm.viewmodel.stateIn
+
 // 1: use KMMViewModel instead of ViewModel
 open class TimeTravelViewModel: KMMViewModel() {
 
@@ -57,15 +69,17 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 
 > **Note:** support for Jetpack Compose is coming soon.
 
-
 ## Swift
 
-Add the Swift package to your project:
+Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
     .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "<version>")
 ]
 ```
+
+Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
+`https://github.com/rickclephas/KMM-ViewModel.git`.
 
 Create a `KMMViewModel.swift` file with the following contents:
 ```swift
@@ -88,6 +102,7 @@ Just use the view model specific property wrappers and functions:
 E.g. to use the `TimeTravelViewModel` as a `StateObject`:
 ```swift
 import SwiftUI
+import KMMViewModelSwiftUI
 import shared // This should be your shared KMM module
 
 struct ContentView: View {
@@ -97,6 +112,7 @@ struct ContentView: View {
 
 It's also possible to subclass your view model in Swift:
 ```swift
+import Combine
 import shared // This should be your shared KMM module
 
 class TimeTravelViewModel: shared.TimeTravelViewModel {

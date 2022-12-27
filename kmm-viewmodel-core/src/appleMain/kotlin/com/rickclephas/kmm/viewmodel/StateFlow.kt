@@ -90,14 +90,16 @@ private class SubscriptionCountFlow(
  */
 public actual fun <T> Flow<T>.stateIn(
     viewModelScope: ViewModelScope,
+    coroutineContext: CoroutineContext,
     started: SharingStarted,
     initialValue: T
 ): StateFlow<T> {
-    // Similar to the kotlinx.coroutines implementation, but using our custom MutableStateFlowImpl.
+    // Similar to kotlinx.coroutines, but using our custom MutableStateFlowImpl and CoroutineContext logic.
     // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L135
     val scope = viewModelScope.asImpl()
+    val upstream = flowOn(coroutineContext)
     val state = MutableStateFlowImpl(scope, MutableStateFlow(initialValue))
-    val job = scope.coroutineScope.launchSharing(EmptyCoroutineContext, this, state, started, initialValue)
+    val job = scope.coroutineScope.launchSharing(EmptyCoroutineContext, upstream, state, started, initialValue)
     return ReadonlyStateFlow(state, job)
 }
 

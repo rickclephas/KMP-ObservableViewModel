@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.library)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
+    `kmm-viewmodel-publish`
 }
 
 kotlin {
@@ -19,7 +20,9 @@ kotlin {
     val tvosArm64 = tvosArm64()
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
-    android()
+    android {
+        publishLibraryVariants("release")
+    }
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
@@ -70,4 +73,7 @@ kotlin {
 android {
     namespace = "com.rickclephas.kmm.viewmodel"
     compileSdk = 33
+    defaultConfig {
+        minSdk = 14
+    }
 }
