@@ -42,6 +42,9 @@ kotlin {
         }
         val appleMain by creating {
             dependsOn(commonMain)
+            dependencies {
+                implementation(libs.kotlinx.collections.immutable)
+            }
         }
         val appleTest by creating {
             dependsOn(commonTest)
