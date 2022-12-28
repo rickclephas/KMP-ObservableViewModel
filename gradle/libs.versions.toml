@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.8.0-RC2"
 kotlinx-coroutines = "1.6.4"
-android = "8.0.0-alpha09"
+android = "7.3.1"
 androidx-lifecycle = "2.5.1"
 ksp = "1.8.0-RC2-1.0.8"
 
