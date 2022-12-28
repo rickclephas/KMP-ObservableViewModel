@@ -13,7 +13,7 @@ struct ContentView: View {
     @StateViewModel var viewModel = TimeTravelViewModel()
     
     private var isFixedTimeBinding: Binding<Bool> {
-        Binding { viewModel.isFixedTimeValue } set: { isFixedTime in
+        Binding { viewModel.isFixedTime } set: { isFixedTime in
             if isFixedTime {
                 viewModel.stopTime()
             } else {
@@ -27,19 +27,19 @@ struct ContentView: View {
             Spacer()
             Group {
                 Text("Actual time:")
-                Text(viewModel.actualTimeValue)
+                Text(viewModel.actualTime)
                     .font(.system(size: 20))
             }
             Group {
                 Spacer().frame(height: 24)
                 Text("Travel effect:")
-                Text(viewModel.travelEffectValue?.description ?? "nil")
+                Text(viewModel.travelEffect?.description ?? "nil")
                     .font(.system(size: 20))
             }
             Group {
                 Spacer().frame(height: 24)
                 Text("Current time:")
-                Text(viewModel.currentTimeValue)
+                Text(viewModel.currentTime)
                     .font(.system(size: 20))
             }
             Group {

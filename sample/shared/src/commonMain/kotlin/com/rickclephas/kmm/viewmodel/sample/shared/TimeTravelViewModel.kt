@@ -1,6 +1,7 @@
 package com.rickclephas.kmm.viewmodel.sample.shared
 
 import com.rickclephas.kmm.viewmodel.*
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
@@ -11,6 +12,7 @@ open class TimeTravelViewModel: KMMViewModel() {
     /**
      * A [StateFlow] that emits the actual time.
      */
+    @NativeCoroutinesState
     val actualTime = clockTime.map { formatTime(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
@@ -18,6 +20,7 @@ open class TimeTravelViewModel: KMMViewModel() {
     /**
      * A [StateFlow] that emits the applied [TravelEffect].
      */
+    @NativeCoroutinesState
     val travelEffect = _travelEffect.asStateFlow()
 
     /**
@@ -25,12 +28,14 @@ open class TimeTravelViewModel: KMMViewModel() {
      * @see startTime
      * @see stopTime
      */
+    @NativeCoroutinesState
     val isFixedTime = _travelEffect.map { it is TravelEffect.Fixed }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     /**
      * A [StateFlow] that emits the current time.
      */
+    @NativeCoroutinesState
     val currentTime = combine(clockTime, _travelEffect) { actualTime, travelEffect ->
         formatTime(actualTime + travelEffect)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
