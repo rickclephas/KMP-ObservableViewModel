@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '13.0'
 
   s.dependency 'KMMViewModelCore', s.version.to_s
+  s.framework = 'SwiftUI'
 
   s.source_files = 'KMMViewModelSwiftUI/**/*.swift'
 end
