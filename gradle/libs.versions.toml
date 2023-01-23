@@ -7,8 +7,8 @@ androidx-lifecycle = "2.5.1"
 # Sample versions
 androidx-compose = "2022.11.00"
 androidx-fragment = "1.5.4"
-ksp = "1.8.0-RC2-1.0.8"
-nativecoroutines = "1.0.0-ALPHA-3"
+ksp = "1.8.0-1.0.8"
+nativecoroutines = "1.0.0-ALPHA-4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
