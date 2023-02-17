@@ -4,13 +4,13 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.7.21`.  
+The latest version of the library uses Kotlin version `1.8.10`.  
 Compatibility versions for newer Kotlin versions are also available:
 
-| Version      | Version suffix    |   Kotlin   | Coroutines |
-|--------------|-------------------|:----------:|:----------:|
-| _latest_     | -kotlin-1.8.0-RC2 | 1.8.0-RC2  |   1.6.4    |
-| **_latest_** | **_no suffix_**   | **1.7.21** | **1.6.4**  |
+| Version       | Version suffix  |   Kotlin   | Coroutines |
+|---------------|-----------------|:----------:|:----------:|
+| **_latest_**  | **_no suffix_** | **1.8.10** | **1.6.4**  |
+| 1.0.0-ALPHA-3 | _no suffix_     |   1.8.0    |   1.6.4    |
 
 ## Kotlin
 
