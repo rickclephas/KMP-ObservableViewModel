@@ -19,7 +19,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0-dev-k1.8.0-RC-4c1865595ed"
+        kotlinCompilerExtensionVersion = "1.4.3-dev-k1.8.20-Beta-c5841510cbf"
     }
     packagingOptions {
         resources {
