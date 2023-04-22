@@ -22,9 +22,10 @@ public extension ObservableViewModel {
         
         public subscript<T>(dynamicMember keyPath: WritableKeyPath<ViewModel, T>) -> Binding<T> {
             Binding {
-                observableObject.get(keyPath)
+                observableObject.viewModel[keyPath: keyPath]
             } set: { value in
-                observableObject.set(keyPath, to: value)
+                var viewModel = observableObject.viewModel
+                viewModel[keyPath: keyPath] = value
             }
         }
     }

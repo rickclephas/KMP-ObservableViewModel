@@ -21,20 +21,11 @@ public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObjec
     
     public let objectWillChange: ObservableViewModelPublisher
     
-    private var _viewModel: ViewModel
-    public var viewModel: ViewModel { _viewModel }
+    public let viewModel: ViewModel
     
     internal init(_ viewModel: ViewModel) {
         objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
-        self._viewModel = viewModel
-    }
-    
-    public func get<T>(_ keyPath: KeyPath<ViewModel, T>) -> T {
-        _viewModel[keyPath: keyPath]
-    }
-    
-    public func set<T>(_ keyPath: WritableKeyPath<ViewModel, T>, to newValue: T) {
-        _viewModel[keyPath: keyPath] = newValue
+        self.viewModel = viewModel
     }
 }
 

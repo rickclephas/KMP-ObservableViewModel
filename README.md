@@ -4,12 +4,13 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.10`.  
+The latest version of the library uses Kotlin version `1.8.20`.  
 Compatibility versions for newer Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   | Coroutines |
 |---------------|-----------------|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.10** | **1.6.4**  |
+| **_latest_**  | **_no suffix_** | **1.8.20** | **1.6.4**  |
+| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.10   |   1.6.4    |
 | 1.0.0-ALPHA-3 | _no suffix_     |   1.8.0    |   1.6.4    |
 
 ## Kotlin
@@ -61,7 +62,7 @@ to turn your `StateFlow`s into properties in Swift:
 val travelEffect = _travelEffect.asStateFlow()
 ```
 
-Checkout the [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/dev-1.0/README.md)
+Checkout the [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/master/README.md)
 for more information and installation instructions for KMP-NativeCoroutines.
 
 <details><summary>Alternative</summary>
@@ -104,6 +105,16 @@ dependencies: [
 
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 `https://github.com/rickclephas/KMM-ViewModel.git`.
+
+<details><summary>CocoaPods</summary>
+<p>
+
+If you like you can also use CocoaPods instead of SPM:
+```ruby
+pod 'KMMViewModelSwiftUI', '<version>'
+```
+</p>
+</details>
 
 Create a `KMMViewModel.swift` file with the following contents:
 ```swift

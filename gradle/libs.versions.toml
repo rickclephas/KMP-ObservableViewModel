@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 kotlinx-coroutines = "1.7.0-Beta"
 android = "7.3.1"
 androidx-lifecycle = "2.5.1"
@@ -7,8 +7,8 @@ androidx-lifecycle = "2.5.1"
 # Sample versions
 androidx-compose = "2022.11.00"
 androidx-fragment = "1.5.4"
-ksp = "1.8.10-1.0.9"
-nativecoroutines = "1.0.0-ALPHA-5"
+ksp = "1.8.20-1.0.10"
+nativecoroutines = "1.0.0-ALPHA-6"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
