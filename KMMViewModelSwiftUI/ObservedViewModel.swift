@@ -15,11 +15,18 @@ public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @ObservedObject private var observableObject: ObservableViewModel<ViewModel>
     
-    /// The underlying `KMMViewModel` referenced by the `ObservedViewModel`.
-    public var wrappedValue: ViewModel { observableObject.viewModel }
-    
     /// A projection of the observed `KMMViewModel` that creates bindings to its properties using dynamic member lookup.
     public var projectedValue: ObservableViewModel<ViewModel>.Projection
+    
+    /// The underlying `KMMViewModel` referenced by the `ObservedViewModel`.
+    public var wrappedValue: ViewModel {
+        get { observableObject.viewModel }
+        set {
+            let observableObject = observableViewModel(for: newValue)
+            self.observableObject = observableObject
+            self.projectedValue = ObservableViewModel.Projection(observableObject)
+        }
+    }
     
     @available(*, deprecated)
     public init(_ projectedValue: ObservableViewModel<ViewModel>.Projection) {
