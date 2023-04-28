@@ -4,12 +4,13 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.20`.  
+The latest version of the library uses Kotlin version `1.8.21`.  
 Compatibility versions for newer Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   | Coroutines |
 |---------------|-----------------|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.20** | **1.6.4**  |
+| **_latest_**  | **_no suffix_** | **1.8.21** | **1.6.4**  |
+| 1.0.0-ALPHA-6 | _no suffix_     |   1.8.20   |   1.6.4    |
 | 1.0.0-ALPHA-4 | _no suffix_     |   1.8.10   |   1.6.4    |
 | 1.0.0-ALPHA-3 | _no suffix_     |   1.8.0    |   1.6.4    |
 
@@ -22,13 +23,12 @@ dependencies {
 }
 ```
 
-Create your ViewModels almost as you would in Android:
+And create your ViewModels:
 ```kotlin
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.stateIn
 
-// 1: use KMMViewModel instead of ViewModel
 open class TimeTravelViewModel: KMMViewModel() {
 
     private val clockTime = Clock.time
@@ -37,10 +37,8 @@ open class TimeTravelViewModel: KMMViewModel() {
      * A [StateFlow] that emits the actual time.
      */
     val actualTime = clockTime.map { formatTime(it) }
-        // 2: supply viewModelScope to your stateIn calls
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
-    // 3: supply viewModelScope to your MutableStateFlows
     private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
     /**
      * A [StateFlow] that emits the applied [TravelEffect].
@@ -49,12 +47,46 @@ open class TimeTravelViewModel: KMMViewModel() {
 }
 ```
 
-You need to use `viewModelScope` wherever possible to propagate state changes to iOS.  
-In other cases you can access the `ViewModelScope.coroutineScope` property directly.
+As you might notice it isn't much different from an Android ViewModel.  
+The most obvious difference is the `KMMViewModel` superclass:
+
+```diff
+- import androidx.lifecycle.ViewModel
++ import com.rickclephas.kmm.viewmodel.KMMViewModel
+
+- open class TimeTravelViewModel: ViewModel() {
++ open class TimeTravelViewModel: KMMViewModel() {
+```
+
+Besides that there are only 2 minor differences.  
+The first being a different import for `stateIn`:
+
+```diff
+- import kotlinx.coroutines.flow.stateIn
++ import com.rickclephas.kmm.viewmodel.stateIn
+
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
+```
+
+And the second being a different `MutableStateFlow` constructor:
+
+```diff
+- import kotlinx.coroutines.flow.MutableStateFlow
++ import com.rickclephas.kmm.viewmodel.MutableStateFlow
+
+-    private val _travelEffect = MutableStateFlow<TravelEffect?>(null)
++    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
+```
+
+These minor differences will make sure that any state changes are propagate to iOS.  
+
+> **Note**: `viewModelScope` is a wrapper around the actual `CoroutineScope` which can be accessed 
+> via the `ViewModelScope.coroutineScope` property.
 
 ### KMP-NativeCoroutines
 
-Use the `@NativeCoroutinesState` annotation from [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
+I highly recommend you to use the `@NativeCoroutinesState` annotation from
+[KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
 to turn your `StateFlow`s into properties in Swift:
 
 ```kotlin
@@ -62,8 +94,8 @@ to turn your `StateFlow`s into properties in Swift:
 val travelEffect = _travelEffect.asStateFlow()
 ```
 
-Checkout the [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/master/README.md)
-for more information and installation instructions for KMP-NativeCoroutines.
+Checkout the KMP-NativeCoroutines [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/master/README.md)
+for more information and installation instructions.
 
 <details><summary>Alternative</summary>
 <p>
@@ -92,7 +124,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 }
 ```
 
-> **Note:** support for Jetpack Compose is coming soon.
+> **Note:** improved support for Jetpack Compose is coming soon.
 
 ## Swift
 
