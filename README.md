@@ -9,7 +9,8 @@ Compatibility versions for newer Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   | Coroutines |
 |---------------|-----------------|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.21** | **1.6.4**  |
+| **_latest_**  | **_no suffix_** | **1.8.21** | **1.7.0**  |
+| 1.0.0-ALPHA-7 | _no suffix_     |   1.8.21   |   1.6.4    |
 | 1.0.0-ALPHA-6 | _no suffix_     |   1.8.20   |   1.6.4    |
 | 1.0.0-ALPHA-4 | _no suffix_     |   1.8.10   |   1.6.4    |
 | 1.0.0-ALPHA-3 | _no suffix_     |   1.8.0    |   1.6.4    |
