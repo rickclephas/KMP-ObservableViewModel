@@ -21,7 +21,7 @@ Compatibility versions for newer Kotlin versions are also available:
 Add the library to your shared Kotlin module:
 ```kotlin
 dependencies {
-    implementation("com.rickclephas.kmm:kmm-viewmodel-core:<version>")
+    api("com.rickclephas.kmm:kmm-viewmodel-core:<version>")
 }
 ```
 
@@ -111,13 +111,6 @@ val TimeTravelViewModel.travelEffectValue: TravelEffect?
 </details>
 
 ## Android
-
-Add the library to your Android module:
-```kotlin
-dependencies {
-    implementation("com.rickclephas.kmm:kmm-viewmodel-core:<version>")
-}
-```
 
 Use the view model like you would any other Android view model:
 ```kotlin
