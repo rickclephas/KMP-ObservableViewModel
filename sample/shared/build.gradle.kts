@@ -11,6 +11,7 @@ plugins {
 
 kotlin {
     android()
+    jvmToolchain(11)
     
     listOf(
         iosX64(),
@@ -64,5 +65,10 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
+    }
+    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }

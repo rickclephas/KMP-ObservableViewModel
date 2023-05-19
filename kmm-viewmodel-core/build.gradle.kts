@@ -8,6 +8,7 @@ plugins {
 
 kotlin {
     explicitApi()
+    jvmToolchain(11)
     val macosX64 = macosX64()
     val macosArm64 = macosArm64()
     val iosArm64 = iosArm64()
@@ -76,5 +77,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 14
+    }
+    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }

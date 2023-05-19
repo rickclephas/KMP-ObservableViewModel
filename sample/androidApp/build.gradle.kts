@@ -26,11 +26,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
         }
     }
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 // Ignore Compose Kotlin version compatibility check
