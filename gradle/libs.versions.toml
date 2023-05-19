@@ -5,8 +5,8 @@ android = "7.3.1"
 androidx-lifecycle = "2.6.1"
 
 # Sample versions
-androidx-compose = "2022.11.00"
-androidx-fragment = "1.5.4"
+androidx-compose = "2023.05.01"
+androidx-fragment = "1.5.7"
 ksp = "1.8.21-1.0.11"
 nativecoroutines = "1.0.0-ALPHA-10"
 
