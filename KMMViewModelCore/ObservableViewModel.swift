@@ -22,11 +22,11 @@ private var observableViewModelKey = "observableViewModel"
 public func observableViewModel<ViewModel: KMMViewModel>(
     for viewModel: ViewModel
 ) -> ObservableViewModel<ViewModel> {
-    if let observableViewModel = objc_getAssociatedObject(viewModel, &observableViewModelKey) {
+    if let observableViewModel = objc_getAssociatedObject(viewModel.viewModelScope, &observableViewModelKey) {
         return observableViewModel as! ObservableViewModel<ViewModel>
     }
     let observableViewModel = ObservableViewModel(viewModel)
-    objc_setAssociatedObject(viewModel, &observableViewModelKey, observableViewModel, .OBJC_ASSOCIATION_ASSIGN)
+    objc_setAssociatedObject(viewModel.viewModelScope, &observableViewModelKey, observableViewModel, .OBJC_ASSOCIATION_ASSIGN)
     return observableViewModel
 }
 

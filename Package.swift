@@ -12,6 +12,10 @@ let package = Package(
         .library(
             name: "KMMViewModelSwiftUI",
             targets: ["KMMViewModelSwiftUI"]
+        ),
+        .library(
+            name: "KMMViewModelState",
+            targets: ["KMMViewModelState"]
         )
     ],
     targets: [
@@ -29,6 +33,14 @@ let package = Package(
             name: "KMMViewModelSwiftUI",
             dependencies: [.target(name: "KMMViewModelCore")],
             path: "KMMViewModelSwiftUI"
+        ),
+        .target(
+            name: "KMMViewModelState",
+            dependencies: [
+                .target(name: "KMMViewModelCore"),
+                .target(name: "KMMViewModelSwiftUI")
+            ],
+            path: "KMMViewModelState"
         )
     ],
     swiftLanguageVersions: [.v5]
