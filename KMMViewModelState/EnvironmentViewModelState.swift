@@ -16,8 +16,11 @@ public struct EnvironmentViewModelState<ViewModel: KMMViewModel, State: AnyObjec
     /// The observed `ViewModelState`.
     @EnvironmentViewModel public var wrappedValue: ViewModelState<ViewModel, State>
     
+    /// The state that is being observed.
+    public var projectedValue: State { wrappedValue.viewModel[keyPath: wrappedValue.stateKeyPath] }
+    
     /// The `KMMViewModel` referenced by the `ViewModelState`.
-    public var projectedValue: ViewModel { wrappedValue.viewModel }
+    public var viewModel: ViewModel { wrappedValue.viewModel }
     
     /// Creates an `EnvironmentViewModelState`.
     public init() { }

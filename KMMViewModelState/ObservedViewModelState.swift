@@ -16,8 +16,11 @@ public struct ObservedViewModelState<ViewModel: KMMViewModel, State: AnyObject>:
     /// The observed `ViewModelState`.
     @ObservedViewModel public var wrappedValue: ViewModelState<ViewModel, State>
     
+    /// The state that is being observed.
+    public var projectedValue: State { wrappedValue.viewModel[keyPath: wrappedValue.stateKeyPath] }
+    
     /// The `KMMViewModel` referenced by the `ViewModelState`.
-    public var projectedValue: ViewModel { wrappedValue.viewModel }
+    public var viewModel: ViewModel { wrappedValue.viewModel }
     
     /// Creates an `ObservedViewModelState` for the specified `ViewModelState`.
     /// - Parameter wrappedValue: The `ViewModelState` to observe.

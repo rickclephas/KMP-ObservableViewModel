@@ -15,7 +15,7 @@ import SwiftUI
 public final class ViewModelState<ViewModel: KMMViewModel, State: AnyObject>: KMMViewModel {
     
     internal let viewModel: ViewModel
-    private let stateKeyPath: KeyPath<ViewModel, State>
+    internal let stateKeyPath: KeyPath<ViewModel, State>
     
     public var viewModelScope: ViewModelScope { viewModel.viewModelScope }
     public var objectWillChange: ObservableObjectPublisher { viewModel.objectWillChange }
