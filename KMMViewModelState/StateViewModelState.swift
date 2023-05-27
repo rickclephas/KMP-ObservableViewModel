@@ -35,7 +35,7 @@ public extension StateViewModelState {
     /// Creates a `StateViewModelState` for the specified state property.
     /// - Parameter wrappedValue: The `KMMViewModel` containing the state.
     /// - Parameter stateKeyPath: The `KeyPath` to the state property of the viewmodel.
-    init(wrappedValue: ViewModel, _ stateKeyPath: KeyPath<ViewModel, State>) {
-        self.init(wrappedValue: ViewModelState(wrappedValue, stateKeyPath))
+    init(wrappedValue: @autoclosure @escaping () -> ViewModel, _ stateKeyPath: KeyPath<ViewModel, State>) {
+        self.init(wrappedValue: ViewModelState(wrappedValue(), stateKeyPath))
     }
 }
