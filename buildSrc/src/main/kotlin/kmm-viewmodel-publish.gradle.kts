@@ -42,7 +42,7 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
-        artifact(emptyJavadocJar.get())
+        artifact(emptyJavadocJar)
 
         pom {
             name.set("KMM-ViewModel")
