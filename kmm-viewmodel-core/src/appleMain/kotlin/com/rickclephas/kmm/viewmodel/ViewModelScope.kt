@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import platform.darwin.NSObject
+import kotlin.experimental.ExperimentalNativeApi
 import kotlin.native.ref.WeakReference
 
 /**
@@ -33,6 +34,7 @@ public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewMode
 /**
  * Implementation of [ViewModelScope].
  */
+@OptIn(ExperimentalNativeApi::class)
 @InternalKMMViewModelApi
 public class ViewModelScopeImpl internal constructor(
     private val viewModelRef: WeakReference<KMMViewModel>
