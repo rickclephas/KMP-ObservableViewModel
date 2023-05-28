@@ -23,11 +23,9 @@ if (localPropsFile.exists()) {
     ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
 }
 
-val emptyJavadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
-
 fun getExtraString(name: String) = ext[name]?.toString()
+
+val signPublications = getExtraString("signing.keyId") != null
 
 publishing {
     repositories {
@@ -42,7 +40,11 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
-        artifact(emptyJavadocJar)
+        artifact(tasks.register("${name}JavadocJar", Jar::class) {
+            archiveClassifier.set("javadoc")
+            archiveAppendix.set(this@withType.name)
+        })
+        if (signPublications) signing.sign(this)
 
         pom {
             name.set("KMM-ViewModel")
@@ -68,11 +70,10 @@ publishing {
     }
 }
 
-getExtraString("signing.keyId")?.let { keyId ->
+if (signPublications) {
     signing {
         getExtraString("signing.secretKey")?.let { secretKey ->
-            useInMemoryPgpKeys(keyId, secretKey, getExtraString("signing.password"))
+            useInMemoryPgpKeys(getExtraString("signing.keyId"), secretKey, getExtraString("signing.password"))
         }
-        sign(publishing.publications)
     }
 }
