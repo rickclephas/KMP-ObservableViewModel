@@ -64,7 +64,6 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 28
-        targetSdk = 33
     }
     // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
     compileOptions {
