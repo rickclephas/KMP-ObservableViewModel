@@ -17,17 +17,29 @@ public func createObservableViewModel<ViewModel: KMMViewModel>(
 
 private var observableViewModelKey = "observableViewModel"
 
-/// Gets an `ObservableObject` for the specified `KMMViewModel`.
+private class WeakObservableViewModel<ViewModel: KMMViewModel> {
+    weak var observableViewModel: ObservableViewModel<ViewModel>?
+    init(_ observableViewModel: ObservableViewModel<ViewModel>) {
+        self.observableViewModel = observableViewModel
+    }
+}
+
+/// Gets the `ObservableObject` for the specified `KMMViewModel`.
 /// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
 public func observableViewModel<ViewModel: KMMViewModel>(
     for viewModel: ViewModel
 ) -> ObservableViewModel<ViewModel> {
-    if let observableViewModel = objc_getAssociatedObject(viewModel, &observableViewModelKey) {
-        return observableViewModel as! ObservableViewModel<ViewModel>
+    if let object = objc_getAssociatedObject(viewModel, &observableViewModelKey) {
+        guard let observableViewModel = (object as! WeakObservableViewModel<ViewModel>).observableViewModel else {
+            fatalError("ObservableViewModel has been deallocated")
+        }
+        return observableViewModel
+    } else {
+        let observableViewModel = ObservableViewModel(viewModel)
+        let object = WeakObservableViewModel<ViewModel>(observableViewModel)
+        objc_setAssociatedObject(viewModel, &observableViewModelKey, object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        return observableViewModel
     }
-    let observableViewModel = ObservableViewModel(viewModel)
-    objc_setAssociatedObject(viewModel, &observableViewModelKey, observableViewModel, .OBJC_ASSOCIATION_ASSIGN)
-    return observableViewModel
 }
 
 /// An `ObservableObject` for a `KMMViewModel`.
