@@ -51,6 +51,7 @@ public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObjec
 
     deinit {
         os_log("deinit ObservableViewModel %@", String(describing: self.viewModel))
+        viewModel.viewModelScope.resetSendObjectWillChange()
     }
 }
 

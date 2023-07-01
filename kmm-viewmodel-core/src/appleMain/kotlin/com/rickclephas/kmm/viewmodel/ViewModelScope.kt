@@ -66,6 +66,11 @@ public class ViewModelScopeImpl internal constructor(
         this.sendObjectWillChange = sendObjectWillChange
     }
 
+    override fun resetSendObjectWillChange() {
+        println("resetSendObjectWillChange $this")
+        sendObjectWillChange = null
+    }
+
     /**
      * Invokes the object will change listener set by [setSendObjectWillChange].
      */
