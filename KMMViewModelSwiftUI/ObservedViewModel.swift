@@ -15,7 +15,7 @@ import os.log
 public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @ObservedObject private var observableObject: ObservableViewModel<ViewModel>
-    private var lifetimeTracker = ObservedViewModelLifetimeTracker()
+    private var lifetimeTracker = LifetimeTracker()
 
     /// A projection of the observed `KMMViewModel` that creates bindings to its properties using dynamic member lookup.
     public var projectedValue: ObservableViewModel<ViewModel>.Projection
@@ -59,7 +59,7 @@ public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
 /// A wrapper to track the lifetime of ObservedViewModel, in order to perform some cleanup
 /// when the ObservedViewModel is deallocated.
 
-private class ObservedViewModelLifetimeTracker {
+class LifetimeTracker {
     var onDeinit: (() -> Void)?
 
     deinit {

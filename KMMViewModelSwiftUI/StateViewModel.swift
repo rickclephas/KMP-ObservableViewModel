@@ -8,6 +8,7 @@
 import SwiftUI
 import KMMViewModelCore
 import KMMViewModelCoreObjC
+import os.log
 
 /// A `StateObject` property wrapper for `KMMViewModel`s.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -15,6 +16,7 @@ import KMMViewModelCoreObjC
 public struct StateViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     
     @StateObject private var observableObject: ObservableViewModel<ViewModel>
+    private var lifetimeTracker = LifetimeTracker()
     
     /// The underlying `KMMViewModel` referenced by the `StateViewModel`.
     public var wrappedValue: ViewModel { observableObject.viewModel }
@@ -28,5 +30,10 @@ public struct StateViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     /// - Parameter wrappedValue: The `KMMViewModel` to observe.
     public init(wrappedValue: @autoclosure @escaping () -> ViewModel) {
         self._observableObject = StateObject(wrappedValue: observableViewModel(for: wrappedValue()))
+        self.lifetimeTracker.onDeinit = { [observableObject] in
+            let vm = observableObject.viewModel
+            os_log("StateViewModel.onDeinit %@", String(describing: vm))
+            return resetObservableViewModel(viewModel: vm)
+        }
     }
 }
