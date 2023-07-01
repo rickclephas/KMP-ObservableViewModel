@@ -42,16 +42,52 @@ public func observableViewModel<ViewModel: KMMViewModel>(
     }
 }
 
+public extension KMMViewModel {
+    
+    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
+    func childViewModel<ViewModel: KMMViewModel>(
+        _ viewModel: ViewModel?,
+        at keyPath: KeyPath<Self, ViewModel?>
+    ) -> ViewModel? {
+        if let viewModel = viewModel {
+            observableViewModel(for: self).childViewModels[keyPath] = observableViewModel(for: viewModel)
+        } else {
+            observableViewModel(for: self).childViewModels.removeValue(forKey: keyPath)
+        }
+        return viewModel
+    }
+    
+    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
+    func childViewModel<ViewModel: KMMViewModel>(
+        _ viewModel: ViewModel,
+        at keyPath: KeyPath<Self, ViewModel>
+    ) -> ViewModel {
+        observableViewModel(for: self).childViewModels[keyPath] = observableViewModel(for: viewModel)
+        return viewModel
+    }
+}
+
 /// An `ObservableObject` for a `KMMViewModel`.
-public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject {
+public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject, Hashable {
     
     public let objectWillChange: ObservableViewModelPublisher
     
+    /// The observed `KMMViewModel`.
     public let viewModel: ViewModel
+    
+    internal var childViewModels: Dictionary<AnyKeyPath, AnyHashable> = [:]
     
     internal init(_ viewModel: ViewModel) {
         objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
         self.viewModel = viewModel
+    }
+    
+    public static func == (lhs: ObservableViewModel<ViewModel>, rhs: ObservableViewModel<ViewModel>) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }
 
@@ -65,7 +101,7 @@ public final class ObservableViewModelPublisher: Publisher {
     private let publisher = ObservableObjectPublisher()
     private var objectWillChangeCancellable: AnyCancellable? = nil
     
-    init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
+    internal init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
         self.viewModelScope = viewModelScope
         viewModelScope.setSendObjectWillChange { [weak self] in
             self?.publisher.send()
