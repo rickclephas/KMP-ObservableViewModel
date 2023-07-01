@@ -31,6 +31,11 @@ public func observableViewModel<ViewModel: KMMViewModel>(
     return observableViewModel
 }
 
+public func resetObservableViewModel<ViewModel: KMMViewModel>(viewModel: ViewModel) {
+    os_log("resetObservableViewModel %@", String(describing: viewModel))
+    objc_setAssociatedObject(viewModel, &observableViewModelKey, nil, .OBJC_ASSOCIATION_ASSIGN)
+}
+
 /// An `ObservableObject` for a `KMMViewModel`.
 public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject {
     
