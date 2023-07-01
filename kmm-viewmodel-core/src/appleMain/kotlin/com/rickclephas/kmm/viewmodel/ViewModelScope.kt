@@ -74,6 +74,7 @@ public class ViewModelScopeImpl internal constructor(
     }
 
     override fun cancel() {
+        println("cancel $this")
         coroutineScope.cancel()
         viewModelRef.value?.onCleared()
     }

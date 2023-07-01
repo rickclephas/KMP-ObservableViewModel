@@ -7,6 +7,7 @@
 
 import Combine
 import KMMViewModelCoreObjC
+import os.log
 
 @available(*, deprecated, renamed: "observableViewModel")
 public func createObservableViewModel<ViewModel: KMMViewModel>(
@@ -40,6 +41,11 @@ public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObjec
     internal init(_ viewModel: ViewModel) {
         objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
         self.viewModel = viewModel
+        os_log("init ObservableViewModel %@", String(describing: viewModel))
+    }
+
+    deinit {
+        os_log("deinit ObservableViewModel %@", String(describing: self.viewModel))
     }
 }
 
@@ -61,6 +67,7 @@ public final class ObservableViewModelPublisher: Publisher {
         objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
             self?.publisher.send()
         }
+        os_log("init ObservableViewModelPublisher %@", String(describing: self))
     }
     
     public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
@@ -69,6 +76,7 @@ public final class ObservableViewModelPublisher: Publisher {
     }
     
     deinit {
+        os_log("deinit ObservableViewModelPublisher %@", String(describing: self))
         viewModelScope?.cancel()
     }
 }
@@ -84,8 +92,13 @@ private class ObservableViewModelSubscriber<S>: Subscriber where S : Subscriber,
     init(_ publisher: ObservableViewModelPublisher, _ subscriber: S) {
         self.publisher = publisher
         self.subscriber = subscriber
+        os_log("init ObservableViewModelSubscriber %@", String(describing: self))
     }
     
+    deinit {
+        os_log("deinit ObservableViewModelSubscriber %@", String(describing: self))
+    }
+
     func receive(subscription: Subscription) {
         subscriber.receive(subscription: ObservableViewModelSubscription(publisher, subscription))
     }
@@ -108,8 +121,13 @@ private class ObservableViewModelSubscription: Subscription {
     init(_ publisher: ObservableViewModelPublisher, _ subscription: Subscription) {
         self.publisher = publisher
         self.subscription = subscription
+        os_log("init ObservableViewModelSubscription %@", String(describing: self))
     }
     
+    deinit {
+        os_log("deinit ObservableViewModelSubscription %@", String(describing: self))
+    }
+
     func request(_ demand: Subscribers.Demand) {
         subscription.request(demand)
     }
