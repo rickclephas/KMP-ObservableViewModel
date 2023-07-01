@@ -7,10 +7,11 @@
 
 import SwiftUI
 import KMMViewModelSwiftUI
+import KMMViewModelSampleShared
 
 struct ContentView: View {
     
-    @StateViewModel var viewModel = TimeTravelViewModel()
+    @ObservedViewModel var viewModel: KMMViewModelSampleShared.TimeTravelViewModel
     
     private var isFixedTimeBinding: Binding<Bool> {
         Binding { viewModel.isFixedTime } set: { isFixedTime in
@@ -55,19 +56,19 @@ struct ContentView: View {
                     viewModel.timeTravel()
                 }
             }
-            Group {
-                Spacer().frame(height: 24)
-                Button("Reset") {
-                    viewModel.resetTime()
-                }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
-            }
+//            Group {
+//                Spacer().frame(height: 24)
+//                Button("Reset") {
+//                    viewModel.resetTime()
+//                }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
+//            }
             Spacer()
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

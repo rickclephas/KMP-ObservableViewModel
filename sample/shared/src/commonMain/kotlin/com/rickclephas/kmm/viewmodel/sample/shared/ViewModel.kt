@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 open class RootViewModel : KMMViewModel() {
     @NativeCoroutinesState
-    val childViewModel: MutableStateFlow<ChildViewModel> = MutableStateFlow(viewModelScope, ChildViewModel("Child"))
+    val childViewModel: MutableStateFlow<TimeTravelViewModel> = MutableStateFlow(viewModelScope, TimeTravelViewModel())
 }
 
 open class ChildViewModel(name: String) : KMMViewModel() {

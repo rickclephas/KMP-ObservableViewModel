@@ -19,7 +19,7 @@ struct RootView: View {
             )
 
             if isExpanded {
-                ChildView(viewModel: viewModel.childViewModel)
+                ContentView(viewModel: viewModel.childViewModel)
             }
 
             Spacer()
