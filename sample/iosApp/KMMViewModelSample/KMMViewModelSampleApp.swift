@@ -13,7 +13,7 @@ struct KMMViewModelSampleApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                NavigationLink("GO!", destination: ContentView())
+                NavigationLink("GO!", destination: RootView())
             }
         }
     }

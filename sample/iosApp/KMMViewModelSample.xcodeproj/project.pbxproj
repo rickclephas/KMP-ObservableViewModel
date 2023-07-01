@@ -17,6 +17,7 @@
 		1DCF89AB2933929400A4C54A /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DCF89AA2933929400A4C54A /* KMMViewModelSwiftUI */; };
 		1DDAF2202935470A0049C114 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF21F2935470A0049C114 /* KMMViewModel.swift */; };
 		1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */; };
+		630B275F2A4FD6CA00F3B221 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630B275E2A4FD6C900F3B221 /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		1DCF89A82933928600A4C54A /* KMM-ViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "KMM-ViewModel"; path = ../..; sourceTree = "<group>"; };
 		1DDAF21F2935470A0049C114 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 		1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelViewModel.swift; sourceTree = "<group>"; };
+		630B275E2A4FD6C900F3B221 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		1D44EF76292C066B00465C43 /* KMMViewModelSample */ = {
 			isa = PBXGroup;
 			children = (
+				630B275E2A4FD6C900F3B221 /* RootView.swift */,
 				1D44EF77292C066B00465C43 /* KMMViewModelSampleApp.swift */,
 				1D44EF79292C066B00465C43 /* ContentView.swift */,
 				1D44EF7B292C066C00465C43 /* Assets.xcassets */,
@@ -313,6 +316,7 @@
 				1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */,
 				1D44EF7A292C066B00465C43 /* ContentView.swift in Sources */,
 				1D44EF78292C066B00465C43 /* KMMViewModelSampleApp.swift in Sources */,
+				630B275F2A4FD6CA00F3B221 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
