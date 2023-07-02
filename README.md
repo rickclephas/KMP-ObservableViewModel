@@ -4,17 +4,20 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.21`.  
-Compatibility versions for newer Kotlin versions are also available:
+The latest version of the library uses Kotlin version `1.8.22`.  
+Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version       | Version suffix  |   Kotlin   | Coroutines | AndroidX Lifecycle |
-|---------------|-----------------|:----------:|:----------:|:------------------:|
-| **_latest_**  | **_no suffix_** | **1.8.21** | **1.7.1**  |     **2.5.1**      |
-| 1.0.0-ALPHA-8 | _no suffix_     |   1.8.21   |   1.7.0    |       2.5.1        |
-| 1.0.0-ALPHA-7 | _no suffix_     |   1.8.21   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-6 | _no suffix_     |   1.8.20   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.10   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-3 | _no suffix_     |   1.8.0    |   1.6.4    |       2.5.1        |
+| Version       | Version suffix     |   Kotlin   | Coroutines | AndroidX Lifecycle |
+|---------------|--------------------|:----------:|:----------:|:------------------:|
+| _latest_      | -kotlin-1.9.0-RC   |  1.9.0-RC  |   1.7.2    |       2.6.1        |
+| **_latest_**  | **_no suffix_**    | **1.8.22** | **1.7.2**  |     **2.6.1**      |
+| 1.0.0-ALPHA-9 | -kotlin-1.9.0-Beta | 1.9.0-Beta |   1.7.1    |       2.6.1        |
+| 1.0.0-ALPHA-9 | _no suffix_        |   1.8.21   |   1.7.1    |       2.5.1        |
+| 1.0.0-ALPHA-8 | _no suffix_        |   1.8.21   |   1.7.0    |       2.5.1        |
+| 1.0.0-ALPHA-7 | _no suffix_        |   1.8.21   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-6 | _no suffix_        |   1.8.20   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-4 | _no suffix_        |   1.8.10   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-3 | _no suffix_        |   1.8.0    |   1.6.4    |       2.5.1        |
 
 ## Kotlin
 
@@ -80,7 +83,7 @@ And the second being a different `MutableStateFlow` constructor:
 +    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
 ```
 
-These minor differences will make sure that any state changes are propagate to iOS.  
+These minor differences will make sure that any state changes are propagated to iOS.  
 
 > **Note**: `viewModelScope` is a wrapper around the actual `CoroutineScope` which can be accessed 
 > via the `ViewModelScope.coroutineScope` property.
@@ -181,3 +184,28 @@ class TimeTravelViewModel: shared.TimeTravelViewModel {
     @Published var isResetDisabled: Bool = false
 }
 ```
+
+### Child view models
+
+You'll need some additional logic if your `KMMViewModel`s expose child view models.
+
+First make sure to use the `NativeCoroutinesRefinedState` annotation instead of the `NativeCoroutinesState` annotation:
+```kotlin
+class MyParentViewModel: KMMViewModel() {
+    @NativeCoroutinesRefinedState
+    val myChildViewModel: StateFlow<MyChildViewModel?> = MutableStateFlow(null)
+}
+```
+
+After that you should create a Swift extension property using the `childViewModel(_, at:)` function: 
+```swift
+extension MyParentViewModel {
+    var myChildViewModel: MyChildViewModel? {
+        childViewModel(__myChildViewModel, at: \.__myChildViewModel)
+    }
+}
+```
+
+This will prevent your Swift view models from being deallocated too soon. 
+
+> **Note**: for lists, sets and dictionaries containing view models there is `childViewModels(_, at:)`.
