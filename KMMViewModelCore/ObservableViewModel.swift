@@ -42,16 +42,37 @@ public func observableViewModel<ViewModel: KMMViewModel>(
     }
 }
 
+/// Gets the `ObservableObject` for the specified `KMMViewModel`.
+/// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
+public func observableViewModel<ViewModel: KMMViewModel>(
+    for viewModel: ViewModel?
+) -> ObservableViewModel<ViewModel>? {
+    guard let viewModel = viewModel else { return nil }
+    let observableViewModel = observableViewModel(for: viewModel)
+    return observableViewModel
+}
+
 /// An `ObservableObject` for a `KMMViewModel`.
-public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject {
+public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject, Hashable {
     
     public let objectWillChange: ObservableViewModelPublisher
     
+    /// The observed `KMMViewModel`.
     public let viewModel: ViewModel
+    
+    internal var childViewModels: Dictionary<AnyKeyPath, AnyHashable> = [:]
     
     internal init(_ viewModel: ViewModel) {
         objectWillChange = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
         self.viewModel = viewModel
+    }
+    
+    public static func == (lhs: ObservableViewModel<ViewModel>, rhs: ObservableViewModel<ViewModel>) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }
 
@@ -65,7 +86,7 @@ public final class ObservableViewModelPublisher: Publisher {
     private let publisher = ObservableObjectPublisher()
     private var objectWillChangeCancellable: AnyCancellable? = nil
     
-    init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
+    internal init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
         self.viewModelScope = viewModelScope
         viewModelScope.setSendObjectWillChange { [weak self] in
             self?.publisher.send()
