@@ -42,29 +42,14 @@ public func observableViewModel<ViewModel: KMMViewModel>(
     }
 }
 
-public extension KMMViewModel {
-    
-    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
-    func childViewModel<ViewModel: KMMViewModel>(
-        _ viewModel: ViewModel?,
-        at keyPath: KeyPath<Self, ViewModel?>
-    ) -> ViewModel? {
-        if let viewModel = viewModel {
-            observableViewModel(for: self).childViewModels[keyPath] = observableViewModel(for: viewModel)
-        } else {
-            observableViewModel(for: self).childViewModels.removeValue(forKey: keyPath)
-        }
-        return viewModel
-    }
-    
-    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
-    func childViewModel<ViewModel: KMMViewModel>(
-        _ viewModel: ViewModel,
-        at keyPath: KeyPath<Self, ViewModel>
-    ) -> ViewModel {
-        observableViewModel(for: self).childViewModels[keyPath] = observableViewModel(for: viewModel)
-        return viewModel
-    }
+/// Gets the `ObservableObject` for the specified `KMMViewModel`.
+/// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
+public func observableViewModel<ViewModel: KMMViewModel>(
+    for viewModel: ViewModel?
+) -> ObservableViewModel<ViewModel>? {
+    guard let viewModel = viewModel else { return nil }
+    let observableViewModel = observableViewModel(for: viewModel)
+    return observableViewModel
 }
 
 /// An `ObservableObject` for a `KMMViewModel`.
