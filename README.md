@@ -183,3 +183,28 @@ class TimeTravelViewModel: shared.TimeTravelViewModel {
     @Published var isResetDisabled: Bool = false
 }
 ```
+
+### Child view models
+
+You'll need some additional logic if your `KMMViewModel`s expose child view models.
+
+First make sure to use the `NativeCoroutinesRefinedState` annotation instead of the `NativeCoroutinesState` annotation:
+```kotlin
+class MyParentViewModel: KMMViewModel() {
+    @NativeCoroutinesRefinedState
+    val myChildViewModel: StateFlow<MyChildViewModel?> = MutableStateFlow(null)
+}
+```
+
+After that you should create a Swift extension property using the `childViewModel(_, at:)` function: 
+```swift
+extension MyParentViewModel {
+    var myChildViewModel: MyChildViewModel? {
+        childViewModel(__myChildViewModel, at: \.__myChildViewModel)
+    }
+}
+```
+
+This will prevent your Swift view models from being deallocated too soon. 
+
+> **Note**: for lists, sets and dictionaries containing view models there is `childViewModels(_, at:)`.
