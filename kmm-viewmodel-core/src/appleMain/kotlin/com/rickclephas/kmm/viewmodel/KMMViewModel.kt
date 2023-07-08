@@ -1,6 +1,7 @@
 package com.rickclephas.kmm.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
+import kotlin.experimental.ExperimentalNativeApi
 import kotlin.native.ref.WeakReference
 
 /**
@@ -16,6 +17,7 @@ public actual abstract class KMMViewModel {
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
+    @OptIn(ExperimentalNativeApi::class)
     @Suppress("LeakingThis")
     public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl(WeakReference(this))
 
