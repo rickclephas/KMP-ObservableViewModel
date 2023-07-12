@@ -9,6 +9,8 @@ plugins {
 kotlin {
     explicitApi()
     jvmToolchain(11)
+
+    //region Apple and Android targets
     val macosX64 = macosX64()
     val macosArm64 = macosArm64()
     val iosArm64 = iosArm64()
@@ -25,11 +27,24 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
     }
+    //endregion
+    //region Other targets
+    val jvm = jvm()
+    val js = js {
+        browser()
+        nodejs()
+    }
+    val linuxArm64 = linuxArm64()
+    val linuxX64 = linuxX64()
+    val mingwX64 = mingwX64()
+    //endregion
+
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
             languageSettings.optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
         }
+
         val commonMain by getting {
             dependencies {
                 api(libs.kotlinx.coroutines.core)
@@ -40,11 +55,13 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
+
         val androidMain by getting {
             dependencies {
                 api(libs.androidx.lifecycle.viewmodel.ktx)
             }
         }
+
         val appleMain by creating {
             dependsOn(commonMain)
         }
@@ -67,6 +84,21 @@ kotlin {
                 cinterops.create("KMMViewModelCoreObjC") {
                     includeDirs("$projectDir/../KMMViewModelCoreObjC")
                 }
+            }
+        }
+
+        val otherMain by creating {
+            dependsOn(commonMain)
+        }
+        val otherTest by creating {
+            dependsOn(commonTest)
+        }
+        listOf(jvm, js, linuxArm64, linuxX64, mingwX64).forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(otherMain)
+            }
+            getByName("${it.targetName}Test") {
+                dependsOn(otherTest)
             }
         }
     }
