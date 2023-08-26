@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMMViewModelSwiftUI'
-  s.version    = '1.0.0-ALPHA-13'
+  s.version    = '1.0.0-ALPHA-14'
   s.summary    = 'Library to share Kotlin ViewModels with SwiftUI'
 
   s.homepage   = 'https://github.com/rickclephas/KMM-ViewModel'

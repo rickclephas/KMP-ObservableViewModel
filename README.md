@@ -4,26 +4,27 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.9.0`.  
+The latest version of the library uses Kotlin version `1.9.10`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix     |  Kotlin   | Coroutines | AndroidX Lifecycle |
-|----------------|--------------------|:---------:|:----------:|:------------------:|
-| **_latest_**   | **_no suffix_**    | **1.9.0** | **1.7.2**  |     **2.6.1**      |
-| 1.0.0-ALPHA-10 | _no suffix_        |  1.8.22   |   1.7.2    |       2.6.1        |
-| 1.0.0-ALPHA-9  | _no suffix_        |  1.8.21   |   1.7.1    |       2.5.1        |
-| 1.0.0-ALPHA-8  | _no suffix_        |  1.8.21   |   1.7.0    |       2.5.1        |
-| 1.0.0-ALPHA-7  | _no suffix_        |  1.8.21   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-6  | _no suffix_        |  1.8.20   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-4  | _no suffix_        |  1.8.10   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-3  | _no suffix_        |   1.8.0   |   1.6.4    |       2.5.1        |
+| Version        | Version suffix     |   Kotlin   | Coroutines | AndroidX Lifecycle |
+|----------------|--------------------|:----------:|:----------:|:------------------:|
+| **_latest_**   | **_no suffix_**    | **1.9.10** | **1.7.3**  |     **2.6.1**      |
+| 1.0.0-ALPHA-13 | _no suffix_        |   1.9.0    |   1.7.3    |       2.6.1        |
+| 1.0.0-ALPHA-10 | _no suffix_        |   1.8.22   |   1.7.2    |       2.6.1        |
+| 1.0.0-ALPHA-9  | _no suffix_        |   1.8.21   |   1.7.1    |       2.5.1        |
+| 1.0.0-ALPHA-8  | _no suffix_        |   1.8.21   |   1.7.0    |       2.5.1        |
+| 1.0.0-ALPHA-7  | _no suffix_        |   1.8.21   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-6  | _no suffix_        |   1.8.20   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-4  | _no suffix_        |   1.8.10   |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-3  | _no suffix_        |   1.8.0    |   1.6.4    |       2.5.1        |
 
 ## Kotlin
 
 Add the library to your shared Kotlin module:
 ```kotlin
 dependencies {
-    api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-13")
+    api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-14")
 }
 ```
 
@@ -128,7 +129,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-13")
+    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-14")
 ]
 ```
 
@@ -140,7 +141,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-13'
+pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
 ```
 </p>
 </details>
