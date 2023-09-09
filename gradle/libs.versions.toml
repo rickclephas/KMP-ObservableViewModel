@@ -1,12 +1,15 @@
 [versions]
-kotlin = "1.7.21"
-kotlinx-coroutines = "1.6.4"
-android = "7.3.1"
-androidx-lifecycle = "2.5.1"
+kotlin = "1.9.10"
+kotlinx-coroutines = "1.7.3"
+android = "7.4.2"
+androidx-lifecycle = "2.6.1"
 
 # Sample versions
-androidx-compose = "2022.11.00"
-androidx-fragment = "1.5.4"
+androidx-compose = "2023.06.01"
+androidx-compose-compiler = "1.5.3-dev-k1.9.10-593b4c95fce"
+androidx-fragment = "1.6.1"
+ksp = "1.9.10-1.0.13"
+nativecoroutines = "1.0.0-ALPHA-18"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -32,3 +35,5 @@ android-library = { id = "com.android.library", version.ref = "android" }
 # Sample plugins
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "android" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "nativecoroutines" }

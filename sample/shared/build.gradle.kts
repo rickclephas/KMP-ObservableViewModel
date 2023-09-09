@@ -3,10 +3,15 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.ksp)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.nativecoroutines)
 }
 
 kotlin {
-    android()
+    androidTarget()
+    jvmToolchain(11)
     
     listOf(
         iosX64(),
@@ -19,10 +24,13 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
-                implementation("com.rickclephas.kmm:kmm-viewmodel-core")
+                api("com.rickclephas.kmm:kmm-viewmodel-core")
             }
         }
         val commonTest by getting {
@@ -30,12 +38,6 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.lifecycle.viewmodel.ktx)
-            }
-        }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -62,6 +64,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 28
-        targetSdk = 33
+    }
+    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }

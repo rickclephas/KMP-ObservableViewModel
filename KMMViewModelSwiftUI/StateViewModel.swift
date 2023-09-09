@@ -27,6 +27,6 @@ public struct StateViewModel<ViewModel: KMMViewModel>: DynamicProperty {
     /// Creates a `StateViewModel` for the specified `KMMViewModel`.
     /// - Parameter wrappedValue: The `KMMViewModel` to observe.
     public init(wrappedValue: @autoclosure @escaping () -> ViewModel) {
-        self._observableObject = StateObject(wrappedValue: createObservableViewModel(for: wrappedValue()))
+        self._observableObject = StateObject(wrappedValue: observableViewModel(for: wrappedValue()))
     }
 }
