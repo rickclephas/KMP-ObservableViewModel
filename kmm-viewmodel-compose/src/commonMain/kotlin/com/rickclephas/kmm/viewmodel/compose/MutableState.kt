@@ -1,22 +1,13 @@
 package com.rickclephas.kmm.viewmodel.compose
 
+import androidx.compose.runtime.MutableState as ComposeMutableState
+import androidx.compose.runtime.SnapshotMutationPolicy
+import androidx.compose.runtime.structuralEqualityPolicy
 import com.rickclephas.kmm.viewmodel.ViewModelScope
-import kotlin.reflect.KProperty
 
-public expect interface MutableState<T>: State<T> {
-    public override var value: T
-    public operator fun component1(): T
-    public operator fun component2(): (T) -> Unit
-}
+public expect interface MutableState<T>: State<T>, ComposeMutableState<T>
 
-public expect fun <T : Any?> mutableStateOf(
-    viewModelScope: ViewModelScope,
+public expect fun <T : Any?> ViewModelScope.mutableStateOf(
     value: T,
     policy: SnapshotMutationPolicy<T> = structuralEqualityPolicy()
 ): MutableState<T>
-
-public inline operator fun <T : Any?> MutableState<T>.setValue(
-    thisObj: Any?,
-    property: KProperty<*>,
-    value: T
-) { this.value = value }

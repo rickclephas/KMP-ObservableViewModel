@@ -19,7 +19,7 @@ kotlin {
     val tvosArm64 = tvosArm64()
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
-    android()
+    androidTarget()
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
@@ -28,16 +28,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":kmm-viewmodel-core"))
+                api(libs.jetbrains.compose.runtime)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                api(libs.androidx.compose.runtime)
             }
         }
         val appleMain by creating {

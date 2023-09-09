@@ -1,6 +1,5 @@
 package com.rickclephas.kmm.viewmodel.compose
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.State as ComposeState
 
-@Suppress("ACTUAL_TYPE_ALIAS_TO_CLASS_WITH_DECLARATION_SITE_VARIANCE")
-public actual typealias State<T> = State<T>
+public actual interface State<out T>: ComposeState<T>
