@@ -43,6 +43,7 @@ kotlin {
         all {
             languageSettings {
                 optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
+                optIn("kotlinx.cinterop.ExperimentalForeignApi")
                 compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
