@@ -41,8 +41,10 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
-            languageSettings.optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
+            languageSettings {
+                optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
+                compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
         }
 
         val commonMain by getting {
