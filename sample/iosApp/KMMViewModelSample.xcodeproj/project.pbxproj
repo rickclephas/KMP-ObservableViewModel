@@ -162,7 +162,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D44EF98292C066C00465C43 /* Build configuration list for PBXNativeTarget "KMMViewModelSample" */;
 			buildPhases = (
-				1D44EFA1292C06EB00465C43 /* ShellScript */,
+				1D44EFA1292C06EB00465C43 /* Build shared Kotlin module */,
 				1D44EF70292C066B00465C43 /* Sources */,
 				1D44EF71292C066B00465C43 /* Frameworks */,
 				1D44EF72292C066B00465C43 /* Resources */,
@@ -285,8 +285,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D44EFA1292C06EB00465C43 /* ShellScript */ = {
+		1D44EFA1292C06EB00465C43 /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -294,6 +295,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
