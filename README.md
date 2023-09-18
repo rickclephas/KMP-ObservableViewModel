@@ -197,15 +197,15 @@ class MyParentViewModel: KMMViewModel() {
 }
 ```
 
-After that you should create a Swift extension property using the `childViewModel(_, at:)` function: 
+After that you should create a Swift extension property using the `childViewModel(at:)` function: 
 ```swift
 extension MyParentViewModel {
     var myChildViewModel: MyChildViewModel? {
-        childViewModel(__myChildViewModel, at: \.__myChildViewModel)
+        childViewModel(at: \.__myChildViewModel)
     }
 }
 ```
 
 This will prevent your Swift view models from being deallocated too soon. 
 
-> **Note**: for lists, sets and dictionaries containing view models there is `childViewModels(_, at:)`.
+> **Note**: for lists, sets and dictionaries containing view models there is `childViewModels(at:)`.

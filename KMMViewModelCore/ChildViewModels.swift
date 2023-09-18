@@ -26,6 +26,15 @@ public extension KMMViewModel {
     
     /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
     func childViewModel<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, ViewModel?>
+    ) -> ViewModel? {
+        let viewModel = self[keyPath: keyPath]
+        setChildViewModel(viewModel, at: keyPath)
+        return viewModel
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModel parameter")
+    func childViewModel<ViewModel: KMMViewModel>(
         _ viewModel: ViewModel?,
         at keyPath: KeyPath<Self, ViewModel?>
     ) -> ViewModel? {
@@ -34,6 +43,15 @@ public extension KMMViewModel {
     }
     
     /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
+    func childViewModel<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, ViewModel>
+    ) -> ViewModel {
+        let viewModel = self[keyPath: keyPath]
+        setChildViewModel(viewModel, at: keyPath)
+        return viewModel
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModel parameter")
     func childViewModel<ViewModel: KMMViewModel>(
         _ viewModel: ViewModel,
         at keyPath: KeyPath<Self, ViewModel>
@@ -55,6 +73,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [ViewModel?]?>
+    ) -> [ViewModel?]? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: [ViewModel?]?,
         at keyPath: KeyPath<Self, [ViewModel?]?>
     ) -> [ViewModel?]? {
@@ -63,6 +90,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [ViewModel?]>
+    ) -> [ViewModel?] {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: [ViewModel?],
         at keyPath: KeyPath<Self, [ViewModel?]>
@@ -73,6 +109,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [ViewModel]?>
+    ) -> [ViewModel]? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: [ViewModel]?,
         at keyPath: KeyPath<Self, [ViewModel]?>
     ) -> [ViewModel]? {
@@ -81,6 +126,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [ViewModel]>
+    ) -> [ViewModel] {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: [ViewModel],
         at keyPath: KeyPath<Self, [ViewModel]>
@@ -102,6 +156,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, Set<ViewModel?>?>
+    ) -> Set<ViewModel?>? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: Set<ViewModel?>?,
         at keyPath: KeyPath<Self, Set<ViewModel?>?>
     ) -> Set<ViewModel?>? {
@@ -110,6 +173,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, Set<ViewModel?>>
+    ) -> Set<ViewModel?> {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: Set<ViewModel?>,
         at keyPath: KeyPath<Self, Set<ViewModel?>>
@@ -120,6 +192,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, Set<ViewModel>?>
+    ) -> Set<ViewModel>? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: Set<ViewModel>?,
         at keyPath: KeyPath<Self, Set<ViewModel>?>
     ) -> Set<ViewModel>? {
@@ -128,6 +209,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, Set<ViewModel>>
+    ) -> Set<ViewModel> {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<ViewModel: KMMViewModel>(
         _ viewModels: Set<ViewModel>,
         at keyPath: KeyPath<Self, Set<ViewModel>>
@@ -149,6 +239,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<Key, ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [Key : ViewModel?]?>
+    ) -> [Key : ViewModel?]? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<Key, ViewModel: KMMViewModel>(
         _ viewModels: [Key : ViewModel?]?,
         at keyPath: KeyPath<Self, [Key : ViewModel?]?>
     ) -> [Key : ViewModel?]? {
@@ -157,6 +256,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<Key, ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [Key : ViewModel?]>
+    ) -> [Key : ViewModel?] {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<Key, ViewModel: KMMViewModel>(
         _ viewModels: [Key : ViewModel?],
         at keyPath: KeyPath<Self, [Key : ViewModel?]>
@@ -167,6 +275,15 @@ public extension KMMViewModel {
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
     func childViewModels<Key, ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [Key : ViewModel]?>
+    ) -> [Key : ViewModel]? {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
+    func childViewModels<Key, ViewModel: KMMViewModel>(
         _ viewModels: [Key : ViewModel]?,
         at keyPath: KeyPath<Self, [Key : ViewModel]?>
     ) -> [Key : ViewModel]? {
@@ -175,6 +292,15 @@ public extension KMMViewModel {
     }
     
     /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
+    func childViewModels<Key, ViewModel: KMMViewModel>(
+        at keyPath: KeyPath<Self, [Key : ViewModel]>
+    ) -> [Key : ViewModel] {
+        let viewModels = self[keyPath: keyPath]
+        setChildViewModels(viewModels, at: keyPath)
+        return viewModels
+    }
+    
+    @available(*, deprecated, message: "Please use the variant without the viewModels parameter")
     func childViewModels<Key, ViewModel: KMMViewModel>(
         _ viewModels: [Key : ViewModel],
         at keyPath: KeyPath<Self, [Key : ViewModel]>
