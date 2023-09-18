@@ -21,10 +21,19 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 
 ## Kotlin
 
-Add the library to your shared Kotlin module:
+Add the library to your shared Kotlin module and opt-in to the `ExperimentalForeignApi`:
 ```kotlin
-dependencies {
-    api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-14")
+kotlin {
+    sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+        commonMain {
+            dependencies {
+                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-14")
+            }
+        }
+    }
 }
 ```
 
