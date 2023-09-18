@@ -30,13 +30,13 @@ kotlin {
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
             }
         }
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 api("com.rickclephas.kmm:kmm-viewmodel-core")
             }
         }
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.test)
             }
