@@ -15,7 +15,7 @@ public func createObservableViewModel<ViewModel: KMMViewModel>(
     observableViewModel(for: viewModel)
 }
 
-private var observableViewModelKey = "observableViewModel"
+private var observableViewModelKey: Void?
 
 private class WeakObservableViewModel<ViewModel: KMMViewModel> {
     weak var observableViewModel: ObservableViewModel<ViewModel>?
