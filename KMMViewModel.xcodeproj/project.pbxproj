@@ -18,6 +18,7 @@
 		1D198B312933C01800EF778D /* KMMViewModelCoreObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D198B2F2933C01800EF778D /* KMMViewModelCoreObjC.m */; };
 		1D198B322933C04400EF778D /* KMMViewModelCoreObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D198B272933BFD900EF778D /* KMMViewModelCoreObjC.framework */; };
 		1D43F3EC2ABAFCA600EB3DFE /* ObservableViewModelPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D43F3EB2ABAFCA600EB3DFE /* ObservableViewModelPublisher.swift */; };
+		1D43F3EE2ABAFD7D00EB3DFE /* ObservableViewModelPublishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D43F3ED2ABAFD7D00EB3DFE /* ObservableViewModelPublishers.swift */; };
 		1D6641DD2A5175C3000180D7 /* ChildViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6641DC2A5175C3000180D7 /* ChildViewModels.swift */; };
 		1DDAF21E293545DD0049C114 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF21D293545DD0049C114 /* KMMViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		1D198B2E2933C01800EF778D /* KMMVMViewModelScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMMVMViewModelScope.h; sourceTree = "<group>"; };
 		1D198B2F2933C01800EF778D /* KMMViewModelCoreObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMMViewModelCoreObjC.m; sourceTree = "<group>"; };
 		1D43F3EB2ABAFCA600EB3DFE /* ObservableViewModelPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableViewModelPublisher.swift; sourceTree = "<group>"; };
+		1D43F3ED2ABAFD7D00EB3DFE /* ObservableViewModelPublishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableViewModelPublishers.swift; sourceTree = "<group>"; };
 		1D6641DC2A5175C3000180D7 /* ChildViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewModels.swift; sourceTree = "<group>"; };
 		1DDAF21D293545DD0049C114 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,7 @@
 				1DDAF21D293545DD0049C114 /* KMMViewModel.swift */,
 				1D0DA80129336AD40057DDAD /* ObservableViewModel.swift */,
 				1D43F3EB2ABAFCA600EB3DFE /* ObservableViewModelPublisher.swift */,
+				1D43F3ED2ABAFD7D00EB3DFE /* ObservableViewModelPublishers.swift */,
 			);
 			path = KMMViewModelCore;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D43F3EE2ABAFD7D00EB3DFE /* ObservableViewModelPublishers.swift in Sources */,
 				1D43F3EC2ABAFCA600EB3DFE /* ObservableViewModelPublisher.swift in Sources */,
 				1DDAF21E293545DD0049C114 /* KMMViewModel.swift in Sources */,
 				1D6641DD2A5175C3000180D7 /* ChildViewModels.swift in Sources */,

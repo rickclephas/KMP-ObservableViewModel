@@ -9,11 +9,11 @@ import KMMViewModelCoreObjC
 
 public extension KMMViewModel {
     
-    private func setChildViewModels(_ keyPath: AnyKeyPath, _ viewModels: AnyHashable?) {
-        if let viewModels = viewModels {
-            observableViewModel(for: self).childViewModels[keyPath] = viewModels
+    private func setChildViewModelPublishers(_ keyPath: AnyKeyPath, _ publishers: AnyHashable?) {
+        if let publishers = publishers {
+            observableViewModelPublishers(for: self).childPublishers[keyPath] = publishers
         } else {
-            observableViewModel(for: self).childViewModels.removeValue(forKey: keyPath)
+            observableViewModelPublishers(for: self).childPublishers.removeValue(forKey: keyPath)
         }
     }
     
@@ -21,7 +21,7 @@ public extension KMMViewModel {
         _ viewModel: ViewModel?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModels(keyPath, observableViewModel(for: viewModel))
+        setChildViewModelPublishers(keyPath, observableViewModelPublishers(for: viewModel))
     }
     
     /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
@@ -66,8 +66,8 @@ public extension KMMViewModel {
         _ viewModels: [ViewModel?]?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModels(keyPath, viewModels?.map { viewModel in
-            observableViewModel(for: viewModel)
+        setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
+            observableViewModelPublishers(for: viewModel)
         })
     }
     
@@ -149,8 +149,8 @@ public extension KMMViewModel {
         _ viewModels: Set<ViewModel?>?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModels(keyPath, viewModels?.map { viewModel in
-            observableViewModel(for: viewModel)
+        setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
+            observableViewModelPublishers(for: viewModel)
         })
     }
     
@@ -232,8 +232,8 @@ public extension KMMViewModel {
         _ viewModels: [Key : ViewModel?]?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModels(keyPath, viewModels?.mapValues { viewModel in
-            observableViewModel(for: viewModel)
+        setChildViewModelPublishers(keyPath, viewModels?.mapValues { viewModel in
+            observableViewModelPublishers(for: viewModel)
         })
     }
     
