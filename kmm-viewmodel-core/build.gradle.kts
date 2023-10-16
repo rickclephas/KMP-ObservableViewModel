@@ -39,12 +39,19 @@ kotlin {
     mingwX64()
     //endregion
 
+    targets.all {
+        compilations.all {
+            compilerOptions.configure {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
+        }
+    }
+
     sourceSets {
         all {
             languageSettings {
                 optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
-                compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
 
