@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
@@ -9,7 +11,18 @@ plugins {
 kotlin {
     explicitApi()
     jvmToolchain(11)
-    applyDefaultHierarchyTemplate()
+
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("other") {
+                withJvm()
+                withJs()
+                withLinux()
+                withMingw()
+            }
+        }
+    }
 
     //region Apple and Android targets
     listOf(
@@ -70,37 +83,6 @@ kotlin {
             dependencies {
                 api(libs.androidx.lifecycle.viewmodel.ktx)
             }
-        }
-
-        val otherMain by creating {
-            dependsOn(commonMain.get())
-        }
-        val otherTest by creating {
-            dependsOn(commonTest.get())
-        }
-        jvmMain {
-            dependsOn(otherMain)
-        }
-        jvmTest {
-            dependsOn(otherTest)
-        }
-        jsMain {
-            dependsOn(otherMain)
-        }
-        jsTest {
-            dependsOn(otherTest)
-        }
-        linuxMain {
-            dependsOn(otherMain)
-        }
-        linuxTest {
-            dependsOn(otherTest)
-        }
-        mingwMain {
-            dependsOn(otherMain)
-        }
-        mingwTest {
-            dependsOn(otherTest)
         }
     }
 }
