@@ -10,6 +10,9 @@ plugins {
 }
 
 kotlin {
+    // TODO: Remove workaround for https://github.com/google/ksp/issues/1569
+    applyDefaultHierarchyTemplate()
+
     androidTarget()
     jvmToolchain(11)
     
