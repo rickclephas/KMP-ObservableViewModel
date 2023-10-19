@@ -88,7 +88,8 @@ And the second being a different `MutableStateFlow` constructor:
 
 These minor differences will make sure that any state changes are propagated to iOS.  
 
-> **Note**: `viewModelScope` is a wrapper around the actual `CoroutineScope` which can be accessed 
+> [!NOTE]
+> `viewModelScope` is a wrapper around the actual `CoroutineScope` which can be accessed 
 > via the `ViewModelScope.coroutineScope` property.
 
 ### KMP-NativeCoroutines
@@ -125,7 +126,8 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 }
 ```
 
-> **Note:** improved support for Jetpack Compose is coming soon.
+> [!NOTE]
+> Improved support for Jetpack Compose is coming soon.
 
 ## Swift
 
@@ -211,4 +213,5 @@ extension MyParentViewModel {
 
 This will prevent your Swift view models from being deallocated too soon. 
 
-> **Note**: for lists, sets and dictionaries containing view models there is `childViewModels(at:)`.
+> [!NOTE]
+> For lists, sets and dictionaries containing view models there is `childViewModels(at:)`.
