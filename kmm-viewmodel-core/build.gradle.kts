@@ -18,8 +18,8 @@ kotlin {
             group("other") {
                 withJvm()
                 withJs()
-                withLinux()
-                withMingw()
+                group("linux")
+                group("mingw")
             }
         }
     }
