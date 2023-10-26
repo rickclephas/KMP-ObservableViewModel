@@ -8,8 +8,6 @@ import kotlinx.coroutines.CoroutineScope
  *
  * On Android this is a subclass of the Jetpack ViewModel.
  */
-@OptIn(ExperimentalMultiplatform::class)
-@AllowDifferentMembersInActual // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-22841
 public actual abstract class KMMViewModel: ViewModel() {
 
     /**

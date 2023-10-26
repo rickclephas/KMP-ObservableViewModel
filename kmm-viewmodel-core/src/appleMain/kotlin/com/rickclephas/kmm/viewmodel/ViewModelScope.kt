@@ -17,8 +17,6 @@ import kotlin.native.ref.WeakReference
  * Holds the [CoroutineScope] of a [KMMViewModel].
  * @see coroutineScope
  */
-@OptIn(ExperimentalMultiplatform::class)
-@AllowDifferentMembersInActual // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-22841
 public actual typealias ViewModelScope = KMMVMViewModelScopeProtocol
 
 /**
