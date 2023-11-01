@@ -31,7 +31,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-14")
+                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-15")
             }
         }
     }
@@ -141,7 +141,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-14")
+    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-15")
 ]
 ```
 
@@ -153,7 +153,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
+pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-15'
 ```
 </p>
 </details>
