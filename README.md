@@ -7,18 +7,19 @@ A library that allows you to share ViewModels between Android and iOS.
 The latest version of the library uses Kotlin version `1.9.20`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix       |    Kotlin    | Coroutines | AndroidX Lifecycle |
-|----------------|----------------------|:------------:|:----------:|:------------------:|
-| **_latest_**   | **_no suffix_**      |  **1.9.20**  | **1.7.3**  |     **2.6.2**      |
-| 1.0.0-ALPHA-14 | _no suffix_          |    1.9.10    |   1.7.3    |       2.6.1        |
-| 1.0.0-ALPHA-13 | _no suffix_          |    1.9.0     |   1.7.3    |       2.6.1        |
-| 1.0.0-ALPHA-10 | _no suffix_          |    1.8.22    |   1.7.2    |       2.6.1        |
-| 1.0.0-ALPHA-9  | _no suffix_          |    1.8.21    |   1.7.1    |       2.5.1        |
-| 1.0.0-ALPHA-8  | _no suffix_          |    1.8.21    |   1.7.0    |       2.5.1        |
-| 1.0.0-ALPHA-7  | _no suffix_          |    1.8.21    |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-6  | _no suffix_          |    1.8.20    |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-4  | _no suffix_          |    1.8.10    |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-3  | _no suffix_          |    1.8.0     |   1.6.4    |       2.5.1        |
+| Version        | Version suffix      |   Kotlin    | Coroutines | AndroidX Lifecycle |
+|----------------|---------------------|:-----------:|:----------:|:------------------:|
+| _latest_       | -kotlin-2.0.0-Beta1 | 2.0.0-Beta1 |   1.7.3    |       2.6.2        |
+| **_latest_**   | **_no suffix_**     | **1.9.20**  | **1.7.3**  |     **2.6.2**      |
+| 1.0.0-ALPHA-14 | _no suffix_         |   1.9.10    |   1.7.3    |       2.6.1        |
+| 1.0.0-ALPHA-13 | _no suffix_         |    1.9.0    |   1.7.3    |       2.6.1        |
+| 1.0.0-ALPHA-10 | _no suffix_         |   1.8.22    |   1.7.2    |       2.6.1        |
+| 1.0.0-ALPHA-9  | _no suffix_         |   1.8.21    |   1.7.1    |       2.5.1        |
+| 1.0.0-ALPHA-8  | _no suffix_         |   1.8.21    |   1.7.0    |       2.5.1        |
+| 1.0.0-ALPHA-7  | _no suffix_         |   1.8.21    |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-6  | _no suffix_         |   1.8.20    |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-4  | _no suffix_         |   1.8.10    |   1.6.4    |       2.5.1        |
+| 1.0.0-ALPHA-3  | _no suffix_         |    1.8.0    |   1.6.4    |       2.5.1        |
 
 ## Kotlin
 
