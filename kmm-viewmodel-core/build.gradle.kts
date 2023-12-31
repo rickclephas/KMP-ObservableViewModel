@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     @Suppress("DSL_SCOPE_VIOLATION")
@@ -20,6 +21,7 @@ kotlin {
                 withJs()
                 group("linux")
                 group("mingw")
+                withWasm()
             }
         }
     }
@@ -50,6 +52,12 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+    }
     //endregion
 
     targets.all {
