@@ -42,6 +42,13 @@ kotlin {
     jvmToolchain(11)
 }
 
+// Ignore Compose Kotlin version compatibility check
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += listOf("-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true")
+    }
+}
+
 dependencies {
     implementation(project(":shared"))
     implementation(platform(libs.androidx.compose.bom))
