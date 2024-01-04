@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.rickclephas.kmm.viewmodel.sample"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.rickclephas.kmm.viewmodel.sample"
         minSdk = 28
