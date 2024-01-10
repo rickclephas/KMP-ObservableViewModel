@@ -36,8 +36,9 @@ open class TimeTravelViewModel(
      * @see stopTime
      */
     @NativeCoroutinesState
-    val isFixedTime = _travelEffect.map { it is TravelEffect.Fixed }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+    val isFixedTime = _travelEffect.map(viewModelScope, SharingStarted.WhileSubscribed()) {
+        it is TravelEffect.Fixed
+    }
 
     /**
      * A [StateFlow] that emits the current time.
