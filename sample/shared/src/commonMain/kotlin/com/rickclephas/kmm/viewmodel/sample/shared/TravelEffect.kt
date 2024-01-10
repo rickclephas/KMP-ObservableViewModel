@@ -1,9 +1,13 @@
 package com.rickclephas.kmm.viewmodel.sample.shared
 
+import kotlinx.serialization.Serializable
 import kotlin.random.Random
 
+@Serializable
 sealed class TravelEffect {
+    @Serializable
     data class Offset(val offset: Long): TravelEffect()
+    @Serializable
     data class Fixed(val time: Long): TravelEffect()
 }
 

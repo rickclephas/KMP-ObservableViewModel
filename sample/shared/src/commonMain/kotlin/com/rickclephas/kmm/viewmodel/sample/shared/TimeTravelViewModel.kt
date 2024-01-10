@@ -1,11 +1,18 @@
 package com.rickclephas.kmm.viewmodel.sample.shared
 
 import com.rickclephas.kmm.viewmodel.*
+import com.rickclephas.kmm.viewmodel.savedstate.AndroidSavedStateHandle
+import com.rickclephas.kmm.viewmodel.savedstate.SavedStateHandle
+import com.rickclephas.kmm.viewmodel.savedstate.asSavedStateHandle
+import com.rickclephas.kmm.viewmodel.savedstate.getMutableStateFlow
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
-open class TimeTravelViewModel: KMMViewModel() {
+open class TimeTravelViewModel(
+    val savedStateHandle: SavedStateHandle
+): KMMViewModel() {
+    constructor(androidSavedStateHandle: AndroidSavedStateHandle): this(androidSavedStateHandle.asSavedStateHandle())
 
     private val clockTime = Clock.time
 
@@ -16,7 +23,7 @@ open class TimeTravelViewModel: KMMViewModel() {
     val actualTime = clockTime.map { formatTime(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
-    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
+    private val _travelEffect = savedStateHandle.getMutableStateFlow<TravelEffect?>(viewModelScope, "travelEffect", null)
     /**
      * A [StateFlow] that emits the applied [TravelEffect].
      */

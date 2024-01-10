@@ -1,6 +1,7 @@
 [versions]
 kotlin = "1.9.22"
 kotlinx-coroutines = "1.7.3"
+kotlinx-serialization = "1.6.2"
 android = "7.4.2"
 androidx-lifecycle = "2.6.2"
 
@@ -14,7 +15,10 @@ nativecoroutines = "1.0.0-ALPHA-24"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-cbor = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor", version.ref = "kotlinx-serialization" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 
 # Sample libraries
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose" }
@@ -32,6 +36,7 @@ android-library = { id = "com.android.library", version.ref = "android" }
 
 # Sample plugins
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "android" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "nativecoroutines" }
