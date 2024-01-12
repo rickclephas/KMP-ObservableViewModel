@@ -13,6 +13,7 @@ open class TimeTravelViewModel(
     val savedStateHandle: SavedStateHandle
 ): KMMViewModel() {
     constructor(androidSavedStateHandle: AndroidSavedStateHandle): this(androidSavedStateHandle.asSavedStateHandle())
+    constructor(): this(SavedStateHandle())
 
     private val clockTime = Clock.time
 

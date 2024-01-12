@@ -7,6 +7,7 @@
 
 import SwiftUI
 import KMMViewModelSwiftUI
+import KMMViewModelSavedState
 
 struct ContentView: View {
     
@@ -62,7 +63,7 @@ struct ContentView: View {
                 }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
             }
             Spacer()
-        }
+        }.savedState("TimeTravelViewModel", viewModel.savedStateHandle)
     }
 }
 
