@@ -45,6 +45,7 @@ public actual class SavedStateHandle actual constructor() {
 
     public actual operator fun contains(key: String): Boolean = serializedState.contains(key)
 
+    @HiddenFromObjC
     public actual inline fun <reified T> getStateFlow(
         viewModelScope: ViewModelScope,
         key: String,
@@ -63,6 +64,7 @@ public actual class SavedStateHandle actual constructor() {
         Pair(MutableStateFlow(viewModelScope, value), serializer)
     }.first.asStateFlow() as StateFlow<T>
 
+    @HiddenFromObjC
     public actual inline operator fun <reified T> get(key: String): T? = get(key, serializer())
 
     @PublishedApi
@@ -70,6 +72,7 @@ public actual class SavedStateHandle actual constructor() {
     internal fun <T> get(key: String, serializer: KSerializer<T>): T? =
         state.getOrPut(key) { serializedState[key]?.let(serializer::deserialize) } as T?
 
+    @HiddenFromObjC
     public actual inline operator fun <reified T> set(key: String, value: T?): Unit = set(key, value, serializer())
 
     @PublishedApi
@@ -80,6 +83,7 @@ public actual class SavedStateHandle actual constructor() {
         invokeStateChangedListener()
     }
 
+    @HiddenFromObjC
     public actual inline fun <reified T> remove(key: String): T? = remove(key, serializer())
 
     @PublishedApi

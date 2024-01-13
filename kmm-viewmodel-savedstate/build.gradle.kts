@@ -40,6 +40,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
+                optIn("kotlin.experimental.ExperimentalObjCRefinement")
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
             }
         }
