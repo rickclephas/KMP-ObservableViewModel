@@ -17,9 +17,9 @@ public actual class SavedStateHandle actual constructor() {
     private val state = mutableMapOf<String, Any?>()
     private val flows = mutableMapOf<String, Pair<MutableStateFlow<Any?>, KSerializer<*>>>()
 
-    private var stateChangedListener: (() -> Unit)? = null
+    private var stateChangedListener: ((NSData?) -> Unit)? = null
 
-    public fun setStateChangedListener(listener: () -> Unit) {
+    public fun setStateChangedListener(listener: (NSData?) -> Unit) {
         stateChangedListener = listener
     }
 
@@ -34,7 +34,7 @@ public actual class SavedStateHandle actual constructor() {
                     flow.value = get(key, serializer)
                 }
             }
-            stateChangedListener?.invoke()
+            stateChangedListener?.invoke(data)
         }
 
     public actual fun keys(): Set<String> = serializedState.keys
@@ -73,7 +73,7 @@ public actual class SavedStateHandle actual constructor() {
         state[key] = value
         serializedState[key] = value?.let(serializer::serialize)
         flows[key]?.first?.value = value
-        stateChangedListener?.invoke()
+        stateChangedListener?.invoke(data)
     }
 
     public actual inline fun <reified T> remove(key: String): T? = remove(key, serializer())

@@ -12,21 +12,21 @@ public extension View {
     
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     func savedStateManager() -> some View {
-        modifier(SavedStateManagerModifier())
+        modifier(SavedStateManagerViewModifier())
     }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-private struct SavedStateManagerModifier: ViewModifier {
+private struct SavedStateManagerViewModifier: ViewModifier {
     
     @SceneStorage("KMMViewModelSavedState") private var state: Data?
-    @StateObject private var savedStateManager = SavedStateManager()
+    @StateObject private var manager = SavedStateManager()
     
     func body(content: Content) -> some View {
-        content.environmentObject(savedStateManager).onReceive(savedStateManager.stateChanged) {
-            state = savedStateManager.getState()
+        content.environmentObject(manager).onReceive(manager.stateChanged) {
+            state = manager.getState()
         }.onAppear {
-            savedStateManager.setState(state)
+            manager.setState(state)
         }
     }
 }
@@ -54,14 +54,10 @@ internal class SavedStateManager: ObservableObject {
     func getState() -> Data? { state }
     
     func setState(_ state: Data?) {
-        guard self.state != state else { return }
+        guard let state, self.state == nil else { return }
         self.state = state
-        if let state {
-            states = try! NSKeyedUnarchiver.unarchivedDictionary(
-                ofKeyClass: NSString.self, objectClass: NSData.self, from: state
-            ) as [String : Data]? ?? [:]
-        } else {
-            states = [:]
-        }
+        states = try! NSKeyedUnarchiver.unarchivedDictionary(
+            ofKeyClass: NSString.self, objectClass: NSData.self, from: state
+        ) as [String : Data]? ?? [:]
     }
 }

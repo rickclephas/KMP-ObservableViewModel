@@ -19,7 +19,7 @@ public extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 internal struct SavedStateObserverViewModifier: ViewModifier {
     
-    @EnvironmentObject private var savedStateManager: SavedStateManager
+    @EnvironmentObject private var manager: SavedStateManager
     @StateObject private var observer: SavedStateObserver
     
     init(_ key: String, _ savedStateHandle: SavedStateHandle) {
@@ -30,7 +30,7 @@ internal struct SavedStateObserverViewModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content.onAppear {
-            observer.setSavedStateManager(savedStateManager)
+            observer.setManager(manager)
         }
     }
 }
@@ -40,25 +40,24 @@ private class SavedStateObserver: ObservableObject {
     
     private let key: String
     private let savedStateHandle: SavedStateHandle
-    private var savedStateManager: SavedStateManager? = nil
-    private var cancellable: AnyCancellable? = nil
+    private var manager: SavedStateManager? = nil
     
     init(_ key: String, _ savedStateHandle: SavedStateHandle) {
         self.key = key
         self.savedStateHandle = savedStateHandle
-        savedStateHandle.setStateChangedListener { [weak self, unowned savedStateHandle] in
+        savedStateHandle.setStateChangedListener { [weak self] data in
             guard let self else { return }
-            self.savedStateManager?.setState(savedStateHandle.data, for: self.key)
+            self.manager?.setState(data, for: key)
         }
     }
     
-    func setSavedStateManager(_ savedStateManager: SavedStateManager) {
-        guard self.savedStateManager == nil else { return }
-        self.savedStateManager = savedStateManager
-        savedStateHandle.data = savedStateManager.getState(for: key)
+    func setManager(_ manager: SavedStateManager) {
+        guard self.manager == nil else { return }
+        self.manager = manager
+        savedStateHandle.data = manager.getState(for: key)
     }
     
     deinit {
-        savedStateManager?.setState(nil, for: key)
+        manager?.setState(nil, for: key)
     }
 }

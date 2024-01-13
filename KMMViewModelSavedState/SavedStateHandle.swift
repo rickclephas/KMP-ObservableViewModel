@@ -9,5 +9,5 @@ import Foundation
 
 public protocol SavedStateHandle: AnyObject {
     var data: Data? { get set }
-    func setStateChangedListener(listener: @escaping () -> Void)
+    func setStateChangedListener(listener: @escaping (Data?) -> Void)
 }
