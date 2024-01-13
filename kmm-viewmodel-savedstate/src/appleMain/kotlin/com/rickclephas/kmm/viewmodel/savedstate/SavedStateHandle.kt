@@ -23,6 +23,10 @@ public actual class SavedStateHandle actual constructor() {
         stateChangedListener = listener
     }
 
+    private fun invokeStateChangedListener() {
+        stateChangedListener?.invoke(data)
+    }
+
     public var data: NSData?
         get() = serializedState.serialize()
         set(value) {
@@ -34,7 +38,7 @@ public actual class SavedStateHandle actual constructor() {
                     flow.value = get(key, serializer)
                 }
             }
-            stateChangedListener?.invoke(data)
+            invokeStateChangedListener()
         }
 
     public actual fun keys(): Set<String> = serializedState.keys
@@ -73,7 +77,7 @@ public actual class SavedStateHandle actual constructor() {
         state[key] = value
         serializedState[key] = value?.let(serializer::serialize)
         flows[key]?.first?.value = value
-        stateChangedListener?.invoke(data)
+        invokeStateChangedListener()
     }
 
     public actual inline fun <reified T> remove(key: String): T? = remove(key, serializer())
@@ -83,6 +87,7 @@ public actual class SavedStateHandle actual constructor() {
         val value = state.remove(key)
         val serializedValue = serializedState.remove(key)
         flows.remove(key)
+        invokeStateChangedListener()
         @Suppress("UNCHECKED_CAST")
         return value as T? ?: serializedValue?.let(serializer::deserialize)
     }

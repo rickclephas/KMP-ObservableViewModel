@@ -2,7 +2,6 @@ package com.rickclephas.kmm.viewmodel.savedstate
 
 import com.rickclephas.kmm.viewmodel.ViewModelScope
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.serialization.KSerializer
 
 public expect class SavedStateHandle() {
     public fun keys(): Set<String>
