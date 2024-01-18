@@ -13,14 +13,14 @@ public final class ObservableViewModelPublisher: Publisher {
     public typealias Output = Void
     public typealias Failure = Never
     
-    internal weak var viewModelScope: ViewModelScope?
+    internal weak var viewModel: (any KMMViewModel)?
     
     private let publisher = ObservableObjectPublisher()
     private var objectWillChangeCancellable: AnyCancellable? = nil
     
-    internal init(_ viewModelScope: ViewModelScope, _ objectWillChange: ObservableObjectPublisher) {
-        self.viewModelScope = viewModelScope
-        viewModelScope.setSendObjectWillChange { [weak self] in
+    internal init(_ viewModel: any KMMViewModel, _ objectWillChange: ObservableObjectPublisher) {
+        self.viewModel = viewModel
+        viewModel.viewModelScope.setSendObjectWillChange { [weak self] in
             self?.publisher.send()
         }
         objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
@@ -29,12 +29,16 @@ public final class ObservableViewModelPublisher: Publisher {
     }
     
     public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
-        viewModelScope?.increaseSubscriptionCount()
+        viewModel?.viewModelScope.increaseSubscriptionCount()
         publisher.receive(subscriber: ObservableViewModelSubscriber(self, subscriber))
     }
     
     deinit {
-        viewModelScope?.cancel()
+        guard let viewModel else { return }
+        if let cancellable = viewModel as? Cancellable {
+            cancellable.cancel()
+        }
+        viewModel.viewModelScope.cancel()
     }
 }
 
@@ -85,6 +89,6 @@ private class ObservableViewModelSubscription: Subscription {
         subscription.cancel()
         guard !cancelled else { return }
         cancelled = true
-        publisher.viewModelScope?.decreaseSubscriptionCount()
+        publisher.viewModel?.viewModelScope.decreaseSubscriptionCount()
     }
 }
