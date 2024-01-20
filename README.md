@@ -225,3 +225,46 @@ This will prevent your Swift view models from being deallocated too soon.
 
 > [!NOTE]
 > For lists, sets and dictionaries containing view models there is `childViewModels(at:)`.
+
+### Cancellable ViewModel
+
+When subclassing your Kotlin ViewModel in Swift you might experience some issues in the way those ViewModels are cleared.
+
+An example of such an issue is when you are using a Combine publisher to observe a Flow through KMP-NativeCoroutines:
+```swift
+import Combine
+import KMPNativeCoroutinesCombine
+import shared // This should be your shared KMM module
+
+class TimeTravelViewModel: shared.TimeTravelViewModel {
+
+    private var cancellables = Set<AnyCancellable>()
+
+    override init() {
+        super.init()
+        createPublisher(for: currentTimeFlow)
+            .assertNoFailure()
+            .sink { time in print("It's \(time)") }
+            .store(in: &cancellables)
+    }
+}
+```
+
+Since `currentTimeFlow` is a StateFlow we don't ever expect it to fail, which is why we are using the `assertNoFailure`.
+However, in this case you'll notice that the publisher will fail with a `JobCancellationException`.
+
+The problem here is that before the `TimeTravelViewModel` is deinited it will already be cleared.
+Meaning the `viewModelScope` is cancelled and `onCleared` is called.
+This results in the Combine publisher outliving the underlying StateFlow collection.
+
+To solve such issues you should have your Swift ViewModel conform to `Cancellable` 
+and perform the required cleanup in the `cancel` function:
+```swift
+class TimeTravelViewModel: shared.TimeTravelViewModel, Cancellable {
+    func cancel() {
+        cancellables = []
+    }
+}
+```
+
+KMM-ViewModel will make sure to call the `cancel` function before the ViewModel is being cleared.
