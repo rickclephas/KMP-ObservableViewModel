@@ -1,0 +1,18 @@
+package com.rickclephas.kmm.viewmodel.savedstate
+
+import com.rickclephas.kmm.viewmodel.ViewModelScope
+import kotlinx.coroutines.flow.StateFlow
+import kotlin.native.HiddenFromObjC
+
+public expect class SavedStateHandle() {
+    public fun keys(): Set<String>
+    public operator fun contains(key: String): Boolean
+    @HiddenFromObjC
+    public inline fun <reified T> getStateFlow(viewModelScope: ViewModelScope, key: String, initialValue: T): StateFlow<T>
+    @HiddenFromObjC
+    public inline operator fun <reified T> get(key: String): T?
+    @HiddenFromObjC
+    public inline operator fun <reified T> set(key: String, value: T?)
+    @HiddenFromObjC
+    public inline fun <reified T> remove(key: String): T?
+}

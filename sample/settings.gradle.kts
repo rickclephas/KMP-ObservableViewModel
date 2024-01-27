@@ -23,6 +23,8 @@ includeBuild("..") {
     dependencySubstitution {
         substitute(module("com.rickclephas.kmm:kmm-viewmodel-core"))
             .using(project(":kmm-viewmodel-core"))
+        substitute(module("com.rickclephas.kmm:kmm-viewmodel-savedstate"))
+            .using(project(":kmm-viewmodel-savedstate"))
     }
 }
 

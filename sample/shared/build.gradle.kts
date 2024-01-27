@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.ksp)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.nativecoroutines)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -34,6 +36,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 api("com.rickclephas.kmm:kmm-viewmodel-core")
+                api("com.rickclephas.kmm:kmm-viewmodel-savedstate")
             }
         }
         commonTest {
