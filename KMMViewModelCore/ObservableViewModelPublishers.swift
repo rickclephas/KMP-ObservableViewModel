@@ -26,7 +26,7 @@ internal func observableViewModelPublishers<ViewModel: KMMViewModel>(
             fatalError("ObservableViewModel has been deallocated")
         }()
     } else {
-        let publisher = ObservableViewModelPublisher(viewModel.viewModelScope, viewModel.objectWillChange)
+        let publisher = ObservableViewModelPublisher(viewModel, viewModel.objectWillChange)
         publishers = ObservableViewModelPublishers(publisher)
         let object = WeakObservableViewModelPublishers(publishers)
         objc_setAssociatedObject(viewModel, &observableViewModelPublishersKey, object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
