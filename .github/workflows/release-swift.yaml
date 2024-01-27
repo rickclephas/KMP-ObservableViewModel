@@ -13,7 +13,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.4.1'
+          xcode-version: '15.0'
       - name: Publish KMMViewModelCoreObjC
         run: pod trunk push KMMViewModelCoreObjC.podspec --synchronous
         env:
