@@ -2,7 +2,7 @@
 kotlin = "1.9.22"
 kotlinx-coroutines = "1.8.0"
 android = "7.4.2"
-androidx-lifecycle = "2.6.2"
+androidx-lifecycle = "2.7.0"
 
 # Sample versions
 androidx-compose = "2023.10.01"
