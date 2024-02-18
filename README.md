@@ -4,13 +4,14 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.9.21`.  
+The latest version of the library uses Kotlin version `1.9.22`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version        | Version suffix      |   Kotlin    | Coroutines | AndroidX Lifecycle |
 |----------------|---------------------|:-----------:|:----------:|:------------------:|
-| _latest_       | -kotlin-2.0.0-Beta1 | 2.0.0-Beta1 |   1.7.3    |       2.6.2        |
-| **_latest_**   | **_no suffix_**     | **1.9.21**  | **1.7.3**  |     **2.6.2**      |
+| _latest_       | -kotlin-2.0.0-Beta3 | 2.0.0-Beta3 | 1.8.0-RC2  |       2.6.2        |
+| **_latest_**   | **_no suffix_**     | **1.9.22**  | **1.7.3**  |     **2.6.2**      |
+| 1.0.0-ALPHA-16 | _no suffix_         |   1.9.21    |   1.7.3    |       2.6.2        |
 | 1.0.0-ALPHA-15 | _no suffix_         |   1.9.20    |   1.7.3    |       2.6.2        |
 | 1.0.0-ALPHA-14 | _no suffix_         |   1.9.10    |   1.7.3    |       2.6.1        |
 | 1.0.0-ALPHA-13 | _no suffix_         |    1.9.0    |   1.7.3    |       2.6.1        |
@@ -33,7 +34,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
+                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-18")
             }
         }
     }
@@ -143,7 +144,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-16")
+    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-18")
 ]
 ```
 
@@ -155,7 +156,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-16'
+pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-18'
 ```
 </p>
 </details>
@@ -224,3 +225,46 @@ This will prevent your Swift view models from being deallocated too soon.
 
 > [!NOTE]
 > For lists, sets and dictionaries containing view models there is `childViewModels(at:)`.
+
+### Cancellable ViewModel
+
+When subclassing your Kotlin ViewModel in Swift you might experience some issues in the way those ViewModels are cleared.
+
+An example of such an issue is when you are using a Combine publisher to observe a Flow through KMP-NativeCoroutines:
+```swift
+import Combine
+import KMPNativeCoroutinesCombine
+import shared // This should be your shared KMM module
+
+class TimeTravelViewModel: shared.TimeTravelViewModel {
+
+    private var cancellables = Set<AnyCancellable>()
+
+    override init() {
+        super.init()
+        createPublisher(for: currentTimeFlow)
+            .assertNoFailure()
+            .sink { time in print("It's \(time)") }
+            .store(in: &cancellables)
+    }
+}
+```
+
+Since `currentTimeFlow` is a StateFlow we don't ever expect it to fail, which is why we are using the `assertNoFailure`.
+However, in this case you'll notice that the publisher will fail with a `JobCancellationException`.
+
+The problem here is that before the `TimeTravelViewModel` is deinited it will already be cleared.
+Meaning the `viewModelScope` is cancelled and `onCleared` is called.
+This results in the Combine publisher outliving the underlying StateFlow collection.
+
+To solve such issues you should have your Swift ViewModel conform to `Cancellable` 
+and perform the required cleanup in the `cancel` function:
+```swift
+class TimeTravelViewModel: shared.TimeTravelViewModel, Cancellable {
+    func cancel() {
+        cancellables = []
+    }
+}
+```
+
+KMM-ViewModel will make sure to call the `cancel` function before the ViewModel is being cleared.
