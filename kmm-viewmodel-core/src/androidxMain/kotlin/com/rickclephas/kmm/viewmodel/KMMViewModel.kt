@@ -9,7 +9,11 @@ import kotlinx.coroutines.CoroutineScope
  *
  * On Android this is a subclass of the Jetpack ViewModel.
  */
-public actual abstract class KMMViewModel: ViewModel() {
+public actual abstract class KMMViewModel: ViewModel {
+
+    public actual constructor(): super()
+
+    public actual constructor(coroutineScope: CoroutineScope): super(coroutineScope)
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.

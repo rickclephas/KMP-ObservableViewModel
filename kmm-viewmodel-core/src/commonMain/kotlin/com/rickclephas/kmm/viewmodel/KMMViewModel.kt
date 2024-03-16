@@ -9,6 +9,8 @@ import kotlinx.coroutines.CoroutineScope
  */
 public expect abstract class KMMViewModel() {
 
+    public constructor(coroutineScope: CoroutineScope)
+
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
      *
