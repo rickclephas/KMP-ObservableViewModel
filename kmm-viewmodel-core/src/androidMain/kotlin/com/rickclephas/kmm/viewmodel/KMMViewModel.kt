@@ -1,6 +1,7 @@
 package com.rickclephas.kmm.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope as androidxViewModelScope
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -16,8 +17,7 @@ public actual abstract class KMMViewModel: ViewModel() {
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    @Suppress("LeakingThis")
-    public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl(this)
+    public actual val viewModelScope: ViewModelScope = ViewModelScope(androidxViewModelScope)
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.

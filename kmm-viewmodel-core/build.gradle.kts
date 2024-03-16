@@ -23,6 +23,14 @@ kotlin {
                 group("mingw")
                 withWasm()
             }
+            group("nonApple") {
+                withAndroidTarget()
+                withJvm()
+                withJs()
+                group("linux")
+                group("mingw")
+                withWasm()
+            }
         }
     }
 

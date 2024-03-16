@@ -2,8 +2,6 @@ package com.rickclephas.kmm.viewmodel
 
 import com.rickclephas.kmm.viewmodel.objc.KMMVMViewModelScopeProtocol
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,6 +13,12 @@ import platform.darwin.NSObject
  * @see coroutineScope
  */
 public actual typealias ViewModelScope = KMMVMViewModelScopeProtocol
+
+/**
+ * Creates a new [ViewModelScope] for the provided [coroutineScope].
+ */
+internal actual fun ViewModelScope(coroutineScope: CoroutineScope): ViewModelScope =
+    ViewModelScopeImpl(coroutineScope)
 
 /**
  * Gets the [CoroutineScope] associated with the [KMMViewModel] of `this` [ViewModelScope].
@@ -30,14 +34,12 @@ public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewMode
 
 /**
  * Implementation of [ViewModelScope].
+ * @property coroutineScope The [CoroutineScope] associated with the [KMMViewModel].
  */
 @InternalKMMViewModelApi
-public class ViewModelScopeImpl internal constructor(): NSObject(), ViewModelScope {
-
-    /**
-     * The [CoroutineScope] associated with the [KMMViewModel].
-     */
-    public val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+public class ViewModelScopeImpl internal constructor(
+    public val coroutineScope: CoroutineScope
+): NSObject(), ViewModelScope {
 
     private val _subscriptionCount = MutableStateFlow(0)
     /**
