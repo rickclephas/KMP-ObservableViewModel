@@ -16,10 +16,14 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     applyDefaultHierarchyTemplate {
         common {
-            group("other") {
+            group("androidx") {
+                withAndroidTarget()
                 withJvm()
+                withLinuxX64()
+            }
+            group("other") {
                 withJs()
-                group("linux")
+                withLinuxArm64()
                 group("mingw")
                 withWasm()
             }
@@ -95,9 +99,9 @@ kotlin {
             }
         }
 
-        androidMain {
+        val androidxMain by getting {
             dependencies {
-                api(libs.androidx.lifecycle.viewmodel.ktx)
+                api(libs.androidx.lifecycle.viewmodel)
             }
         }
     }
