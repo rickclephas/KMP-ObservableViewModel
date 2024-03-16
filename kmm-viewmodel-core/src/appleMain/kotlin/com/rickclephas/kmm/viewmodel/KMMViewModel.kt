@@ -1,8 +1,7 @@
 package com.rickclephas.kmm.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
-import kotlin.experimental.ExperimentalNativeApi
-import kotlin.native.ref.WeakReference
+import kotlinx.coroutines.cancel
 
 /**
  * A Kotlin Multiplatform Mobile ViewModel.
@@ -17,12 +16,12 @@ public actual abstract class KMMViewModel {
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    @OptIn(ExperimentalNativeApi::class)
-    @Suppress("LeakingThis")
-    public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl(WeakReference(this))
+    public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl()
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.
      */
-    public actual open fun onCleared() { }
+    public actual open fun onCleared() {
+        viewModelScope.coroutineScope.cancel()
+    }
 }

@@ -4,14 +4,11 @@ import com.rickclephas.kmm.viewmodel.objc.KMMVMViewModelScopeProtocol
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import platform.darwin.NSObject
-import kotlin.experimental.ExperimentalNativeApi
-import kotlin.native.ref.WeakReference
 
 /**
  * Holds the [CoroutineScope] of a [KMMViewModel].
@@ -34,11 +31,8 @@ public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewMode
 /**
  * Implementation of [ViewModelScope].
  */
-@OptIn(ExperimentalNativeApi::class)
 @InternalKMMViewModelApi
-public class ViewModelScopeImpl internal constructor(
-    private val viewModelRef: WeakReference<KMMViewModel>
-): NSObject(), ViewModelScope {
+public class ViewModelScopeImpl internal constructor(): NSObject(), ViewModelScope {
 
     /**
      * The [CoroutineScope] associated with the [KMMViewModel].
@@ -73,10 +67,5 @@ public class ViewModelScopeImpl internal constructor(
      */
     public fun sendObjectWillChange() {
         sendObjectWillChange?.invoke()
-    }
-
-    override fun cancel() {
-        coroutineScope.cancel()
-        viewModelRef.value?.onCleared()
     }
 }

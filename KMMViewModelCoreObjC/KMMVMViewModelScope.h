@@ -15,7 +15,6 @@ __attribute__((swift_name("ViewModelScope")))
 - (void)increaseSubscriptionCount;
 - (void)decreaseSubscriptionCount;
 - (void)setSendObjectWillChange:(void (^ _Nonnull)(void))sendObjectWillChange;
-- (void)cancel;
 @end
 
 #endif /* KMMVMViewModelScope_h */
