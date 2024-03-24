@@ -10,11 +10,9 @@ import kotlinx.coroutines.cancel
  *
  * On Android this is a subclass of the Jetpack ViewModel.
  */
-public actual abstract class KMMViewModel private constructor(coroutineScope: CoroutineScope?) {
+public actual abstract class KMMViewModel public actual constructor(coroutineScope: CoroutineScope) {
 
-    public actual constructor(): this(null)
-
-    public actual constructor(coroutineScope: CoroutineScope): this(coroutineScope as CoroutineScope?)
+    public actual constructor(): this(CoroutineScope(SupervisorJob() + Dispatchers.Main))
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
@@ -22,8 +20,7 @@ public actual abstract class KMMViewModel private constructor(coroutineScope: Co
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    public actual val viewModelScope: ViewModelScope =
-        ViewModelScope(coroutineScope ?: CoroutineScope(SupervisorJob() + Dispatchers.Main))
+    public actual val viewModelScope: ViewModelScope = ViewModelScope(coroutineScope)
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.
