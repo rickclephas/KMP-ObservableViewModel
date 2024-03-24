@@ -24,7 +24,6 @@ allprojects {
     repositories {
         mavenCentral()
         google()
-        maven("https://androidx.dev/snapshots/builds/11586237/artifacts/repository")
     }
 }
 
