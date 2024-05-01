@@ -6,7 +6,6 @@ androidx-lifecycle = "2.7.0"
 
 # Sample versions
 androidx-compose = "2023.10.01"
-androidx-compose-compiler = "1.5.11-dev-k2.0.0-Beta4-21f5e479a96"
 androidx-fragment = "1.6.2"
 ksp = "2.0.0-RC2-1.0.20"
 nativecoroutines = "1.0.0-ALPHA-28-kotlin-2.0.0-RC2"
@@ -32,6 +31,7 @@ android-library = { id = "com.android.library", version.ref = "android" }
 
 # Sample plugins
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "android" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "nativecoroutines" }

@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.application)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.android)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -17,9 +19,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     packagingOptions {
         resources {
@@ -40,13 +39,6 @@ android {
 
 kotlin {
     jvmToolchain(11)
-}
-
-// Ignore Compose Kotlin version compatibility check
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
-    compilerOptions {
-        freeCompilerArgs.addAll("-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true")
-    }
 }
 
 dependencies {
