@@ -23,7 +23,7 @@ kotlin {
                 withLinuxX64()
                 group("macos")
             }
-            group("other") {
+            group("nonAndroidx") {
                 withJs()
                 withLinuxArm64()
                 group("mingw")
@@ -42,7 +42,6 @@ kotlin {
         }
     }
 
-    //region Apple and Android targets
     listOf(
         macosX64(), macosArm64(),
         iosArm64(), iosX64(), iosSimulatorArm64(),
@@ -58,8 +57,6 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
     }
-    //endregion
-    //region Other targets
     jvm()
     js {
         browser()
@@ -74,7 +71,6 @@ kotlin {
         nodejs()
         d8()
     }
-    //endregion
 
     targets.all {
         compilations.all {
