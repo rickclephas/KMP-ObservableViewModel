@@ -17,8 +17,8 @@ private class WeakObservableViewModelPublishers {
 }
 
 /// Gets the `ObservableViewModelPublishers` for the specified `viewModel`.
-internal func observableViewModelPublishers<ViewModel: KMMViewModel>(
-    for viewModel: ViewModel
+internal func observableViewModelPublishers<VM: ViewModel>(
+    for viewModel: VM
 ) -> ObservableViewModelPublishers {
     let publishers: ObservableViewModelPublishers
     if let object = objc_getAssociatedObject(viewModel, &observableViewModelPublishersKey) {
@@ -35,8 +35,8 @@ internal func observableViewModelPublishers<ViewModel: KMMViewModel>(
 }
 
 /// Gets the `ObservableViewModelPublishers` for the specified `viewModel`.
-internal func observableViewModelPublishers<ViewModel: KMMViewModel>(
-    for viewModel: ViewModel?
+internal func observableViewModelPublishers<VM: ViewModel>(
+    for viewModel: VM?
 ) -> ObservableViewModelPublishers? {
     guard let viewModel = viewModel else { return nil }
     let observableViewModelPublishers = observableViewModelPublishers(for: viewModel)

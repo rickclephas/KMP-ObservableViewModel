@@ -7,7 +7,7 @@
 
 import KMMViewModelCoreObjC
 
-public extension KMMViewModel {
+public extension ViewModel {
     
     private func setChildViewModelPublishers(_ keyPath: AnyKeyPath, _ publishers: AnyHashable?) {
         if let publishers = publishers {
@@ -17,26 +17,26 @@ public extension KMMViewModel {
         }
     }
     
-    private func setChildViewModel<ViewModel: KMMViewModel>(
-        _ viewModel: ViewModel?,
+    private func setChildViewModel<VM: ViewModel>(
+        _ viewModel: VM?,
         at keyPath: AnyKeyPath
     ) {
         setChildViewModelPublishers(keyPath, observableViewModelPublishers(for: viewModel))
     }
     
-    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
-    func childViewModel<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, ViewModel?>
-    ) -> ViewModel? {
+    /// Stores a reference to the `ObservableObject` for the specified child `ViewModel`.
+    func childViewModel<VM: ViewModel>(
+        at keyPath: KeyPath<Self, VM?>
+    ) -> VM? {
         let viewModel = self[keyPath: keyPath]
         setChildViewModel(viewModel, at: keyPath)
         return viewModel
     }
     
-    /// Stores a reference to the `ObservableObject` for the specified child `KMMViewModel`.
-    func childViewModel<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, ViewModel>
-    ) -> ViewModel {
+    /// Stores a reference to the `ObservableObject` for the specified child `ViewModel`.
+    func childViewModel<VM: ViewModel>(
+        at keyPath: KeyPath<Self, VM>
+    ) -> VM {
         let viewModel = self[keyPath: keyPath]
         setChildViewModel(viewModel, at: keyPath)
         return viewModel
@@ -44,8 +44,8 @@ public extension KMMViewModel {
     
     // MARK: Arrays
     
-    private func setChildViewModels<ViewModel: KMMViewModel>(
-        _ viewModels: [ViewModel?]?,
+    private func setChildViewModels<VM: ViewModel>(
+        _ viewModels: [VM?]?,
         at keyPath: AnyKeyPath
     ) {
         setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
@@ -53,37 +53,37 @@ public extension KMMViewModel {
         })
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [ViewModel?]?>
-    ) -> [ViewModel?]? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, [VM?]?>
+    ) -> [VM?]? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [ViewModel?]>
-    ) -> [ViewModel?] {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, [VM?]>
+    ) -> [VM?] {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [ViewModel]?>
-    ) -> [ViewModel]? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, [VM]?>
+    ) -> [VM]? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [ViewModel]>
-    ) -> [ViewModel] {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, [VM]>
+    ) -> [VM] {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
@@ -91,8 +91,8 @@ public extension KMMViewModel {
     
     // MARK: Sets
     
-    private func setChildViewModels<ViewModel: KMMViewModel>(
-        _ viewModels: Set<ViewModel?>?,
+    private func setChildViewModels<VM: ViewModel>(
+        _ viewModels: Set<VM?>?,
         at keyPath: AnyKeyPath
     ) {
         setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
@@ -100,37 +100,37 @@ public extension KMMViewModel {
         })
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, Set<ViewModel?>?>
-    ) -> Set<ViewModel?>? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, Set<VM?>?>
+    ) -> Set<VM?>? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, Set<ViewModel?>>
-    ) -> Set<ViewModel?> {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, Set<VM?>>
+    ) -> Set<VM?> {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, Set<ViewModel>?>
-    ) -> Set<ViewModel>? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, Set<VM>?>
+    ) -> Set<VM>? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, Set<ViewModel>>
-    ) -> Set<ViewModel> {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<VM: ViewModel>(
+        at keyPath: KeyPath<Self, Set<VM>>
+    ) -> Set<VM> {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
@@ -138,8 +138,8 @@ public extension KMMViewModel {
     
     // MARK: Dictionaries
     
-    private func setChildViewModels<Key, ViewModel: KMMViewModel>(
-        _ viewModels: [Key : ViewModel?]?,
+    private func setChildViewModels<Key, VM: ViewModel>(
+        _ viewModels: [Key : VM?]?,
         at keyPath: AnyKeyPath
     ) {
         setChildViewModelPublishers(keyPath, viewModels?.mapValues { viewModel in
@@ -147,37 +147,37 @@ public extension KMMViewModel {
         })
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<Key, ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [Key : ViewModel?]?>
-    ) -> [Key : ViewModel?]? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<Key, VM: ViewModel>(
+        at keyPath: KeyPath<Self, [Key : VM?]?>
+    ) -> [Key : VM?]? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<Key, ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [Key : ViewModel?]>
-    ) -> [Key : ViewModel?] {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<Key, VM: ViewModel>(
+        at keyPath: KeyPath<Self, [Key : VM?]>
+    ) -> [Key : VM?] {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<Key, ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [Key : ViewModel]?>
-    ) -> [Key : ViewModel]? {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<Key, VM: ViewModel>(
+        at keyPath: KeyPath<Self, [Key : VM]?>
+    ) -> [Key : VM]? {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels
     }
     
-    /// Stores references to the `ObservableObject`s of the specified child `KMMViewModel`s.
-    func childViewModels<Key, ViewModel: KMMViewModel>(
-        at keyPath: KeyPath<Self, [Key : ViewModel]>
-    ) -> [Key : ViewModel] {
+    /// Stores references to the `ObservableObject`s of the specified child `ViewModel`s.
+    func childViewModels<Key, VM: ViewModel>(
+        at keyPath: KeyPath<Self, [Key : VM]>
+    ) -> [Key : VM] {
         let viewModels = self[keyPath: keyPath]
         setChildViewModels(viewModels, at: keyPath)
         return viewModels

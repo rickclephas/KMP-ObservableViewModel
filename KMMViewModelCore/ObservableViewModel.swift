@@ -8,43 +8,43 @@
 import Combine
 import KMMViewModelCoreObjC
 
-/// Gets an `ObservableObject` for the specified `KMMViewModel`.
-/// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
-public func observableViewModel<ViewModel: KMMViewModel>(
-    for viewModel: ViewModel
-) -> ObservableViewModel<ViewModel> {
+/// Gets an `ObservableObject` for the specified `ViewModel`.
+/// - Parameter viewModel: The `ViewModel` to wrap in an `ObservableObject`.
+public func observableViewModel<VM: ViewModel>(
+    for viewModel: VM
+) -> ObservableViewModel<VM> {
     let publishers = observableViewModelPublishers(for: viewModel)
     return ObservableViewModel(publishers, viewModel)
 }
 
-/// Gets an `ObservableObject` for the specified `KMMViewModel`.
-/// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
-public func observableViewModel<ViewModel: KMMViewModel>(
-    for viewModel: ViewModel?
-) -> ObservableViewModel<ViewModel>? {
+/// Gets an `ObservableObject` for the specified `ViewModel`.
+/// - Parameter viewModel: The `ViewModel` to wrap in an `ObservableObject`.
+public func observableViewModel<VM: ViewModel>(
+    for viewModel: VM?
+) -> ObservableViewModel<VM>? {
     guard let viewModel = viewModel else { return nil }
     let observableViewModel = observableViewModel(for: viewModel)
     return observableViewModel
 }
 
-/// An `ObservableObject` for a `KMMViewModel`.
-public final class ObservableViewModel<ViewModel: KMMViewModel>: ObservableObject, Hashable {
+/// An `ObservableObject` for a `ViewModel`.
+public final class ObservableViewModel<VM: ViewModel>: ObservableObject, Hashable {
     
     public let objectWillChange: ObservableViewModelPublisher
     
-    /// The observed `KMMViewModel`.
-    public let viewModel: ViewModel
+    /// The observed `ViewModel`.
+    public let viewModel: VM
     
     /// Holds a strong reference to the publishers
     private let publishers: ObservableViewModelPublishers
     
-    internal init(_ publishers: ObservableViewModelPublishers, _ viewModel: ViewModel) {
+    internal init(_ publishers: ObservableViewModelPublishers, _ viewModel: VM) {
         objectWillChange = publishers.publisher
         self.viewModel = viewModel
         self.publishers = publishers
     }
     
-    public static func == (lhs: ObservableViewModel<ViewModel>, rhs: ObservableViewModel<ViewModel>) -> Bool {
+    public static func == (lhs: ObservableViewModel<VM>, rhs: ObservableViewModel<VM>) -> Bool {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
     

@@ -5,7 +5,7 @@ import com.rickclephas.kmp.observableviewmodel.*
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
-open class TimeTravelViewModel: KMMViewModel() {
+open class TimeTravelViewModel: ViewModel() {
 
     private val clockTime = Clock.time
 

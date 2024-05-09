@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 /**
  * A Kotlin Multiplatform Mobile ViewModel.
  */
-public expect abstract class KMMViewModel {
+public expect abstract class ViewModel {
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
@@ -29,30 +29,30 @@ public expect abstract class KMMViewModel {
 }
 
 /**
- * Adds an [AutoCloseable] resource with an associated [key] to this [KMMViewModel].
- * The resource will be closed right before the [onCleared][KMMViewModel.onCleared] method is called.
+ * Adds an [AutoCloseable] resource with an associated [key] to this [ViewModel].
+ * The resource will be closed right before the [onCleared][ViewModel.onCleared] method is called.
  *
  * If the [key] already has a resource associated with it, the old resource will be replaced and closed immediately.
  *
- * If [onCleared][KMMViewModel.onCleared] has already been called,
+ * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
 @OptIn(ExperimentalStdlibApi::class)
-public expect fun KMMViewModel.addCloseable(key: String, closeable: AutoCloseable)
+public expect fun ViewModel.addCloseable(key: String, closeable: AutoCloseable)
 
 /**
- * Adds an [AutoCloseable] resource to this [KMMViewModel].
- * The resource will be closed right before the [onCleared][KMMViewModel.onCleared] method is called.
+ * Adds an [AutoCloseable] resource to this [ViewModel].
+ * The resource will be closed right before the [onCleared][ViewModel.onCleared] method is called.
  *
- * If [onCleared][KMMViewModel.onCleared] has already been called,
+ * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
 @OptIn(ExperimentalStdlibApi::class)
-public expect fun KMMViewModel.addCloseable(closeable: AutoCloseable)
+public expect fun ViewModel.addCloseable(closeable: AutoCloseable)
 
 /**
  * Returns the [AutoCloseable] resource associated to the given [key],
- * or `null` if such a [key] is not present in this [KMMViewModel].
+ * or `null` if such a [key] is not present in this [ViewModel].
  */
 @OptIn(ExperimentalStdlibApi::class)
-public expect fun <T : AutoCloseable> KMMViewModel.getCloseable(key: String): T?
+public expect fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T?

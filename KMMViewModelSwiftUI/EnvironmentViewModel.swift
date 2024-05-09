@@ -9,17 +9,17 @@ import SwiftUI
 import KMMViewModelCore
 import KMMViewModelCoreObjC
 
-/// An `EnvironmentObject` property wrapper for `KMMViewModel`s.
+/// An `EnvironmentObject` property wrapper for `ViewModel`s.
 @propertyWrapper
-public struct EnvironmentViewModel<ViewModel: KMMViewModel>: DynamicProperty {
+public struct EnvironmentViewModel<VM: ViewModel>: DynamicProperty {
     
-    @EnvironmentObject private var observableObject: ObservableViewModel<ViewModel>
+    @EnvironmentObject private var observableObject: ObservableViewModel<VM>
     
-    /// The underlying `KMMViewModel` referenced by the `EnvironmentViewModel`.
-    public var wrappedValue: ViewModel { observableObject.viewModel }
+    /// The underlying `ViewModel` referenced by the `EnvironmentViewModel`.
+    public var wrappedValue: VM { observableObject.viewModel }
     
-    /// A projection of the observed `KMMViewModel` that creates bindings to its properties using dynamic member lookup.
-    public var projectedValue: ObservableViewModel<ViewModel>.Projection {
+    /// A projection of the observed `ViewModel` that creates bindings to its properties using dynamic member lookup.
+    public var projectedValue: ObservableViewModel<VM>.Projection {
         ObservableViewModel.Projection(observableObject)
     }
     
@@ -28,9 +28,9 @@ public struct EnvironmentViewModel<ViewModel: KMMViewModel>: DynamicProperty {
 }
 
 public extension View {
-    /// Supplies a `KMMViewModel` to a view subhierarchy.
-    /// - Parameter viewModel: The `KMMViewModel` to supply to a view subhierarchy.
-    func environmentViewModel<ViewModel: KMMViewModel>(_ viewModel: ViewModel) -> some View {
+    /// Supplies a `ViewModel` to a view subhierarchy.
+    /// - Parameter viewModel: The `ViewModel` to supply to a view subhierarchy.
+    func environmentViewModel<VM: ViewModel>(_ viewModel: VM) -> some View {
         environmentObject(observableViewModel(for: viewModel))
     }
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.update
 import platform.darwin.NSObject
 
 /**
- * Holds the [CoroutineScope] of a [KMMViewModel].
+ * Holds the [CoroutineScope] of a [ViewModel].
  * @see coroutineScope
  */
 public actual typealias ViewModelScope = KMMVMViewModelScopeProtocol
@@ -21,7 +21,7 @@ internal actual fun ViewModelScope(coroutineScope: CoroutineScope): ViewModelSco
     ViewModelScopeImpl(coroutineScope)
 
 /**
- * Gets the [CoroutineScope] associated with the [KMMViewModel] of `this` [ViewModelScope].
+ * Gets the [CoroutineScope] associated with the [ViewModel] of `this` [ViewModelScope].
  */
 public actual val ViewModelScope.coroutineScope: CoroutineScope
     get() = asImpl().coroutineScope
@@ -34,7 +34,7 @@ public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewMode
 
 /**
  * Implementation of [ViewModelScope].
- * @property coroutineScope The [CoroutineScope] associated with the [KMMViewModel].
+ * @property coroutineScope The [CoroutineScope] associated with the [ViewModel].
  */
 @InternalKMPObservableViewModelApi
 public class ViewModelScopeImpl internal constructor(
@@ -43,7 +43,7 @@ public class ViewModelScopeImpl internal constructor(
 
     private val _subscriptionCount = MutableStateFlow(0)
     /**
-     * A [StateFlow] that emits the number of subscribers to the [KMMViewModel].
+     * A [StateFlow] that emits the number of subscribers to the [ViewModel].
      */
     public val subscriptionCount: StateFlow<Int> = _subscriptionCount.asStateFlow()
 
@@ -59,7 +59,7 @@ public class ViewModelScopeImpl internal constructor(
 
     override fun setSendObjectWillChange(sendObjectWillChange: () -> Unit) {
         if (this.sendObjectWillChange != null) {
-            throw IllegalStateException("KMMViewModel can't be wrapped more than once")
+            throw IllegalStateException("ViewModel can't be wrapped more than once")
         }
         this.sendObjectWillChange = sendObjectWillChange
     }

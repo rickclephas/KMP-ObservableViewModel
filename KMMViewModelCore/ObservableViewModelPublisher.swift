@@ -13,12 +13,12 @@ public final class ObservableViewModelPublisher: Publisher {
     public typealias Output = Void
     public typealias Failure = Never
     
-    internal weak var viewModel: (any KMMViewModel)?
+    internal weak var viewModel: (any ViewModel)?
     
     private let publisher = ObservableObjectPublisher()
     private var objectWillChangeCancellable: AnyCancellable? = nil
     
-    internal init(_ viewModel: any KMMViewModel, _ objectWillChange: ObservableObjectPublisher) {
+    internal init(_ viewModel: any ViewModel, _ objectWillChange: ObservableObjectPublisher) {
         self.viewModel = viewModel
         viewModel.viewModelScope.setSendObjectWillChange { [weak self] in
             self?.publisher.send()

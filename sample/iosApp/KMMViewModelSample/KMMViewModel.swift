@@ -8,4 +8,4 @@
 import KMMViewModelCore
 import KMMViewModelSampleShared
 
-extension Kmm_viewmodel_coreKMMViewModel: KMMViewModel { }
+extension Kmp_observableviewmodel_coreViewModel: ViewModel { }
