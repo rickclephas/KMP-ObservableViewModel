@@ -111,7 +111,7 @@ android {
     namespace = "com.rickclephas.kmm.viewmodel"
     compileSdk = 33
     defaultConfig {
-        minSdk = 14
+        minSdk = 19
     }
     // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
     compileOptions {
