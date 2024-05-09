@@ -29,7 +29,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
-                api("com.rickclephas.kmm:kmm-viewmodel-core")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core")
             }
         }
         commonTest {

@@ -20,7 +20,7 @@ buildscript {
 }
 
 allprojects {
-    group = "com.rickclephas.kmm"
+    group = "com.rickclephas.kmp"
     version = "1.0.0-ALPHA-20"
 
     repositories {
