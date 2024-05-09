@@ -1,7 +1,5 @@
 package com.rickclephas.kmm.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -11,11 +9,15 @@ import kotlinx.coroutines.CoroutineScope
 public actual interface ViewModelScope
 
 /**
+ * Creates a new [ViewModelScope] for the provided [coroutineScope].
+ */
+internal actual fun ViewModelScope(coroutineScope: CoroutineScope): ViewModelScope =
+    ViewModelScopeImpl(coroutineScope)
+
+/**
  * Gets the [CoroutineScope] associated with the [KMMViewModel] of `this` [ViewModelScope].
  */
 public actual val ViewModelScope.coroutineScope: CoroutineScope
     get() = (this as ViewModelScopeImpl).coroutineScope
 
-internal class ViewModelScopeImpl(viewModel: KMMViewModel): ViewModelScope {
-    val coroutineScope: CoroutineScope = (viewModel as ViewModel).viewModelScope
-}
+private class ViewModelScopeImpl(val coroutineScope: CoroutineScope): ViewModelScope

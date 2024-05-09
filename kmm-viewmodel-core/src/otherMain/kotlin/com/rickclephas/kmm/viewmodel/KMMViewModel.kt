@@ -1,6 +1,8 @@
 package com.rickclephas.kmm.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
 /**
@@ -16,7 +18,8 @@ public actual abstract class KMMViewModel {
      * On Android this is bound to `Dispatchers.Main.immediate`,
      * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    public actual val viewModelScope: ViewModelScope = ViewModelScopeImpl()
+    public actual val viewModelScope: ViewModelScope =
+        ViewModelScope(CoroutineScope(SupervisorJob() + Dispatchers.Main))
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.

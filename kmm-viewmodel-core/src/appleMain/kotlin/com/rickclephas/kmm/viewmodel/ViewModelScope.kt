@@ -2,22 +2,23 @@ package com.rickclephas.kmm.viewmodel
 
 import com.rickclephas.kmm.viewmodel.objc.KMMVMViewModelScopeProtocol
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import platform.darwin.NSObject
-import kotlin.experimental.ExperimentalNativeApi
-import kotlin.native.ref.WeakReference
 
 /**
  * Holds the [CoroutineScope] of a [KMMViewModel].
  * @see coroutineScope
  */
 public actual typealias ViewModelScope = KMMVMViewModelScopeProtocol
+
+/**
+ * Creates a new [ViewModelScope] for the provided [coroutineScope].
+ */
+internal actual fun ViewModelScope(coroutineScope: CoroutineScope): ViewModelScope =
+    ViewModelScopeImpl(coroutineScope)
 
 /**
  * Gets the [CoroutineScope] associated with the [KMMViewModel] of `this` [ViewModelScope].
@@ -33,17 +34,12 @@ public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewMode
 
 /**
  * Implementation of [ViewModelScope].
+ * @property coroutineScope The [CoroutineScope] associated with the [KMMViewModel].
  */
-@OptIn(ExperimentalNativeApi::class)
 @InternalKMMViewModelApi
 public class ViewModelScopeImpl internal constructor(
-    private val viewModelRef: WeakReference<KMMViewModel>
+    public val coroutineScope: CoroutineScope
 ): NSObject(), ViewModelScope {
-
-    /**
-     * The [CoroutineScope] associated with the [KMMViewModel].
-     */
-    public val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     private val _subscriptionCount = MutableStateFlow(0)
     /**
@@ -73,10 +69,5 @@ public class ViewModelScopeImpl internal constructor(
      */
     public fun sendObjectWillChange() {
         sendObjectWillChange?.invoke()
-    }
-
-    override fun cancel() {
-        coroutineScope.cancel()
-        viewModelRef.value?.onCleared()
     }
 }
