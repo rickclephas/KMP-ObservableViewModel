@@ -45,7 +45,7 @@ public actual abstract class KMMViewModel: ViewModel {
      * Internal KMM-ViewModel function used by the Swift implementation to clear the ViewModel.
      * Warning: you should NOT call this yourself!
      */
-    @InternalKMMViewModelApi
+    @InternalKMPObservableViewModelApi
     public fun clear() {
         // We can't directly call the internal clear function from AndroidX.
         // To call it indirectly we use the public Store and Provider APIs instead.

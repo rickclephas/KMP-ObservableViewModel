@@ -82,7 +82,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
-                optIn("com.rickclephas.kmp.observableviewmodel.InternalKMMViewModelApi")
+                optIn("com.rickclephas.kmp.observableviewmodel.InternalKMPObservableViewModelApi")
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
             }
         }

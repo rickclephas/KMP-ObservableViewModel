@@ -6,4 +6,4 @@ package com.rickclephas.kmp.observableviewmodel
 )
 @Retention(value = AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
-public annotation class InternalKMMViewModelApi
+public annotation class InternalKMPObservableViewModelApi

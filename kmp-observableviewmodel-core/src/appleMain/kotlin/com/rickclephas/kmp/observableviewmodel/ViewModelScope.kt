@@ -29,14 +29,14 @@ public actual val ViewModelScope.coroutineScope: CoroutineScope
 /**
  * Casts `this` [ViewModelScope] to a [ViewModelScopeImpl].
  */
-@InternalKMMViewModelApi
+@InternalKMPObservableViewModelApi
 public inline fun ViewModelScope.asImpl(): ViewModelScopeImpl = this as ViewModelScopeImpl
 
 /**
  * Implementation of [ViewModelScope].
  * @property coroutineScope The [CoroutineScope] associated with the [KMMViewModel].
  */
-@InternalKMMViewModelApi
+@InternalKMPObservableViewModelApi
 public class ViewModelScopeImpl internal constructor(
     public val coroutineScope: CoroutineScope
 ): NSObject(), ViewModelScope {
