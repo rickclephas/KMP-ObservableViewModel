@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
-    `kmm-viewmodel-publish`
+    `kmp-observableviewmodel-publish`
     id("kotlinx-atomicfu")
 }
 
