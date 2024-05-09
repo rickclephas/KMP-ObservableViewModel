@@ -18,14 +18,18 @@ kotlin {
         common {
             group("androidx") {
                 withAndroidTarget()
+                group("ios")
                 withJvm()
                 withLinuxX64()
+                group("macos")
             }
             group("other") {
                 withJs()
                 withLinuxArm64()
                 group("mingw")
+                group("tvos")
                 withWasm()
+                group("watchos")
             }
             group("nonApple") {
                 withAndroidTarget()

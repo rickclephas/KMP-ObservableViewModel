@@ -1,30 +1,51 @@
 package com.rickclephas.kmm.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope as androidxViewModelScope
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewmodel.CreationExtras
 import kotlinx.coroutines.CoroutineScope
+import kotlin.reflect.KClass
 
 /**
  * A Kotlin Multiplatform Mobile ViewModel.
- *
- * On Android this is a subclass of the Jetpack ViewModel.
  */
-public actual abstract class KMMViewModel: ViewModel {
+public actual abstract class KMMViewModel public actual constructor(
+    coroutineScope: CoroutineScope
+): ViewModel(coroutineScope) {
 
-    public actual constructor(): super()
-
-    public actual constructor(coroutineScope: CoroutineScope): super(coroutineScope)
+    public actual constructor(): this(DefaultCoroutineScope())
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
-     *
-     * On Android this is bound to `Dispatchers.Main.immediate`,
-     * where on Apple platforms it is bound to `Dispatchers.Main`.
      */
-    public actual val viewModelScope: ViewModelScope = ViewModelScope(androidxViewModelScope)
+    public actual val viewModelScope: ViewModelScope = ViewModelScope(coroutineScope)
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.
      */
-    public actual override fun onCleared() { }
+    public actual override fun onCleared() {
+        super.onCleared()
+    }
+
+    /**
+     * Internal KMM-ViewModel function used by the Swift implementation to clear the ViewModel.
+     * Warning: you should NOT call this yourself!
+     */
+    @InternalKMMViewModelApi
+    public fun clear() {
+        // We can't directly call the internal clear function from AndroidX.
+        // To call it indirectly we use the public Store and Provider APIs instead.
+        val store = ViewModelStore()
+        ViewModelProvider.create(
+            store = store,
+            factory = object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
+                    @Suppress("UNCHECKED_CAST")
+                    return this@KMMViewModel as T
+                }
+            }
+        )[KMMViewModel::class]
+        store.clear()
+    }
 }
