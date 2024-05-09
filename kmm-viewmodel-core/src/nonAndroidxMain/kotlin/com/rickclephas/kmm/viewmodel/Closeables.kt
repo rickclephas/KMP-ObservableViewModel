@@ -3,6 +3,10 @@ package com.rickclephas.kmm.viewmodel
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 
+/**
+ * A collection of [AutoCloseable]s behaving similar to the
+ * [AndroidX ViewModel implementation](https://cs.android.com/androidx/platform/frameworks/support/+/58618bec2592c538b0a9e469f1492365ef2233e3:lifecycle/lifecycle-viewmodel/src/commonMain/kotlin/androidx/lifecycle/viewmodel/internal/ViewModelImpl.kt).
+ */
 @OptIn(ExperimentalStdlibApi::class)
 internal class Closeables(
     private val closeables: MutableSet<AutoCloseable> = mutableSetOf(),
