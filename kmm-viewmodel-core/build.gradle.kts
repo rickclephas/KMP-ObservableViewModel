@@ -14,12 +14,20 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     applyDefaultHierarchyTemplate {
         common {
-            group("other") {
+            group("androidx") {
+                withAndroidTarget()
+                group("ios")
                 withJvm()
+                withLinuxX64()
+                group("macos")
+            }
+            group("nonAndroidx") {
                 withJs()
-                group("linux")
+                withLinuxArm64()
                 group("mingw")
+                group("tvos")
                 withWasm()
+                group("watchos")
             }
             group("nonApple") {
                 withAndroidTarget()
@@ -32,7 +40,6 @@ kotlin {
         }
     }
 
-    //region Apple and Android targets
     listOf(
         macosX64(), macosArm64(),
         iosArm64(), iosX64(), iosSimulatorArm64(),
@@ -48,8 +55,6 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
     }
-    //endregion
-    //region Other targets
     jvm()
     js {
         browser()
@@ -64,7 +69,6 @@ kotlin {
         nodejs()
         d8()
     }
-    //endregion
 
     targets.all {
         compilations.all {
@@ -93,9 +97,9 @@ kotlin {
             }
         }
 
-        androidMain {
+        val androidxMain by getting {
             dependencies {
-                api(libs.androidx.lifecycle.viewmodel.ktx)
+                api(libs.androidx.lifecycle.viewmodel)
             }
         }
     }
@@ -105,7 +109,7 @@ android {
     namespace = "com.rickclephas.kmm.viewmodel"
     compileSdk = 33
     defaultConfig {
-        minSdk = 14
+        minSdk = 19
     }
     publishing {
         singleVariant("release") {

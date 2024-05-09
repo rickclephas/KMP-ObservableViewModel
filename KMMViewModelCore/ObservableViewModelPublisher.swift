@@ -38,7 +38,7 @@ public final class ObservableViewModelPublisher: Publisher {
         if let cancellable = viewModel as? Cancellable {
             cancellable.cancel()
         }
-        viewModel.onCleared()
+        viewModel.clear()
     }
 }
 
