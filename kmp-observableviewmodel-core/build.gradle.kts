@@ -48,8 +48,8 @@ kotlin {
         tvosArm64(), tvosX64(), tvosSimulatorArm64(),
     ).forEach {
         it.compilations.getByName("main") {
-            cinterops.create("KMMViewModelCoreObjC") {
-                includeDirs("$projectDir/../KMMViewModelCoreObjC")
+            cinterops.create("KMPObservableViewModelCoreObjC") {
+                includeDirs("$projectDir/../KMPObservableViewModelCoreObjC")
             }
         }
     }

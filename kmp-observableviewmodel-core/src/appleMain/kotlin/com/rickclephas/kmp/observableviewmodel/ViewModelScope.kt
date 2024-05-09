@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.observableviewmodel
 
-import com.rickclephas.kmp.observableviewmodel.objc.KMMVMViewModelScopeProtocol
+import com.rickclephas.kmp.observableviewmodel.objc.KMPOVMViewModelScopeProtocol
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import platform.darwin.NSObject
  * Holds the [CoroutineScope] of a [ViewModel].
  * @see coroutineScope
  */
-public actual typealias ViewModelScope = KMMVMViewModelScopeProtocol
+public actual typealias ViewModelScope = KMPOVMViewModelScopeProtocol
 
 /**
  * Creates a new [ViewModelScope] for the provided [coroutineScope].
