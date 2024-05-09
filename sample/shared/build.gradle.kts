@@ -1,11 +1,7 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.ksp)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.nativecoroutines)
 }
 

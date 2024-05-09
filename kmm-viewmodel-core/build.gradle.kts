@@ -2,9 +2,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
     `kmm-viewmodel-publish`
 }
