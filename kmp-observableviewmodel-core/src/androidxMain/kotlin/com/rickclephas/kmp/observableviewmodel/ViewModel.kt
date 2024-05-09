@@ -42,7 +42,7 @@ public actual abstract class ViewModel: AndroidXViewModel {
     }
 
     /**
-     * Internal KMM-ViewModel function used by the Swift implementation to clear the ViewModel.
+     * Internal KMP-ObservableViewModel function used by the Swift implementation to clear the ViewModel.
      * Warning: you should NOT call this yourself!
      */
     @InternalKMPObservableViewModelApi

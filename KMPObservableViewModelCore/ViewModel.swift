@@ -12,7 +12,7 @@ import KMPObservableViewModelCoreObjC
 public protocol ViewModel: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
     /// The `ViewModelScope` of this `ViewModel`.
     var viewModelScope: ViewModelScope { get }
-    /// Internal KMM-ViewModel function used to clear the ViewModel.
+    /// Internal KMP-ObservableViewModel function used to clear the ViewModel.
     /// - Warning: You should NOT call this yourself!
     func clear()
 }

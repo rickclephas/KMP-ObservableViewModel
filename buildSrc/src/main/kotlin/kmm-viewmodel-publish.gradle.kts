@@ -47,7 +47,7 @@ publishing {
         if (signPublications) signing.sign(this)
 
         pom {
-            name.set("KMM-ViewModel")
+            name.set("KMP-ObservableViewModel")
             description.set("Library to share Kotlin ViewModels with SwiftUI")
             url.set("https://github.com/rickclephas/KMM-ViewModel")
             licenses {
