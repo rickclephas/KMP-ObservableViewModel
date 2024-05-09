@@ -10,16 +10,29 @@ import kotlin.reflect.KClass
 /**
  * A Kotlin Multiplatform Mobile ViewModel.
  */
-public actual abstract class KMMViewModel public actual constructor(
-    coroutineScope: CoroutineScope
-): ViewModel(coroutineScope) {
-
-    public actual constructor(): this(DefaultCoroutineScope())
+public actual abstract class KMMViewModel: ViewModel {
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
      */
-    public actual val viewModelScope: ViewModelScope = ViewModelScope(coroutineScope)
+    public actual val viewModelScope: ViewModelScope
+
+    public actual constructor(): this(DefaultCoroutineScope())
+
+    public actual constructor(coroutineScope: CoroutineScope): super(coroutineScope) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    public actual constructor(vararg closeables: AutoCloseable): this(DefaultCoroutineScope(), *closeables)
+
+    @OptIn(ExperimentalStdlibApi::class)
+    public actual constructor(
+        coroutineScope: CoroutineScope,
+        vararg closeables: AutoCloseable
+    ): super(coroutineScope, *closeables) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.
@@ -49,3 +62,18 @@ public actual abstract class KMMViewModel public actual constructor(
         store.clear()
     }
 }
+
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun KMMViewModel.addCloseable(key: String, closeable: AutoCloseable): Unit =
+    addCloseable(key, closeable)
+
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun KMMViewModel.addCloseable(closeable: AutoCloseable): Unit =
+    addCloseable(closeable)
+
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun <T : AutoCloseable> KMMViewModel.getCloseable(key: String): T? =
+    getCloseable(key)
