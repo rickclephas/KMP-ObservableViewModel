@@ -1,14 +1,17 @@
 package com.rickclephas.kmm.viewmodel
 
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
+
 @OptIn(ExperimentalStdlibApi::class)
 internal class Closeables(
     private val closeables: MutableSet<AutoCloseable> = mutableSetOf(),
     private val keyedCloseables: MutableMap<String, AutoCloseable> = mutableMapOf()
-): AutoCloseable { // TODO: lock
+): SynchronizedObject(), AutoCloseable {
 
     private var isClosed = false
 
-    operator fun plusAssign(closeable: AutoCloseable) {
+    operator fun plusAssign(closeable: AutoCloseable): Unit = synchronized(this) {
         if (isClosed) {
             closeWithRuntimeException(closeable)
             return
@@ -16,7 +19,7 @@ internal class Closeables(
         closeables += closeable
     }
 
-    operator fun set(key: String, closeable: AutoCloseable) {
+    operator fun set(key: String, closeable: AutoCloseable): Unit = synchronized(this) {
         if (isClosed) {
             closeWithRuntimeException(closeable)
             return
@@ -24,9 +27,11 @@ internal class Closeables(
         closeWithRuntimeException(keyedCloseables.put(key, closeable))
     }
 
-    operator fun get(key: String): AutoCloseable? = keyedCloseables[key]
+    operator fun get(key: String): AutoCloseable? = synchronized(this) {
+        keyedCloseables[key]
+    }
 
-    override fun close() {
+    override fun close(): Unit = synchronized(this) {
         if (isClosed) return
         isClosed = true
         for (closeable in keyedCloseables.values) {
