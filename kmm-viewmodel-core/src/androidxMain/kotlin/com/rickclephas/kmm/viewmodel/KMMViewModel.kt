@@ -10,16 +10,29 @@ import kotlin.reflect.KClass
 /**
  * A Kotlin Multiplatform Mobile ViewModel.
  */
-public actual abstract class KMMViewModel public actual constructor(
-    coroutineScope: CoroutineScope
-): ViewModel(coroutineScope) {
-
-    public actual constructor(): this(DefaultCoroutineScope())
+public actual abstract class KMMViewModel: ViewModel {
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
      */
-    public actual val viewModelScope: ViewModelScope = ViewModelScope(coroutineScope)
+    public actual val viewModelScope: ViewModelScope
+
+    public actual constructor(): this(DefaultCoroutineScope())
+
+    public actual constructor(coroutineScope: CoroutineScope): super(coroutineScope) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    public actual constructor(vararg closeables: AutoCloseable): this(DefaultCoroutineScope(), *closeables)
+
+    @OptIn(ExperimentalStdlibApi::class)
+    public actual constructor(
+        coroutineScope: CoroutineScope,
+        vararg closeables: AutoCloseable
+    ): super(coroutineScope, *closeables) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
 
     /**
      * Called when this ViewModel is no longer used and will be destroyed.
@@ -49,3 +62,38 @@ public actual abstract class KMMViewModel public actual constructor(
         store.clear()
     }
 }
+
+/**
+ * Adds an [AutoCloseable] resource with an associated [key] to this [KMMViewModel].
+ * The resource will be closed right before the [onCleared][KMMViewModel.onCleared] method is called.
+ *
+ * If the [key] already has a resource associated with it, the old resource will be replaced and closed immediately.
+ *
+ * If [onCleared][KMMViewModel.onCleared] has already been called,
+ * the provided resource will not be added and will be closed immediately.
+ */
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun KMMViewModel.addCloseable(key: String, closeable: AutoCloseable): Unit =
+    addCloseable(key, closeable)
+
+/**
+ * Adds an [AutoCloseable] resource to this [KMMViewModel].
+ * The resource will be closed right before the [onCleared][KMMViewModel.onCleared] method is called.
+ *
+ * If [onCleared][KMMViewModel.onCleared] has already been called,
+ * the provided resource will not be added and will be closed immediately.
+ */
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun KMMViewModel.addCloseable(closeable: AutoCloseable): Unit =
+    addCloseable(closeable)
+
+/**
+ * Returns the [AutoCloseable] resource associated to the given [key],
+ * or `null` if such a [key] is not present in this [KMMViewModel].
+ */
+@OptIn(ExperimentalStdlibApi::class)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+public actual inline fun <T : AutoCloseable> KMMViewModel.getCloseable(key: String): T? =
+    getCloseable(key)

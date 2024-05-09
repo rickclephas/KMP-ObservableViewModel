@@ -13,6 +13,10 @@ buildscript {
         mavenCentral()
         google()
     }
+
+    dependencies {
+        classpath(libs.atomicfu.gradle.plugin)
+    }
 }
 
 allprojects {

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     `kmm-viewmodel-publish`
+    id("kotlinx-atomicfu")
 }
 
 kotlin {
