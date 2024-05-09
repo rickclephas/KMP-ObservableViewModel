@@ -41,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.rickclephas.kmm.viewmodel.sample.shared"
+    namespace = "com.rickclephas.kmp.observableviewmodel.sample.shared"
     compileSdk = 33
     defaultConfig {
         minSdk = 28

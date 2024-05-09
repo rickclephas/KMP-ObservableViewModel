@@ -82,7 +82,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
-                optIn("com.rickclephas.kmm.viewmodel.InternalKMMViewModelApi")
+                optIn("com.rickclephas.kmp.observableviewmodel.InternalKMMViewModelApi")
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
             }
         }
@@ -107,7 +107,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.rickclephas.kmm.viewmodel"
+    namespace = "com.rickclephas.kmp.observableviewmodel"
     compileSdk = 33
     defaultConfig {
         minSdk = 19
