@@ -28,12 +28,6 @@ public struct ObservedViewModel<ViewModel: KMMViewModel>: DynamicProperty {
         }
     }
     
-    @available(*, deprecated)
-    public init(_ projectedValue: ObservableViewModel<ViewModel>.Projection) {
-        self.observableObject = projectedValue.observableObject
-        self.projectedValue = projectedValue
-    }
-    
     /// Creates an `ObservedViewModel` for the specified `KMMViewModel`.
     /// - Parameter wrappedValue: The `KMMViewModel` to observe.
     public init(wrappedValue: ViewModel) {

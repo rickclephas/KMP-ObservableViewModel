@@ -33,9 +33,4 @@ public extension View {
     func environmentViewModel<ViewModel: KMMViewModel>(_ viewModel: ViewModel) -> some View {
         environmentObject(observableViewModel(for: viewModel))
     }
-    
-    @available(*, deprecated)
-    func environmentViewModel<ViewModel: KMMViewModel>(_ projectedValue: ObservableViewModel<ViewModel>.Projection) -> some View {
-        environmentObject(projectedValue.observableObject)
-    }
 }

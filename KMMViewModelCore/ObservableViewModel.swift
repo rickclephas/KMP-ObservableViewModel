@@ -8,13 +8,6 @@
 import Combine
 import KMMViewModelCoreObjC
 
-@available(*, deprecated, renamed: "observableViewModel")
-public func createObservableViewModel<ViewModel: KMMViewModel>(
-    for viewModel: ViewModel
-) -> ObservableViewModel<ViewModel> {
-    observableViewModel(for: viewModel)
-}
-
 /// Gets an `ObservableObject` for the specified `KMMViewModel`.
 /// - Parameter viewModel: The `KMMViewModel` to wrap in an `ObservableObject`.
 public func observableViewModel<ViewModel: KMMViewModel>(
