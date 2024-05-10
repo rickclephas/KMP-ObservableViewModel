@@ -3,12 +3,12 @@ Pod::Spec.new do |s|
   s.version    = '1.0.0-ALPHA-21'
   s.summary    = 'Library to share Kotlin ViewModels with SwiftUI'
 
-  s.homepage   = 'https://github.com/rickclephas/KMM-ViewModel'
+  s.homepage   = 'https://github.com/rickclephas/KMP-ObservableViewModel'
   s.license    = 'MIT'
   s.authors    = 'Rick Clephas'
 
   s.source = {
-    :git => 'https://github.com/rickclephas/KMM-ViewModel.git',
+    :git => 'https://github.com/rickclephas/KMP-ObservableViewModel.git',
     :tag => 'v' + s.version.to_s
   }
 

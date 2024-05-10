@@ -49,7 +49,7 @@ publishing {
         pom {
             name.set("KMP-ObservableViewModel")
             description.set("Library to share Kotlin ViewModels with SwiftUI")
-            url.set("https://github.com/rickclephas/KMM-ViewModel")
+            url.set("https://github.com/rickclephas/KMP-ObservableViewModel")
             licenses {
                 license {
                     name.set("MIT")
@@ -64,7 +64,7 @@ publishing {
                 }
             }
             scm {
-                url.set("https://github.com/rickclephas/KMM-ViewModel")
+                url.set("https://github.com/rickclephas/KMP-ObservableViewModel")
             }
         }
     }

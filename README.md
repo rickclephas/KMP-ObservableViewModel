@@ -146,12 +146,12 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-21")
+    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-ALPHA-21")
 ]
 ```
 
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
-`https://github.com/rickclephas/KMM-ViewModel.git`.
+`https://github.com/rickclephas/KMP-ObservableViewModel.git`.
 
 <details><summary>CocoaPods</summary>
 <p>
