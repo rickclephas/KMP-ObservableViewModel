@@ -1,30 +1,33 @@
 # KMP-ObservableViewModel
 
-A library that allows you to share ViewModels between Android and iOS.
+A library that allows you to use AndroidX/Kotlin ViewModels with SwiftUI.
 
 ## Compatibility
+
+You can use this library in any KMP project,
+but not all targets support AndroidX and/or SwiftUI interop:
+
+| Target     | AndroidX | SwiftUI |
+|------------|:--------:|:-------:|
+| Android    |    ✅     |    -    |
+| JVM        |    ✅     |    -    |
+| iOS        |    ✅     |    ✅    |
+| macOS      |    ✅     |    ✅    |
+| tvOS       |    -     |    ✅    |
+| watchOS    |    -     |    ✅    |
+| linuxX64   |    ✅     |    -    |
+| linuxArm64 |    -     |    -    |
+| mingwX64   |    -     |    -    |
+| JS         |    -     |    -    |
+| Wasm       |    -     |    -    |
 
 The latest version of the library uses Kotlin version `1.9.24`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix    |   Kotlin   | Coroutines | AndroidX Lifecycle |
-|----------------|-------------------|:----------:|:----------:|:------------------:|
-| _latest_       | -kotlin-2.0.0-RC2 | 2.0.0-RC2  |   1.8.0    |       2.7.0        |
-| **_latest_**   | **_no suffix_**   | **1.9.24** | **1.8.0**  |     **2.7.0**      |
-| 1.0.0-ALPHA-20 | _no suffix_       |   1.9.23   |   1.8.0    |       2.7.0        |
-| 1.0.0-ALPHA-19 | _no suffix_       |   1.9.22   |   1.8.0    |       2.7.0        |
-| 1.0.0-ALPHA-18 | _no suffix_       |   1.9.22   |   1.7.3    |       2.6.2        |
-| 1.0.0-ALPHA-16 | _no suffix_       |   1.9.21   |   1.7.3    |       2.6.2        |
-| 1.0.0-ALPHA-15 | _no suffix_       |   1.9.20   |   1.7.3    |       2.6.2        |
-| 1.0.0-ALPHA-14 | _no suffix_       |   1.9.10   |   1.7.3    |       2.6.1        |
-| 1.0.0-ALPHA-13 | _no suffix_       |   1.9.0    |   1.7.3    |       2.6.1        |
-| 1.0.0-ALPHA-10 | _no suffix_       |   1.8.22   |   1.7.2    |       2.6.1        |
-| 1.0.0-ALPHA-9  | _no suffix_       |   1.8.21   |   1.7.1    |       2.5.1        |
-| 1.0.0-ALPHA-8  | _no suffix_       |   1.8.21   |   1.7.0    |       2.5.1        |
-| 1.0.0-ALPHA-7  | _no suffix_       |   1.8.21   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-6  | _no suffix_       |   1.8.20   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-4  | _no suffix_       |   1.8.10   |   1.6.4    |       2.5.1        |
-| 1.0.0-ALPHA-3  | _no suffix_       |   1.8.0    |   1.6.4    |       2.5.1        |
+| Version      | Version suffix    |   Kotlin   | Coroutines | AndroidX Lifecycle |
+|--------------|-------------------|:----------:|:----------:|:------------------:|
+| _latest_     | -kotlin-2.0.0-RC2 | 2.0.0-RC2  |   1.8.0    |     2.8.0-rc01     |
+| **_latest_** | **_no suffix_**   | **1.9.24** | **1.8.0**  |   **2.8.0-rc01**   |
 
 ## Kotlin
 
@@ -68,15 +71,17 @@ open class TimeTravelViewModel: ViewModel() {
 }
 ```
 
-As you might notice it isn't much different from an Android ViewModel.  
-The most obvious difference is the `ViewModel` superclass:
+As you might notice it isn't much different from an AndroidX ViewModel.  
+We are obviously using a different `ViewModel` superclass:
 
 ```diff
 - import androidx.lifecycle.ViewModel
 + import com.rickclephas.kmp.observableviewmodel.ViewModel
+
+open class TimeTravelViewModel: ViewModel() {
 ```
 
-Besides that there are only 2 minor differences.  
+But besides that there are only 2 minor differences.  
 The first being a different import for `stateIn`:
 
 ```diff
@@ -96,7 +101,7 @@ And the second being a different `MutableStateFlow` constructor:
 +    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
 ```
 
-These minor differences will make sure that any state changes are propagated to iOS.  
+These minor differences will make sure that state changes are propagated to SwiftUI.  
 
 > [!NOTE]
 > `viewModelScope` is a wrapper around the actual `CoroutineScope` which can be accessed 
@@ -119,7 +124,7 @@ for more information and installation instructions.
 <details><summary>Alternative</summary>
 <p>
 
-Alternatively you can create extension properties in your iOS source-set yourself:
+Alternatively you can create extension properties in your iOS/Apple source-set yourself:
 ```kotlin
 val TimeTravelViewModel.travelEffectValue: TravelEffect?
     get() = travelEffect.value
@@ -129,15 +134,12 @@ val TimeTravelViewModel.travelEffectValue: TravelEffect?
 
 ## Android
 
-Use the view model like you would any other Android view model:
+Use the view model like you would any other AndroidX ViewModel:
 ```kotlin
 class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
     private val viewModel: TimeTravelViewModel by viewModels()
 }
 ```
-
-> [!NOTE]
-> Improved support for Jetpack Compose is coming soon.
 
 ## Swift
 
@@ -228,7 +230,7 @@ This will prevent your Swift view models from being deallocated too soon.
 
 ### Cancellable ViewModel
 
-When subclassing your Kotlin ViewModel in Swift you might experience some issues in the way those ViewModels are cleared.
+When subclassing your Kotlin ViewModel in Swift you might experience some issues in the way those view models are cleared.
 
 An example of such an issue is when you are using a Combine publisher to observe a Flow through KMP-NativeCoroutines:
 ```swift
@@ -257,7 +259,7 @@ The problem here is that before the `TimeTravelViewModel` is deinited it will al
 Meaning the `viewModelScope` is cancelled and `onCleared` is called.
 This results in the Combine publisher outliving the underlying StateFlow collection.
 
-To solve such issues you should have your Swift ViewModel conform to `Cancellable` 
+To solve such issues you should have your Swift view model conform to `Cancellable` 
 and perform the required cleanup in the `cancel` function:
 ```swift
 class TimeTravelViewModel: shared.TimeTravelViewModel, Cancellable {
