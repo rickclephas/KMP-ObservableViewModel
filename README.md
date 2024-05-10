@@ -1,6 +1,6 @@
 # KMP-ObservableViewModel
 
-A library that allows you to use AndroidX/Kotlin ViewModels with SwiftUI.
+A library (previously known as KMM-ViewModel) that allows you to use AndroidX/Kotlin ViewModels with SwiftUI.
 
 ## Compatibility
 
