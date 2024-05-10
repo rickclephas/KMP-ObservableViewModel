@@ -1,4 +1,4 @@
-# KMM-ViewModel
+# KMP-ObservableViewModel
 
 A library that allows you to share ViewModels between Android and iOS.
 
@@ -36,7 +36,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-20")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-ALPHA-20")
             }
         }
     }
@@ -45,11 +45,11 @@ kotlin {
 
 And create your ViewModels:
 ```kotlin
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
-import com.rickclephas.kmm.viewmodel.stateIn
+import com.rickclephas.kmp.observableviewmodel.ViewModel
+import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
+import com.rickclephas.kmp.observableviewmodel.stateIn
 
-open class TimeTravelViewModel: KMMViewModel() {
+open class TimeTravelViewModel: ViewModel() {
 
     private val clockTime = Clock.time
 
@@ -68,14 +68,11 @@ open class TimeTravelViewModel: KMMViewModel() {
 ```
 
 As you might notice it isn't much different from an Android ViewModel.  
-The most obvious difference is the `KMMViewModel` superclass:
+The most obvious difference is the `ViewModel` superclass:
 
 ```diff
 - import androidx.lifecycle.ViewModel
-+ import com.rickclephas.kmm.viewmodel.KMMViewModel
-
-- open class TimeTravelViewModel: ViewModel() {
-+ open class TimeTravelViewModel: KMMViewModel() {
++ import com.rickclephas.kmp.observableviewmodel.ViewModel
 ```
 
 Besides that there are only 2 minor differences.  
@@ -83,7 +80,7 @@ The first being a different import for `stateIn`:
 
 ```diff
 - import kotlinx.coroutines.flow.stateIn
-+ import com.rickclephas.kmm.viewmodel.stateIn
++ import com.rickclephas.kmp.observableviewmodel.stateIn
 
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 ```
@@ -92,7 +89,7 @@ And the second being a different `MutableStateFlow` constructor:
 
 ```diff
 - import kotlinx.coroutines.flow.MutableStateFlow
-+ import com.rickclephas.kmm.viewmodel.MutableStateFlow
++ import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
 
 -    private val _travelEffect = MutableStateFlow<TravelEffect?>(null)
 +    private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
@@ -158,23 +155,23 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-20'
+pod 'KMPObservableViewModelSwiftUI', '1.0.0-ALPHA-20'
 ```
 </p>
 </details>
 
-Create a `KMMViewModel.swift` file with the following contents:
+Create a `KMPObservableViewModel.swift` file with the following contents:
 ```swift
-import KMMViewModelCore
-import shared // This should be your shared KMM module
+import KMPObservableViewModelCore
+import shared // This should be your shared KMP module
 
-extension Kmm_viewmodel_coreKMMViewModel: KMMViewModel { }
+extension Kmp_observableviewmodel_coreViewModel: ViewModel { }
 ```
 
 After that you can use your view model almost as if it were an `ObservableObject`.   
 Just use the view model specific property wrappers and functions:
 
-| `ObservableObject`      | `KMMViewModel`             |
+| `ObservableObject`      | `ViewModel`                |
 |-------------------------|----------------------------|
 | `@StateObject`          | `@StateViewModel`          |
 | `@ObservedObject`       | `@ObservedViewModel`       |
@@ -184,8 +181,8 @@ Just use the view model specific property wrappers and functions:
 E.g. to use the `TimeTravelViewModel` as a `StateObject`:
 ```swift
 import SwiftUI
-import KMMViewModelSwiftUI
-import shared // This should be your shared KMM module
+import KMPObservableViewModelSwiftUI
+import shared // This should be your shared KMP module
 
 struct ContentView: View {
     @StateViewModel var viewModel = TimeTravelViewModel()
@@ -195,7 +192,7 @@ struct ContentView: View {
 It's also possible to subclass your view model in Swift:
 ```swift
 import Combine
-import shared // This should be your shared KMM module
+import shared // This should be your shared KMP module
 
 class TimeTravelViewModel: shared.TimeTravelViewModel {
     @Published var isResetDisabled: Bool = false
@@ -204,11 +201,11 @@ class TimeTravelViewModel: shared.TimeTravelViewModel {
 
 ### Child view models
 
-You'll need some additional logic if your `KMMViewModel`s expose child view models.
+You'll need some additional logic if your `ViewModel`s expose child view models.
 
 First make sure to use the `NativeCoroutinesRefinedState` annotation instead of the `NativeCoroutinesState` annotation:
 ```kotlin
-class MyParentViewModel: KMMViewModel() {
+class MyParentViewModel: ViewModel() {
     @NativeCoroutinesRefinedState
     val myChildViewModel: StateFlow<MyChildViewModel?> = MutableStateFlow(null)
 }
@@ -236,7 +233,7 @@ An example of such an issue is when you are using a Combine publisher to observe
 ```swift
 import Combine
 import KMPNativeCoroutinesCombine
-import shared // This should be your shared KMM module
+import shared // This should be your shared KMP module
 
 class TimeTravelViewModel: shared.TimeTravelViewModel {
 
@@ -269,4 +266,4 @@ class TimeTravelViewModel: shared.TimeTravelViewModel, Cancellable {
 }
 ```
 
-KMM-ViewModel will make sure to call the `cancel` function before the ViewModel is being cleared.
+KMP-ObservableViewModel will make sure to call the `cancel` function before the ViewModel is being cleared.

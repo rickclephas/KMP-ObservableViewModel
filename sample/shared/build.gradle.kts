@@ -15,7 +15,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "KMMViewModelSampleShared"
+            baseName = "KMPObservableViewModelSampleShared"
         }
     }
 
@@ -29,7 +29,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
-                api("com.rickclephas.kmm:kmm-viewmodel-core")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core")
             }
         }
         commonTest {
@@ -41,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.rickclephas.kmm.viewmodel.sample.shared"
+    namespace = "com.rickclephas.kmp.observableviewmodel.sample.shared"
     compileSdk = 33
     defaultConfig {
         minSdk = 28
