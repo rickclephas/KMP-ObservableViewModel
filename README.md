@@ -4,13 +4,14 @@ A library that allows you to share ViewModels between Android and iOS.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.9.23`.  
+The latest version of the library uses Kotlin version `1.9.24`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version        | Version suffix    |   Kotlin   | Coroutines | AndroidX Lifecycle |
 |----------------|-------------------|:----------:|:----------:|:------------------:|
 | _latest_       | -kotlin-2.0.0-RC2 | 2.0.0-RC2  |   1.8.0    |       2.7.0        |
-| **_latest_**   | **_no suffix_**   | **1.9.23** | **1.8.0**  |     **2.7.0**      |
+| **_latest_**   | **_no suffix_**   | **1.9.24** | **1.8.0**  |     **2.7.0**      |
+| 1.0.0-ALPHA-20 | _no suffix_       |   1.9.23   |   1.8.0    |       2.7.0        |
 | 1.0.0-ALPHA-19 | _no suffix_       |   1.9.22   |   1.8.0    |       2.7.0        |
 | 1.0.0-ALPHA-18 | _no suffix_       |   1.9.22   |   1.7.3    |       2.6.2        |
 | 1.0.0-ALPHA-16 | _no suffix_       |   1.9.21   |   1.7.3    |       2.6.2        |
@@ -36,7 +37,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-ALPHA-20")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-ALPHA-21")
             }
         }
     }
@@ -143,7 +144,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-20")
+    .package(url: "https://github.com/rickclephas/KMM-ViewModel.git", from: "1.0.0-ALPHA-21")
 ]
 ```
 
@@ -155,7 +156,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', '1.0.0-ALPHA-20'
+pod 'KMPObservableViewModelSwiftUI', '1.0.0-ALPHA-21'
 ```
 </p>
 </details>
