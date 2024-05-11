@@ -6,6 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "kmm-viewmodel"
+rootProject.name = "kmp-observableviewmodel"
 
-include(":kmm-viewmodel-core")
+include(":kmp-observableviewmodel-core")

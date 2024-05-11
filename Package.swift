@@ -2,33 +2,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "KMMViewModel",
+    name: "KMPObservableViewModel",
     platforms: [.iOS(.v13), .macOS(.v10_15), .tvOS(.v13), .watchOS(.v6)],
     products: [
         .library(
-            name: "KMMViewModelCore",
-            targets: ["KMMViewModelCore"]
+            name: "KMPObservableViewModelCore",
+            targets: ["KMPObservableViewModelCore"]
         ),
         .library(
-            name: "KMMViewModelSwiftUI",
-            targets: ["KMMViewModelSwiftUI"]
+            name: "KMPObservableViewModelSwiftUI",
+            targets: ["KMPObservableViewModelSwiftUI"]
         )
     ],
     targets: [
         .target(
-            name: "KMMViewModelCoreObjC",
-            path: "KMMViewModelCoreObjC",
+            name: "KMPObservableViewModelCoreObjC",
+            path: "KMPObservableViewModelCoreObjC",
             publicHeadersPath: "."
         ),
         .target(
-            name: "KMMViewModelCore",
-            dependencies: [.target(name: "KMMViewModelCoreObjC")],
-            path: "KMMViewModelCore"
+            name: "KMPObservableViewModelCore",
+            dependencies: [.target(name: "KMPObservableViewModelCoreObjC")],
+            path: "KMPObservableViewModelCore"
         ),
         .target(
-            name: "KMMViewModelSwiftUI",
-            dependencies: [.target(name: "KMMViewModelCore")],
-            path: "KMMViewModelSwiftUI"
+            name: "KMPObservableViewModelSwiftUI",
+            dependencies: [.target(name: "KMPObservableViewModelCore")],
+            path: "KMPObservableViewModelSwiftUI"
         )
     ],
     swiftLanguageVersions: [.v5]
