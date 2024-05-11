@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.compose.compiler)
 }
 
