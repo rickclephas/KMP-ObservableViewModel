@@ -7,19 +7,19 @@ A library (previously known as KMM-ViewModel) that allows you to use AndroidX/Ko
 You can use this library in any KMP project,
 but not all targets support AndroidX and/or SwiftUI interop:
 
-| Target     | AndroidX | SwiftUI |
-|------------|:--------:|:-------:|
-| Android    |    ✅     |    -    |
-| JVM        |    ✅     |    -    |
-| iOS        |    ✅     |    ✅    |
-| macOS      |    ✅     |    ✅    |
-| tvOS       |    -     |    ✅    |
-| watchOS    |    -     |    ✅    |
-| linuxX64   |    ✅     |    -    |
-| linuxArm64 |    -     |    -    |
-| mingwX64   |    -     |    -    |
-| JS         |    -     |    -    |
-| Wasm       |    -     |    -    |
+| Target     |  Supported  | AndroidX | SwiftUI |
+|------------|:-----------:|:--------:|:-------:|
+| Android    |      ✅      |    ✅     |    -    |
+| JVM        |      ✅      |    ✅     |    -    |
+| iOS        |      ✅      |    ✅     |    ✅    |
+| macOS      |      ✅      |    ✅     |    ✅    |
+| tvOS       |      ✅      |    -     |    ✅    |
+| watchOS    |      ✅      |    -     |    ✅    |
+| linuxX64   |      ✅      |    ✅     |    -    |
+| linuxArm64 |      ✅      |    -     |    -    |
+| mingwX64   |      ✅      |    -     |    -    |
+| JS         |      ✅      |    -     |    -    |
+| Wasm       |      ✅      |    -     |    -    |
 
 The latest version of the library uses Kotlin version `1.9.24`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
