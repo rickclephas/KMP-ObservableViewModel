@@ -3,9 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library) apply false
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
@@ -15,11 +13,15 @@ buildscript {
         mavenCentral()
         google()
     }
+
+    dependencies {
+        classpath(libs.atomicfu.gradle.plugin)
+    }
 }
 
 allprojects {
-    group = "com.rickclephas.kmm"
-    version = "1.0.0-ALPHA-19"
+    group = "com.rickclephas.kmp"
+    version = "1.0.0-BETA-1"
 
     repositories {
         mavenCentral()

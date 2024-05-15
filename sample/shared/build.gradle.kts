@@ -1,11 +1,7 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.android.library)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.ksp)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.nativecoroutines)
 }
 
@@ -19,7 +15,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "KMMViewModelSampleShared"
+            baseName = "KMPObservableViewModelSampleShared"
         }
     }
 
@@ -33,7 +29,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
-                api("com.rickclephas.kmm:kmm-viewmodel-core")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core")
             }
         }
         commonTest {
@@ -45,14 +41,9 @@ kotlin {
 }
 
 android {
-    namespace = "com.rickclephas.kmm.viewmodel.sample.shared"
+    namespace = "com.rickclephas.kmp.observableviewmodel.sample.shared"
     compileSdk = 33
     defaultConfig {
         minSdk = 28
-    }
-    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
     }
 }

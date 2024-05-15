@@ -3,26 +3,27 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-BETA-[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+'
 jobs:
   publish-cocoapods-libraries:
-    runs-on: macos-12
+    runs-on: macos-14
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.0'
-      - name: Publish KMMViewModelCoreObjC
-        run: pod trunk push KMMViewModelCoreObjC.podspec --synchronous
+      - name: Publish KMPObservableViewModelCoreObjC
+        run: pod trunk push KMPObservableViewModelCoreObjC.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-      - name: Publish KMMViewModelCore
-        run: pod trunk push KMMViewModelCore.podspec --synchronous
+      - name: Publish KMPObservableViewModelCore
+        run: pod trunk push KMPObservableViewModelCore.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-      - name: Publish KMMViewModelSwiftUI
-        run: pod trunk push KMMViewModelSwiftUI.podspec --synchronous
+      - name: Publish KMPObservableViewModelSwiftUI
+        run: pod trunk push KMPObservableViewModelSwiftUI.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
