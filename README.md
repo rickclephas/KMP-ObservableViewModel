@@ -7,27 +7,27 @@ A library (previously known as KMM-ViewModel) that allows you to use AndroidX/Ko
 You can use this library in any KMP project,
 but not all targets support AndroidX and/or SwiftUI interop:
 
-| Target     | AndroidX | SwiftUI |
-|------------|:--------:|:-------:|
-| Android    |    ✅     |    -    |
-| JVM        |    ✅     |    -    |
-| iOS        |    ✅     |    ✅    |
-| macOS      |    ✅     |    ✅    |
-| tvOS       |    -     |    ✅    |
-| watchOS    |    -     |    ✅    |
-| linuxX64   |    ✅     |    -    |
-| linuxArm64 |    -     |    -    |
-| mingwX64   |    -     |    -    |
-| JS         |    -     |    -    |
-| Wasm       |    -     |    -    |
+| Target     |  Supported  | AndroidX | SwiftUI |
+|------------|:-----------:|:--------:|:-------:|
+| Android    |      ✅      |    ✅     |    -    |
+| JVM        |      ✅      |    ✅     |    -    |
+| iOS        |      ✅      |    ✅     |    ✅    |
+| macOS      |      ✅      |    ✅     |    ✅    |
+| tvOS       |      ✅      |    -     |    ✅    |
+| watchOS    |      ✅      |    -     |    ✅    |
+| linuxX64   |      ✅      |    ✅     |    -    |
+| linuxArm64 |      ✅      |    -     |    -    |
+| mingwX64   |      ✅      |    -     |    -    |
+| JS         |      ✅      |    -     |    -    |
+| Wasm       |      ✅      |    -     |    -    |
 
 The latest version of the library uses Kotlin version `1.9.24`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version      | Version suffix    |   Kotlin   | Coroutines | AndroidX Lifecycle |
 |--------------|-------------------|:----------:|:----------:|:------------------:|
-| _latest_     | -kotlin-2.0.0-RC2 | 2.0.0-RC2  |   1.8.0    |     2.8.0-rc01     |
-| **_latest_** | **_no suffix_**   | **1.9.24** | **1.8.0**  |   **2.8.0-rc01**   |
+| _latest_     | -kotlin-2.0.0-RC2 | 2.0.0-RC2  |   1.8.1    |       2.8.0        |
+| **_latest_** | **_no suffix_**   | **1.9.24** | **1.8.1**  |     **2.8.0**      |
 
 ## Kotlin
 
@@ -40,7 +40,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-1")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-2")
             }
         }
     }
@@ -146,7 +146,7 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 Add the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-1")
+    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-2")
 ]
 ```
 
@@ -158,7 +158,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-1'
+pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-2'
 ```
 </p>
 </details>
