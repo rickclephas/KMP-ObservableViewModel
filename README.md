@@ -143,7 +143,8 @@ class TimeTravelFragment: Fragment(R.layout.fragment_time_travel) {
 
 ## Swift
 
-Add the Swift package to your `Package.swift` file:
+After you have configured your `shared` Kotlin module and created a ViewModel it's time to configure your Swift project.  
+Start by adding the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
     .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-2")
