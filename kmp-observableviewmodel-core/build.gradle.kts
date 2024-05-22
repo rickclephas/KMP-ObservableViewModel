@@ -27,7 +27,7 @@ kotlin {
                 withLinuxArm64()
                 group("mingw")
                 group("tvos")
-                withWasm()
+                withWasmJs()
                 group("watchos")
             }
             group("nonApple") {
@@ -36,7 +36,7 @@ kotlin {
                 withJs()
                 group("linux")
                 group("mingw")
-                withWasm()
+                withWasmJs()
             }
         }
     }
