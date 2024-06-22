@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   qodana:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     permissions:
       contents: write
       pull-requests: write
