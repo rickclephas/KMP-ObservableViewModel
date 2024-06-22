@@ -17,7 +17,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
+      - id: get-java-home-11
+        run: echo "JAVA_HOME_11_arm64=JAVA_HOME_11_arm64" >> $GITHUB_OUTPUT
       - name: 'Qodana Scan'
         uses: rickclephas/qodana-action@macos
+        with:
+          args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_arm64 }}:/root/.jdks/jdk11
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}

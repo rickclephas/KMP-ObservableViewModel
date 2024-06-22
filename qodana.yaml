@@ -1,5 +1,4 @@
 version: 1.0
-ide: QDJVMC
 projectJDK: '17'
 profile:
   name: qodana.recommended
