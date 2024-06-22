@@ -17,16 +17,13 @@ public actual abstract class ViewModel {
 
     public actual constructor(): this(DefaultCoroutineScope())
 
-    @OptIn(ExperimentalStdlibApi::class)
     public actual constructor(coroutineScope: CoroutineScope) {
         viewModelScope = ViewModelScope(coroutineScope)
         closeables = Closeables()
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     public actual constructor(vararg closeables: AutoCloseable): this(DefaultCoroutineScope(), *closeables)
 
-    @OptIn(ExperimentalStdlibApi::class)
     public actual constructor(
         coroutineScope: CoroutineScope,
         vararg closeables: AutoCloseable
@@ -59,7 +56,6 @@ public actual abstract class ViewModel {
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 public actual fun ViewModel.addCloseable(key: String, closeable: AutoCloseable) {
     closeables[key] = closeable
 }
@@ -71,7 +67,6 @@ public actual fun ViewModel.addCloseable(key: String, closeable: AutoCloseable) 
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 public actual fun ViewModel.addCloseable(closeable: AutoCloseable) {
     closeables += closeable
 }
@@ -80,7 +75,6 @@ public actual fun ViewModel.addCloseable(closeable: AutoCloseable) {
  * Returns the [AutoCloseable] resource associated to the given [key],
  * or `null` if such a [key] is not present in this [ViewModel].
  */
-@OptIn(ExperimentalStdlibApi::class)
 @Suppress("UNCHECKED_CAST")
 public actual fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T? =
     closeables[key] as T?

@@ -23,10 +23,8 @@ public actual abstract class ViewModel: AndroidXViewModel {
         viewModelScope = ViewModelScope(coroutineScope)
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     public actual constructor(vararg closeables: AutoCloseable): this(DefaultCoroutineScope(), *closeables)
 
-    @OptIn(ExperimentalStdlibApi::class)
     public actual constructor(
         coroutineScope: CoroutineScope,
         vararg closeables: AutoCloseable
@@ -72,7 +70,6 @@ public actual abstract class ViewModel: AndroidXViewModel {
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 public actual inline fun ViewModel.addCloseable(key: String, closeable: AutoCloseable): Unit =
     addCloseable(key, closeable)
@@ -84,7 +81,6 @@ public actual inline fun ViewModel.addCloseable(key: String, closeable: AutoClos
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 public actual inline fun ViewModel.addCloseable(closeable: AutoCloseable): Unit =
     addCloseable(closeable)
@@ -93,7 +89,6 @@ public actual inline fun ViewModel.addCloseable(closeable: AutoCloseable): Unit 
  * Returns the [AutoCloseable] resource associated to the given [key],
  * or `null` if such a [key] is not present in this [ViewModel].
  */
-@OptIn(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 public actual inline fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T? =
     getCloseable(key)

@@ -16,10 +16,8 @@ public expect abstract class ViewModel {
 
     public constructor(coroutineScope: CoroutineScope)
 
-    @OptIn(ExperimentalStdlibApi::class)
     public constructor(vararg closeables: AutoCloseable)
 
-    @OptIn(ExperimentalStdlibApi::class)
     public constructor(coroutineScope: CoroutineScope, vararg closeables: AutoCloseable)
 
     /**
@@ -37,7 +35,6 @@ public expect abstract class ViewModel {
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 public expect fun ViewModel.addCloseable(key: String, closeable: AutoCloseable)
 
 /**
@@ -47,12 +44,10 @@ public expect fun ViewModel.addCloseable(key: String, closeable: AutoCloseable)
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@OptIn(ExperimentalStdlibApi::class)
 public expect fun ViewModel.addCloseable(closeable: AutoCloseable)
 
 /**
  * Returns the [AutoCloseable] resource associated to the given [key],
  * or `null` if such a [key] is not present in this [ViewModel].
  */
-@OptIn(ExperimentalStdlibApi::class)
 public expect fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T?
