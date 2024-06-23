@@ -17,6 +17,7 @@
 		1DCF89AB2933929400A4C54A /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DCF89AA2933929400A4C54A /* KMPObservableViewModelSwiftUI */; };
 		1DDAF2202935470A0049C114 /* KMPObservableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */; };
 		1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */; };
+		1DF227B02C2856BC00D8B3A7 /* ContentViewMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		1DCF89A82933928600A4C54A /* KMP-ObservableViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "KMP-ObservableViewModel"; path = ../..; sourceTree = "<group>"; };
 		1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModel.swift; sourceTree = "<group>"; };
 		1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelViewModel.swift; sourceTree = "<group>"; };
+		1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewMP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				1D44EF7D292C066C00465C43 /* Preview Content */,
 				1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */,
 				1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */,
+				1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */,
 			);
 			path = KMPObservableViewModelSample;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				1DDAF2202935470A0049C114 /* KMPObservableViewModel.swift in Sources */,
 				1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */,
 				1D44EF7A292C066B00465C43 /* ContentView.swift in Sources */,
+				1DF227B02C2856BC00D8B3A7 /* ContentViewMP.swift in Sources */,
 				1D44EF78292C066B00465C43 /* KMPObservableViewModelSampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
