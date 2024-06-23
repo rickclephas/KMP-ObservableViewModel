@@ -22,4 +22,12 @@
         android:text="Compose"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/composeMPButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Compose MP"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>

@@ -19,21 +19,25 @@ class PickerFragment: Fragment(R.layout.fragment_picker) {
         val view = super.onCreateView(inflater, container, savedInstanceState) ?: return null
 
         view.findViewById<Button>(R.id.viewButton).setOnClickListener {
-            parentFragmentManager.commit {
-                replace<ViewFragment>(R.id.fragmentContainerView)
-                setReorderingAllowed(true)
-                addToBackStack(null)
-            }
+            navigate<ViewFragment>()
         }
 
         view.findViewById<Button>(R.id.composeButton).setOnClickListener {
-            parentFragmentManager.commit {
-                replace<ComposeFragment>(R.id.fragmentContainerView)
-                setReorderingAllowed(true)
-                addToBackStack(null)
-            }
+            navigate<ComposeFragment>()
+        }
+
+        view.findViewById<Button>(R.id.composeMPButton).setOnClickListener {
+            navigate<ComposeMPFragment>()
         }
 
         return view
+    }
+
+    private inline fun <reified T: Fragment> navigate() {
+        parentFragmentManager.commit {
+            replace<T>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
     }
 }
