@@ -42,7 +42,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-3")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-4")
             }
         }
     }
@@ -149,7 +149,7 @@ After you have configured your `shared` Kotlin module and created a ViewModel it
 Start by adding the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-3")
+    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-4")
 ]
 ```
 
@@ -161,7 +161,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-3'
+pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-4'
 ```
 </p>
 </details>
