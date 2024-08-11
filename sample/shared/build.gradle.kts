@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.ksp)
     alias(libs.plugins.nativecoroutines)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -30,6 +32,10 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 api("com.rickclephas.kmp:kmp-observableviewmodel-core")
+
+                implementation(compose.runtime)
+                implementation(compose.ui)
+                implementation(compose.material)
             }
         }
         commonTest {

@@ -13,7 +13,9 @@ struct KMPObservableViewModelSampleApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                NavigationLink("GO!", destination: ContentView())
+                NavigationLink("SwiftUI", destination: ContentView())
+                Spacer().frame(height: 24)
+                NavigationLink("Compose MP", destination: ContentViewMP())
             }
         }
     }
