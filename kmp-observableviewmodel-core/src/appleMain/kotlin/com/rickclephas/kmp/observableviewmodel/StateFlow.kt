@@ -17,7 +17,6 @@ public actual fun <T> MutableStateFlow(
  * A [MutableStateFlow] that triggers [ViewModelScopeImpl.sendObjectWillChange]
  * and accounts for the [ViewModelScopeImpl.subscriptionCount].
  */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 private class MutableStateFlowImpl<T>(
     private val viewModelScope: ViewModelScopeImpl,
     private val stateFlow: MutableStateFlow<T>
@@ -68,7 +67,6 @@ private class MutableStateFlowImpl<T>(
 /**
  * A [StateFlow] that combines the subscription counts of a [ViewModelScopeImpl] and [StateFlow].
  */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 private class SubscriptionCountFlow(
     private val viewModelScopeSubscriptionCount: StateFlow<Int>,
     private val stateFlowSubscriptionCount: StateFlow<Int>
@@ -141,7 +139,6 @@ private fun <T> CoroutineScope.launchSharing(
  * Similar to the kotlinx.coroutines implementation, used to return a read-only StateFlow with an optional Job.
  * https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L379
  */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 private class ReadonlyStateFlow<T>(
     flow: StateFlow<T>,
     @Suppress("unused")
