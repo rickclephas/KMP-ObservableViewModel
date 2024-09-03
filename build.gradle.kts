@@ -28,14 +28,3 @@ allprojects {
         google()
     }
 }
-
-// TODO: Remove once default NodeJS version supports wasm
-plugins.withType<NodeJsRootPlugin> {
-    extensions.configure(NodeJsRootExtension::class) {
-        version = "21.0.0-v8-canary20231019bd785be450"
-        downloadBaseUrl = "https://nodejs.org/download/v8-canary"
-    }
-    tasks.withType<KotlinNpmInstallTask> {
-        args.add("--ignore-engines")
-    }
-}
