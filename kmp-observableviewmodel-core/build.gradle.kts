@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-observableviewmodel-publish`
-    id("kotlinx-atomicfu")
+    alias(libs.plugins.atomicfu)
 }
 
 kotlin {
