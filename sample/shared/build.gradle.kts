@@ -53,3 +53,5 @@ android {
         minSdk = 28
     }
 }
+
+tasks.findByName("checkSandboxAndWriteProtection")?.dependsOn("syncComposeResourcesForIos")
