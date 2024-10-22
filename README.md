@@ -21,16 +21,17 @@ but not all targets support AndroidX and/or SwiftUI interop:
 | JS         |      ✅      |    -     |    -    |
 | Wasm       |      ✅      |    -     |    -    |
 
-The latest version of the library uses Kotlin version `2.0.20`.  
+The latest version of the library uses Kotlin version `2.0.21`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version      | Version suffix     |   Kotlin   | Coroutines | AndroidX Lifecycle |
-|--------------|--------------------|:----------:|:----------:|:------------------:|
-| **_latest_** | **_no suffix_**    | **2.0.20** | **1.9.0**  |     **2.8.4**      |
-| 1.0.0-BETA-5 | _no suffix_        |   2.0.20   |   1.8.1    |       2.8.4        |
-| 1.0.0-BETA-4 | _no suffix_        |   2.0.10   |   1.8.1    |       2.8.4        |
-| 1.0.0-BETA-3 | _no suffix_        |   2.0.0    |   1.8.1    |       2.8.0        |
-| 1.0.0-BETA-2 | _no suffix_        |   1.9.24   |   1.8.1    |       2.8.0        |
+| Version      | Version suffix      |   Kotlin    | Coroutines | AndroidX Lifecycle |
+|--------------|---------------------|:-----------:|:----------:|:------------------:|
+| _latest_     | -kotlin-2.1.0-Beta1 | 2.1.0-Beta1 |   1.9.0    |       2.8.4        |
+| **_latest_** | **_no suffix_**     | **2.0.21**  | **1.9.0**  |     **2.8.4**      |
+| 1.0.0-BETA-6 | _no suffix_         |   2.0.20    |   1.9.0    |       2.8.4        |
+| 1.0.0-BETA-4 | _no suffix_         |   2.0.10    |   1.8.1    |       2.8.4        |
+| 1.0.0-BETA-3 | _no suffix_         |    2.0.0    |   1.8.1    |       2.8.0        |
+| 1.0.0-BETA-2 | _no suffix_         |   1.9.24    |   1.8.1    |       2.8.0        |
 
 ## Kotlin
 
@@ -43,7 +44,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-6")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-7")
             }
         }
     }
@@ -150,7 +151,7 @@ After you have configured your `shared` Kotlin module and created a ViewModel it
 Start by adding the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-6")
+    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.0-BETA-7")
 ]
 ```
 
@@ -162,7 +163,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-6'
+pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-7'
 ```
 </p>
 </details>
