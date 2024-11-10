@@ -26,7 +26,7 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 
 | Version      | Version suffix      |   Kotlin    | Coroutines | AndroidX Lifecycle |
 |--------------|---------------------|:-----------:|:----------:|:------------------:|
-| _latest_     | -kotlin-2.1.0-Beta1 | 2.1.0-Beta1 |   1.9.0    |       2.8.4        |
+| _latest_     | -kotlin-2.1.0-RC    | 2.1.0-RC    |   1.9.0    |       2.8.4        |
 | **_latest_** | **_no suffix_**     | **2.0.21**  | **1.9.0**  |     **2.8.4**      |
 | 1.0.0-BETA-6 | _no suffix_         |   2.0.20    |   1.9.0    |       2.8.4        |
 | 1.0.0-BETA-4 | _no suffix_         |   2.0.10    |   1.8.1    |       2.8.4        |
