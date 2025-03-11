@@ -11,6 +11,7 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
         google()
+        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     }
 }
 
@@ -19,5 +20,6 @@ allprojects {
         mavenCentral()
         google()
         maven("https://androidx.dev/storage/compose-compiler/repository/")
+        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     }
 }

@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.20-RC2"
+kotlin = "2.1.20-199"
 kotlinx-coroutines = "1.10.1"
 android = "8.2.0"
 androidx-lifecycle = "2.8.7"
