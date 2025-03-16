@@ -8,17 +8,15 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
         google()
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     }
 }
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-BETA-9-kotlin-2.1.20-RC2"
+    version = "1.0.0-BETA-9-kotlin-2.1.20-RC3"
 
     repositories {
         mavenCentral()
         google()
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     }
 }
