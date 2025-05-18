@@ -13,7 +13,7 @@ open class TimeTravelViewModel: ViewModel() {
      * A [StateFlow] that emits the actual time.
      */
     @NativeCoroutinesState
-    val actualTime = clockTime.map { formatTime(it) }
+    val actualTime: StateFlow<String> = clockTime.map { formatTime(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
     private val _travelEffect = MutableStateFlow<TravelEffect?>(viewModelScope, null)
@@ -21,7 +21,7 @@ open class TimeTravelViewModel: ViewModel() {
      * A [StateFlow] that emits the applied [TravelEffect].
      */
     @NativeCoroutinesState
-    val travelEffect = _travelEffect.asStateFlow()
+    val travelEffect: StateFlow<TravelEffect?> = _travelEffect.asStateFlow()
 
     /**
      * A [StateFlow] that indicates if the [currentTime] is fixed.
@@ -29,14 +29,14 @@ open class TimeTravelViewModel: ViewModel() {
      * @see stopTime
      */
     @NativeCoroutinesState
-    val isFixedTime = _travelEffect.map { it is TravelEffect.Fixed }
+    val isFixedTime: StateFlow<Boolean> = _travelEffect.map { it is TravelEffect.Fixed }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     /**
      * A [StateFlow] that emits the current time.
      */
     @NativeCoroutinesState
-    val currentTime = combine(clockTime, _travelEffect) { actualTime, travelEffect ->
+    val currentTime: StateFlow<String> = combine(clockTime, _travelEffect) { actualTime, travelEffect ->
         formatTime(actualTime + travelEffect)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "N/A")
 
