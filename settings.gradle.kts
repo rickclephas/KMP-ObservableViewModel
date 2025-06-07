@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -6,6 +8,13 @@ pluginManagement {
     }
 }
 
-rootProject.name = "kmm-viewmodel"
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
 
-include(":kmm-viewmodel-core")
+rootProject.name = "kmp-observableviewmodel"
+
+include(":kmp-observableviewmodel-core")

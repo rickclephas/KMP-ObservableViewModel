@@ -21,8 +21,8 @@ include(":shared")
 
 includeBuild("..") {
     dependencySubstitution {
-        substitute(module("com.rickclephas.kmm:kmm-viewmodel-core"))
-            .using(project(":kmm-viewmodel-core"))
+        substitute(module("com.rickclephas.kmp:kmp-observableviewmodel-core"))
+            .using(project(":kmp-observableviewmodel-core"))
     }
 }
 

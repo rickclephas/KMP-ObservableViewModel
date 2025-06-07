@@ -4,4 +4,4 @@
     android:id="@+id/fragmentContainerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.rickclephas.kmm.viewmodel.sample.PickerFragment" />
+    android:name="com.rickclephas.kmp.observableviewmodel.sample.PickerFragment" />
