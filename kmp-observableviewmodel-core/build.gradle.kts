@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
-    `kmp-observableviewmodel-publish`
+    id("kmp-observableviewmodel-android-library")
+    id("kmp-observableviewmodel-kotlin-multiplatform")
+    id("kmp-observableviewmodel-publish")
     alias(libs.plugins.atomicfu)
 }
 
@@ -53,9 +53,7 @@ kotlin {
             }
         }
     }
-    androidTarget {
-        publishLibraryVariants("release")
-    }
+    androidTarget()
     jvm()
     js {
         browser()
@@ -113,11 +111,5 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 19
-    }
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
     }
 }

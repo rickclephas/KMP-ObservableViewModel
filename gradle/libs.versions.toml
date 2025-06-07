@@ -12,9 +12,12 @@ ksp = "2.2.0-RC-2.0.1"
 nativecoroutines = "1.0.0-ALPHA-43-kotlin-2.2.0-RC"
 
 [libraries]
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+android-library-gradle-plugin = { module = "com.android.library:com.android.library.gradle.plugin", version.ref = "android" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+vanniktech-mavenPublish = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.32.0" }
 
 # Sample libraries
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose" }
