@@ -13,13 +13,12 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
     public typealias Output = Void
     public typealias Failure = Never
     
-    internal weak var viewModel: (any ViewModel)?
+    internal let cancellable = ViewModelCancellable()
     
     private let publisher: ObservableObjectPublisher
     private let subscriptionCount: any SubscriptionCount
     
     internal init(_ viewModel: any ViewModel) {
-        self.viewModel = viewModel
         self.publisher = viewModel.objectWillChange
         self.subscriptionCount = viewModel.viewModelScope.subscriptionCount
     }
@@ -31,14 +30,6 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
     
     public func send() {
         publisher.send()
-    }
-    
-    deinit {
-        guard let viewModel else { return }
-        if let cancellable = viewModel as? Cancellable {
-            cancellable.cancel()
-        }
-        viewModel.clear()
     }
 }
 

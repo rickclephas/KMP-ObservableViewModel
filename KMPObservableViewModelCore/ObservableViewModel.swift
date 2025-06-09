@@ -34,9 +34,13 @@ public final class ObservableViewModel<VM: ViewModel>: ObservableObject, Hashabl
     /// The observed `ViewModel`.
     public let viewModel: VM
     
+    /// Holds a strong reference to the cancellable
+    private let cancellable: AnyCancellable
+    
     internal init(_ viewModel: VM) {
         objectWillChange = viewModel.viewModelWillChange
         self.viewModel = viewModel
+        cancellable = ViewModelCancellable.get(for: viewModel)
     }
     
     public static func == (lhs: ObservableViewModel<VM>, rhs: ObservableViewModel<VM>) -> Bool {
