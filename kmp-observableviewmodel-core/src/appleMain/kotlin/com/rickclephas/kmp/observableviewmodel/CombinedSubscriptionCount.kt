@@ -16,7 +16,7 @@ internal class CombinedSubscriptionCount private constructor(
 ): StateFlow<Int> {
 
     constructor(viewModelScope: NativeViewModelScope, stateFlow: MutableStateFlow<*>) : this(
-        viewModelScopeCount = viewModelScope.subscriptionCount,
+        viewModelScopeCount = viewModelScope.subscriptionCount().stateFlow,
         stateFlowCount = stateFlow.subscriptionCount
     )
 

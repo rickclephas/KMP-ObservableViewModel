@@ -1,10 +1,6 @@
 package com.rickclephas.kmp.observableviewmodel
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import platform.darwin.NSObject
 
 /**
@@ -15,19 +11,8 @@ internal class NativeViewModelScope internal constructor(
     val coroutineScope: CoroutineScope
 ): NSObject(), ViewModelScope {
 
-    private val _subscriptionCount = MutableStateFlow(0)
-    /**
-     * A [StateFlow] that emits the number of subscribers to the [ViewModel].
-     */
-    val subscriptionCount: StateFlow<Int> = _subscriptionCount.asStateFlow()
-
-    override fun increaseSubscriptionCount() {
-        _subscriptionCount.update { it + 1 }
-    }
-
-    override fun decreaseSubscriptionCount() {
-        _subscriptionCount.update { it - 1 }
-    }
+    private val _subscriptionCount = SubscriptionCount()
+    override fun subscriptionCount(): SubscriptionCount = _subscriptionCount
 
     private var sendObjectWillChange: (() -> Unit)? = null
 

@@ -9,12 +9,17 @@
 #define KMPOVMViewModelScope_h
 
 #import <Foundation/Foundation.h>
+#import "KMPOVMSubscriptionCount.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 __attribute__((swift_name("ViewModelScope")))
 @protocol KMPOVMViewModelScope
-- (void)increaseSubscriptionCount;
-- (void)decreaseSubscriptionCount;
+@property (readonly) id<KMPOVMSubscriptionCount> subscriptionCount;
+
 - (void)setSendObjectWillChange:(void (^ _Nonnull)(void))sendObjectWillChange;
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* KMPOVMViewModelScope_h */
