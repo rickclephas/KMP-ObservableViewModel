@@ -11,7 +11,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 public actual fun <T> MutableStateFlow(
     viewModelScope: ViewModelScope,
     value: T
-): MutableStateFlow<T> = MutableStateFlowImpl(viewModelScope.asImpl(), MutableStateFlow(value))
+): MutableStateFlow<T> = MutableStateFlowImpl(viewModelScope.asNative(), MutableStateFlow(value))
 
 /**
  * A [MutableStateFlow] that triggers [ViewModelScopeImpl.sendObjectWillChange]
@@ -19,7 +19,7 @@ public actual fun <T> MutableStateFlow(
  */
 @OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 private class MutableStateFlowImpl<T>(
-    private val viewModelScope: ViewModelScopeImpl,
+    private val viewModelScope: NativeViewModelScope,
     private val stateFlow: MutableStateFlow<T>
 ): MutableStateFlow<T> {
 
@@ -97,7 +97,7 @@ public actual fun <T> Flow<T>.stateIn(
 ): StateFlow<T> {
     // Similar to kotlinx.coroutines, but using our custom MutableStateFlowImpl and CoroutineContext logic.
     // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L135
-    val scope = viewModelScope.asImpl()
+    val scope = viewModelScope.asNative()
     val state = MutableStateFlowImpl(scope, MutableStateFlow(initialValue))
     val job = scope.coroutineScope.launchSharing(EmptyCoroutineContext, this, state, started, initialValue)
     return ReadonlyStateFlow(state, job)
