@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * A [MutableStateFlow] that triggers [NativeViewModelScope.sendObjectWillChange]
+ * A [MutableStateFlow] that triggers [NativeViewModelScope.publisher]
  * and accounts for the [NativeViewModelScope.subscriptionCount].
  */
 @OptIn(ExperimentalForInheritanceCoroutinesApi::class)
@@ -21,7 +21,7 @@ internal class ObservableMutableStateFlow<T>(
         get() = stateFlow.value
         set(value) {
             if (stateFlow.value != value) {
-                viewModelScope.sendObjectWillChange()
+                viewModelScope.publisher?.send()
             }
             stateFlow.value = value
         }
@@ -36,7 +36,7 @@ internal class ObservableMutableStateFlow<T>(
 
     override fun compareAndSet(expect: T, update: T): Boolean {
         if (stateFlow.value == expect && expect != update) {
-            viewModelScope.sendObjectWillChange()
+            viewModelScope.publisher?.send()
         }
         return stateFlow.compareAndSet(expect, update)
     }

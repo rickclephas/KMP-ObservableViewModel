@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.observableviewmodel
 
+import com.rickclephas.kmp.observableviewmodel.objc.KMPOVMPublisherProtocol
 import kotlinx.coroutines.CoroutineScope
 import platform.darwin.NSObject
 
@@ -14,20 +15,11 @@ internal class NativeViewModelScope internal constructor(
     private val _subscriptionCount = SubscriptionCount()
     override fun subscriptionCount(): SubscriptionCount = _subscriptionCount
 
-    private var sendObjectWillChange: (() -> Unit)? = null
-
-    override fun setSendObjectWillChange(sendObjectWillChange: () -> Unit) {
-        if (this.sendObjectWillChange != null) {
-            throw IllegalStateException("ViewModel can't be wrapped more than once")
-        }
-        this.sendObjectWillChange = sendObjectWillChange
-    }
-
-    /**
-     * Invokes the object will change listener set by [setSendObjectWillChange].
-     */
-    fun sendObjectWillChange() {
-        sendObjectWillChange?.invoke()
+    private var _publisher: KMPOVMPublisherProtocol? = null
+    override fun publisher(): KMPOVMPublisherProtocol? = _publisher
+    override fun setPublisher(publisher: KMPOVMPublisherProtocol?) {
+        if (_publisher != null) throw IllegalStateException("ViewModel can't be initialized more than once")
+        _publisher = publisher
     }
 }
 

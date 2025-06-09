@@ -9,30 +9,28 @@ import Combine
 import KMPObservableViewModelCoreObjC
 
 /// Publisher for `ObservableViewModel` that connects to the `ViewModelScope`.
-public final class ObservableViewModelPublisher: Publisher {
+public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservableViewModelCoreObjC.Publisher {
     public typealias Output = Void
     public typealias Failure = Never
     
     internal weak var viewModel: (any ViewModel)?
+    
+    private let publisher: ObservableObjectPublisher
     private let subscriptionCount: any SubscriptionCount
     
-    private let publisher = ObservableObjectPublisher()
-    private var objectWillChangeCancellable: AnyCancellable? = nil
-    
-    internal init(_ viewModel: any ViewModel, _ objectWillChange: ObservableObjectPublisher) {
+    internal init(_ viewModel: any ViewModel) {
         self.viewModel = viewModel
+        self.publisher = viewModel.objectWillChange
         self.subscriptionCount = viewModel.viewModelScope.subscriptionCount
-        viewModel.viewModelScope.setSendObjectWillChange { [weak self] in
-            self?.publisher.send()
-        }
-        objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
-            self?.publisher.send()
-        }
     }
     
     public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
         subscriptionCount.increase()
         publisher.receive(subscriber: ObservableViewModelSubscriber(subscriptionCount, subscriber))
+    }
+    
+    public func send() {
+        publisher.send()
     }
     
     deinit {

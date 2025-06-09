@@ -9,6 +9,7 @@
 #define KMPOVMViewModelScope_h
 
 #import <Foundation/Foundation.h>
+#import "KMPOVMPublisher.h"
 #import "KMPOVMSubscriptionCount.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 __attribute__((swift_name("ViewModelScope")))
 @protocol KMPOVMViewModelScope
 @property (readonly) id<KMPOVMSubscriptionCount> subscriptionCount;
-
-- (void)setSendObjectWillChange:(void (^ _Nonnull)(void))sendObjectWillChange;
+@property id<KMPOVMPublisher> _Nullable publisher;
 @end
 
 NS_ASSUME_NONNULL_END
