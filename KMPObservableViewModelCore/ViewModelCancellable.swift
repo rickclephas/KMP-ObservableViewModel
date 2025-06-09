@@ -12,6 +12,7 @@ internal class ViewModelCancellable {
     
     private var didInit = false
     private weak var cancellable: AnyCancellable?
+    private var childCancellables: Dictionary<AnyKeyPath, AnyHashable>? = [:]
     
     private func get(_ viewModel: any ViewModel) -> AnyCancellable {
         guard didInit else {
@@ -19,6 +20,7 @@ internal class ViewModelCancellable {
                 if let cancellable = viewModel as? Cancellable {
                     cancellable.cancel()
                 }
+                self.childCancellables = nil
                 viewModel.clear()
             }
             self.cancellable = cancellable
@@ -31,7 +33,21 @@ internal class ViewModelCancellable {
         return cancellable
     }
     
+    func setChildCancellables(_ keyPath: AnyKeyPath, _ cancellables: AnyHashable?) {
+        if let cancellables = cancellables {
+            childCancellables?[keyPath] = cancellables
+        } else {
+            childCancellables?.removeValue(forKey: keyPath)
+        }
+    }
+    
     static func get(for viewModel: any ViewModel) -> AnyCancellable {
         viewModel.viewModelWillChange.cancellable.get(viewModel)
+    }
+    
+    static func get(for viewModel: (any ViewModel)?) -> AnyCancellable? {
+        guard let viewModel else { return nil }
+        let cancellable = get(for: viewModel)
+        return cancellable
     }
 }
