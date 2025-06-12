@@ -21,3 +21,8 @@ public expect fun <T> Flow<T>.stateIn(
     started: SharingStarted,
     initialValue: T
 ): StateFlow<T>
+
+/**
+ * @see kotlinx.coroutines.flow.asStateFlow
+ */
+public expect fun <T> MutableStateFlow<T>.asObservableStateFlow(): StateFlow<T>

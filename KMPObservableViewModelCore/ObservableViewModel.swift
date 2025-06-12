@@ -13,8 +13,7 @@ import KMPObservableViewModelCoreObjC
 public func observableViewModel<VM: ViewModel>(
     for viewModel: VM
 ) -> ObservableViewModel<VM> {
-    let publishers = observableViewModelPublishers(for: viewModel)
-    return ObservableViewModel(publishers, viewModel)
+    return ObservableViewModel(viewModel)
 }
 
 /// Gets an `ObservableObject` for the specified `ViewModel`.
@@ -35,13 +34,13 @@ public final class ObservableViewModel<VM: ViewModel>: ObservableObject, Hashabl
     /// The observed `ViewModel`.
     public let viewModel: VM
     
-    /// Holds a strong reference to the publishers
-    private let publishers: ObservableViewModelPublishers
+    /// Holds a strong reference to the cancellable
+    private let cancellable: AnyCancellable
     
-    internal init(_ publishers: ObservableViewModelPublishers, _ viewModel: VM) {
-        objectWillChange = publishers.publisher
+    internal init(_ viewModel: VM) {
+        objectWillChange = viewModel.viewModelWillChange
         self.viewModel = viewModel
-        self.publishers = publishers
+        cancellable = ViewModelCancellable.get(for: viewModel)
     }
     
     public static func == (lhs: ObservableViewModel<VM>, rhs: ObservableViewModel<VM>) -> Bool {

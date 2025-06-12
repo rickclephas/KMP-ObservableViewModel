@@ -5,4 +5,7 @@
 //  Created by Rick Clephas on 27/11/2022.
 //
 
+#import "KMPOVMPublisher.h"
+#import "KMPOVMSubscriptionCount.h"
+#import "KMPOVMViewModelKeyPath.h"
 #import "KMPOVMViewModelScope.h"
