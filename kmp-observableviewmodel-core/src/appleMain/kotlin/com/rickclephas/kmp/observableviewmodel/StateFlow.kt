@@ -62,3 +62,9 @@ private fun <T> CoroutineScope.launchSharing(
         }
     }
 }
+
+/**
+ * @see kotlinx.coroutines.flow.asStateFlow
+ */
+public actual fun <T> MutableStateFlow<T>.asObservableStateFlow(): StateFlow<T> =
+    ObservableStateFlow(requireObservableStateFlow(this), null)

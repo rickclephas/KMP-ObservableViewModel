@@ -6,12 +6,24 @@
 //
 
 import Combine
+import Observation
 import KMPObservableViewModelCoreObjC
 
 /// Publisher for `ObservableViewModel` that connects to the `ViewModelScope`.
 public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservableViewModelCoreObjC.Publisher {
     public typealias Output = Void
     public typealias Failure = Never
+    
+    private var _observationRegistrar: Any? = nil
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    public var observationRegistrar: ObservationRegistrar {
+        if let observationRegistrar = _observationRegistrar {
+            return observationRegistrar as! ObservationRegistrar
+        }
+        let observationRegistrar = ObservationRegistrar()
+        _observationRegistrar = observationRegistrar
+        return observationRegistrar
+    }
     
     internal let cancellable = ViewModelCancellable()
     
@@ -30,6 +42,16 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
     
     public func send() {
         publisher.send()
+    }
+}
+
+internal extension KMPObservableViewModelCoreObjC.Publisher {
+    /// Casts this `Publisher` to an `ObservableViewModelPublisher`.
+    func cast() -> ObservableViewModelPublisher {
+        guard let publisher = self as? ObservableViewModelPublisher else {
+            fatalError("Publisher must be an ObservableViewModelPublisher")
+        }
+        return publisher
     }
 }
 
