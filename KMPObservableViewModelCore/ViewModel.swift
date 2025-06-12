@@ -8,7 +8,7 @@
 import Combine
 import KMPObservableViewModelCoreObjC
 
-/// A Kotlin Multiplatform Mobile ViewModel.
+/// A Kotlin Multiplatform ViewModel.
 public protocol ViewModel: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
     /// The `ViewModelScope` of this `ViewModel`.
     var viewModelScope: ViewModelScope { get }

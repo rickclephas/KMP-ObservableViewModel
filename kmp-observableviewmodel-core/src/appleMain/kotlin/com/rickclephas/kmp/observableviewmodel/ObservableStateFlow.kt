@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * A [MutableStateFlow] that triggers [NativeViewModelScope.publisher]
- * and accounts for the [NativeViewModelScope.subscriptionCount].
+ * A [MutableStateFlow] wrapper that emits state change events through the [NativeViewModelScope]
+ * and it accounts for the [NativeViewModelScope.subscriptionCount].
  */
 @OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 internal class ObservableMutableStateFlow<T>(
@@ -29,6 +29,9 @@ internal class ObservableMutableStateFlow<T>(
     override val replayCache: List<T>
         get() = stateFlow.replayCache
 
+    /**
+     * The combined subscription count from the [NativeViewModelScope] and the actual [StateFlow].
+     */
     override val subscriptionCount: StateFlow<Int> = CombinedSubscriptionCount(viewModelScope, stateFlow)
 
     override suspend fun collect(collector: FlowCollector<T>): Nothing =

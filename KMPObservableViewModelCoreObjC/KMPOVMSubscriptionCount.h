@@ -1,6 +1,6 @@
 //
 //  KMPOVMSubscriptionCount.h
-//  KMPObservableViewModel
+//  KMPObservableViewModelCoreObjC
 //
 //  Created by Rick Clephas on 09/06/2025.
 //

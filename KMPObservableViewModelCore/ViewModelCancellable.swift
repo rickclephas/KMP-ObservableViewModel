@@ -1,6 +1,6 @@
 //
 //  ViewModelCancellable.swift
-//  KMPObservableViewModel
+//  KMPObservableViewModelCore
 //
 //  Created by Rick Clephas on 09/06/2025.
 //
