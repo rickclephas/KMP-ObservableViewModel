@@ -22,7 +22,7 @@ public protocol ViewModel: ObservableObject where ObjectWillChangePublisher == O
 public extension ViewModel {
     var viewModelWillChange: ObservableViewModelPublisher {
         if let publisher = viewModelScope.publisher {
-            return publisher as! ObservableViewModelPublisher
+            return publisher.cast()
         }
         let publisher = ObservableViewModelPublisher(self)
         viewModelScope.publisher = publisher
