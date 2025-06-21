@@ -3,7 +3,7 @@ package com.rickclephas.kmp.observableviewmodel
 import kotlinx.coroutines.CoroutineScope
 
 /**
- * A Kotlin Multiplatform Mobile ViewModel.
+ * A Kotlin Multiplatform ViewModel.
  */
 public expect abstract class ViewModel {
 

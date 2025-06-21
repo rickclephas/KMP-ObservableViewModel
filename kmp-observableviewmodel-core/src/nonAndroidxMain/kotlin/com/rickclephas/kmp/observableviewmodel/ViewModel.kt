@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 
 /**
- * A Kotlin Multiplatform Mobile ViewModel.
+ * A Kotlin Multiplatform ViewModel.
  */
 public actual abstract class ViewModel {
 

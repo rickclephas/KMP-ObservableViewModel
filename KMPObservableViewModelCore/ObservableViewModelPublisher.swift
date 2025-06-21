@@ -58,6 +58,16 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
     }
 }
 
+internal extension KMPObservableViewModelCoreObjC.Publisher {
+    /// Casts this `Publisher` to an `ObservableViewModelPublisher`.
+    func cast() -> ObservableViewModelPublisher {
+        guard let publisher = self as? ObservableViewModelPublisher else {
+            fatalError("Publisher must be an ObservableViewModelPublisher")
+        }
+        return publisher
+    }
+}
+
 /// Subscriber for `ObservableViewModelPublisher` that creates `ObservableViewModelSubscription`s.
 private class ObservableViewModelSubscriber<S>: Subscriber where S : Subscriber, Never == S.Failure, Void == S.Input {
     typealias Input = Void
