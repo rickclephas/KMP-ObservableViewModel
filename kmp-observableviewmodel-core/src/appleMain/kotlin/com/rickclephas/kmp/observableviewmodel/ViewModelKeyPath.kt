@@ -4,13 +4,13 @@ import com.rickclephas.kmp.observableviewmodel.objc.KMPOVMViewModelKeyPathProtoc
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * Sets the [KeyPath][KMPOVMViewModelKeyPathProtocol] of an `ObservableStateFlow`.
+ * The [KeyPath][KMPOVMViewModelKeyPathProtocol] of an `ObservableStateFlow`.
  * @throws IllegalArgumentException if `this` [StateFlow] isn't an `ObservableStateFlow`.
  */
 @InternalKMPObservableViewModelApi
-public fun <T> StateFlow<T>.setKeyPath(keyPath: KMPOVMViewModelKeyPathProtocol?) {
-    requireObservableStateFlow(this).keyPath = keyPath
-}
+public var <T> StateFlow<T>.keyPath: KMPOVMViewModelKeyPathProtocol?
+    get() = requireObservableStateFlow(this).keyPath
+    set(value) { requireObservableStateFlow(this).keyPath = value }
 
 /**
  * Helper to emit [keyPath] access events through the [NativeViewModelScope].
