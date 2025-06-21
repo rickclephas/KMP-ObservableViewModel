@@ -10,6 +10,10 @@ let package = Package(
             targets: ["KMPObservableViewModelCore"]
         ),
         .library(
+            name: "KMPObservableViewModelProperties",
+            targets: ["KMPObservableViewModelProperties"]
+        ),
+        .library(
             name: "KMPObservableViewModelSwiftUI",
             targets: ["KMPObservableViewModelSwiftUI"]
         )
@@ -24,6 +28,11 @@ let package = Package(
             name: "KMPObservableViewModelCore",
             dependencies: [.target(name: "KMPObservableViewModelCoreObjC")],
             path: "KMPObservableViewModelCore"
+        ),
+        .target(
+            name: "KMPObservableViewModelProperties",
+            dependencies: [.target(name: "KMPObservableViewModelCore")],
+            path: "KMPObservableViewModelProperties"
         ),
         .target(
             name: "KMPObservableViewModelSwiftUI",

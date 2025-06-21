@@ -7,4 +7,5 @@
 
 #import "KMPOVMPublisher.h"
 #import "KMPOVMSubscriptionCount.h"
+#import "KMPOVMViewModelKeyPath.h"
 #import "KMPOVMViewModelScope.h"

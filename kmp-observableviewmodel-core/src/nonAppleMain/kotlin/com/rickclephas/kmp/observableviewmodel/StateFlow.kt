@@ -18,3 +18,8 @@ public actual inline fun <T> Flow<T>.stateIn(
     started: SharingStarted,
     initialValue: T
 ): StateFlow<T> = stateIn(viewModelScope.coroutineScope, started, initialValue)
+
+/**
+ * @see kotlinx.coroutines.flow.asStateFlow
+ */
+public actual fun <T> MutableStateFlow<T>.asObservableStateFlow(): StateFlow<T> = asStateFlow()
