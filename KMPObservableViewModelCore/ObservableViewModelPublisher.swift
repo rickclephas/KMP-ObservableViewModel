@@ -9,36 +9,27 @@ import Combine
 import KMPObservableViewModelCoreObjC
 
 /// Publisher for `ObservableViewModel` that connects to the `ViewModelScope`.
-public final class ObservableViewModelPublisher: Publisher {
+public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservableViewModelCoreObjC.Publisher {
     public typealias Output = Void
     public typealias Failure = Never
     
-    internal weak var viewModel: (any ViewModel)?
+    internal let cancellable = ViewModelCancellable()
     
-    private let publisher = ObservableObjectPublisher()
-    private var objectWillChangeCancellable: AnyCancellable? = nil
+    private let publisher: ObservableObjectPublisher
+    private let subscriptionCount: any SubscriptionCount
     
-    internal init(_ viewModel: any ViewModel, _ objectWillChange: ObservableObjectPublisher) {
-        self.viewModel = viewModel
-        viewModel.viewModelScope.setSendObjectWillChange { [weak self] in
-            self?.publisher.send()
-        }
-        objectWillChangeCancellable = objectWillChange.sink { [weak self] _ in
-            self?.publisher.send()
-        }
+    internal init(_ viewModel: any ViewModel) {
+        self.publisher = viewModel.objectWillChange
+        self.subscriptionCount = viewModel.viewModelScope.subscriptionCount
     }
     
     public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
-        viewModel?.viewModelScope.increaseSubscriptionCount()
-        publisher.receive(subscriber: ObservableViewModelSubscriber(self, subscriber))
+        subscriptionCount.increase()
+        publisher.receive(subscriber: ObservableViewModelSubscriber(subscriptionCount, subscriber))
     }
     
-    deinit {
-        guard let viewModel else { return }
-        if let cancellable = viewModel as? Cancellable {
-            cancellable.cancel()
-        }
-        viewModel.clear()
+    public func send() {
+        publisher.send()
     }
 }
 
@@ -47,16 +38,16 @@ private class ObservableViewModelSubscriber<S>: Subscriber where S : Subscriber,
     typealias Input = Void
     typealias Failure = Never
     
-    private let publisher: ObservableViewModelPublisher
+    private let subscriptionCount: any SubscriptionCount
     private let subscriber: S
     
-    init(_ publisher: ObservableViewModelPublisher, _ subscriber: S) {
-        self.publisher = publisher
+    init(_ subscriptionCount: any SubscriptionCount, _ subscriber: S) {
+        self.subscriptionCount = subscriptionCount
         self.subscriber = subscriber
     }
     
     func receive(subscription: Subscription) {
-        subscriber.receive(subscription: ObservableViewModelSubscription(publisher, subscription))
+        subscriber.receive(subscription: ObservableViewModelSubscription(subscriptionCount, subscription))
     }
     
     func receive(_ input: Void) -> Subscribers.Demand {
@@ -71,11 +62,11 @@ private class ObservableViewModelSubscriber<S>: Subscriber where S : Subscriber,
 /// Subscription for `ObservableViewModelPublisher` that decreases the subscription count upon cancellation.
 private class ObservableViewModelSubscription: Subscription {
     
-    private let publisher: ObservableViewModelPublisher
+    private var subscriptionCount: (any SubscriptionCount)?
     private let subscription: Subscription
     
-    init(_ publisher: ObservableViewModelPublisher, _ subscription: Subscription) {
-        self.publisher = publisher
+    init(_ subscriptionCount: any SubscriptionCount, _ subscription: Subscription) {
+        self.subscriptionCount = subscriptionCount
         self.subscription = subscription
     }
     
@@ -83,12 +74,9 @@ private class ObservableViewModelSubscription: Subscription {
         subscription.request(demand)
     }
     
-    private var cancelled = false
-    
     func cancel() {
         subscription.cancel()
-        guard !cancelled else { return }
-        cancelled = true
-        publisher.viewModel?.viewModelScope.decreaseSubscriptionCount()
+        subscriptionCount?.decrease()
+        subscriptionCount = nil
     }
 }

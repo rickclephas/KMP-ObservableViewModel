@@ -9,19 +9,11 @@ import KMPObservableViewModelCoreObjC
 
 public extension ViewModel {
     
-    private func setChildViewModelPublishers(_ keyPath: AnyKeyPath, _ publishers: AnyHashable?) {
-        if let publishers = publishers {
-            observableViewModelPublishers(for: self).childPublishers[keyPath] = publishers
-        } else {
-            observableViewModelPublishers(for: self).childPublishers.removeValue(forKey: keyPath)
-        }
-    }
-    
     private func setChildViewModel<VM: ViewModel>(
         _ viewModel: VM?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModelPublishers(keyPath, observableViewModelPublishers(for: viewModel))
+        viewModelWillChange.cancellable.setChildCancellables(keyPath, ViewModelCancellable.get(for: viewModel))
     }
     
     /// Stores a reference to the `ObservableObject` for the specified child `ViewModel`.
@@ -48,8 +40,8 @@ public extension ViewModel {
         _ viewModels: [VM?]?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
-            observableViewModelPublishers(for: viewModel)
+        viewModelWillChange.cancellable.setChildCancellables(keyPath, viewModels?.map { viewModel in
+            ViewModelCancellable.get(for: viewModel)
         })
     }
     
@@ -95,8 +87,8 @@ public extension ViewModel {
         _ viewModels: Set<VM?>?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModelPublishers(keyPath, viewModels?.map { viewModel in
-            observableViewModelPublishers(for: viewModel)
+        viewModelWillChange.cancellable.setChildCancellables(keyPath, viewModels?.map { viewModel in
+            ViewModelCancellable.get(for: viewModel)
         })
     }
     
@@ -142,8 +134,8 @@ public extension ViewModel {
         _ viewModels: [Key : VM?]?,
         at keyPath: AnyKeyPath
     ) {
-        setChildViewModelPublishers(keyPath, viewModels?.mapValues { viewModel in
-            observableViewModelPublishers(for: viewModel)
+        viewModelWillChange.cancellable.setChildCancellables(keyPath, viewModels?.mapValues { viewModel in
+            ViewModelCancellable.get(for: viewModel)
         })
     }
     
