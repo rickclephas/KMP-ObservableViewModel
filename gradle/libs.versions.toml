@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.2.0-RC3"
+kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.1"
 android = "8.2.0"
 androidx-lifecycle = "2.8.7"
@@ -8,8 +8,8 @@ atomicfu = "0.27.0"
 # Sample versions
 androidx-compose = "2023.10.01"
 androidx-fragment = "1.6.2"
-ksp = "2.2.0-RC3-2.0.2"
-nativecoroutines = "1.0.0-ALPHA-44-kotlin-2.2.0-RC2"
+ksp = "2.2.0-2.0.2"
+nativecoroutines = "1.0.0-ALPHA-45"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
