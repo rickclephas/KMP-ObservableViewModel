@@ -9,16 +9,10 @@ import KMPObservableViewModelCore
 
 /// A Kotlin Multiplatform ViewModel.
 @dynamicMemberLookup
-public protocol ViewModel: KMPObservableViewModelCore.ViewModel {
-    
-    associatedtype Properties: KMPObservableViewModelProperties.Properties
-    
-    /// The observable properties of `this` ViewModel.
-    var __properties: Properties { get }
-    
-    /// Returns the value of an observable property.
-    subscript<T>(dynamicMember keyPath: KeyPath<Properties, T>) -> T { get }
-    
-    /// Gets or sets the value of an observable property.
-    subscript<T>(dynamicMember keyPath: ReferenceWritableKeyPath<Properties, T>) -> T { get set }
+public protocol ViewModel: KMPObservableViewModelCore.ViewModel { }
+
+private extension ViewModel {
+    subscript<T>(dynamicMember keyPath: KeyPath<Properties, T>) -> T {
+        fatalError("ViewModel subscripts will be added by @ObservableViewModel")
+    }
 }

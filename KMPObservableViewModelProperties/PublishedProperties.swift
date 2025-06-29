@@ -15,7 +15,7 @@ public protocol PublishedProperties: Properties { }
 public extension PublishedProperties {
     
     /// Returns the value of a property ensuring the `keyPath` is being registered.
-    subscript<Value>(keyPath: KeyPath<Self, Value>) -> Value {
+    subscript<Value>(published keyPath: KeyPath<Self, Value>) -> Value {
         let value = self[keyPath: keyPath]
         guard shouldRegisterKeyPath(), Thread.isMainThread else { return value }
         registerKeyPath(PublishedKeyPath.shared)
@@ -23,8 +23,21 @@ public extension PublishedProperties {
     }
     
     /// Gets or sets the value of a property ensuring the `keyPath` is being registered.
-    subscript<Value>(keyPath: ReferenceWritableKeyPath<Self, Value>) -> Value {
-        get { self[keyPath as KeyPath<Self, Value>] }
+    subscript<Value>(published keyPath: ReferenceWritableKeyPath<Self, Value>) -> Value {
+        get { self[published: keyPath as KeyPath<Self, Value>] }
         set { self[keyPath: keyPath] = newValue }
+    }
+    
+    /// `ObservableProperties` implementation required for compilation if only `PublishedProperties` is used.
+    @_disfavoredOverload
+    subscript<Value>(observable keyPath: KeyPath<Self, Value>) -> Value {
+        self[published: keyPath]
+    }
+    
+    /// `ObservableProperties` implementation required for compilation if only `PublishedProperties` is used.
+    @_disfavoredOverload
+    subscript<Value>(observable keyPath: ReferenceWritableKeyPath<Self, Value>) -> Value {
+        get { self[published: keyPath] }
+        set { self[published: keyPath] = newValue }
     }
 }
