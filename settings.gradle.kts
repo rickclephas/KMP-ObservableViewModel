@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 rootProject.name = "kmp-observableviewmodel"
 
 include(":kmp-observableviewmodel-core")
+include(":kmp-observableviewmodel-properties")
