@@ -10,7 +10,7 @@ import KMPObservableViewModelCoreObjC
 
 /// An observable `KeyPath` which uses an `ObservationRegistrar` to track changes.
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public final class ObservableKeyPath<Root, Value>: ViewModelKeyPath where Root: AnyObject, Root: Observable {
+public final class ObservableKeyPath<Root: AnyObject & Observable, Value>: ViewModelKeyPath {
     
     private weak var subject: Root?
     private let keyPath: KeyPath<Root, Value>
