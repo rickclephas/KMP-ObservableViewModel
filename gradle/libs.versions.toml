@@ -3,7 +3,7 @@ kotlin = "2.3.0-Beta1"
 kotlinx-coroutines = "1.10.1"
 android = "8.2.2"
 androidx-lifecycle = "2.8.7"
-atomicfu = "0.27.0"
+atomicfu = "0.29.0"
 
 # Sample versions
 androidx-compose = "2023.10.01"
