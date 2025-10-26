@@ -10,4 +10,5 @@ import KMPObservableViewModelSampleShared
 
 extension Kmp_observableviewmodel_coreViewModel: @retroactive ViewModel { }
 
-extension Kmp_observableviewmodel_coreViewModel: @retroactive Observable { }
+// Uncomment to make all KMP-ObservableViewModels compatible with the Observation framework
+// extension Kmp_observableviewmodel_coreViewModel: @retroactive Observable { }

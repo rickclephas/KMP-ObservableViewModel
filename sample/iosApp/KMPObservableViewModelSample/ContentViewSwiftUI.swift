@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ContentViewSwiftUI.swift
 //  KMPObservableViewModelSample
 //
 //  Created by Rick Clephas on 21/11/2022.
@@ -8,37 +8,61 @@
 import SwiftUI
 import KMPObservableViewModelSwiftUI
 
-struct ContentView: View {
+struct ContentViewSwiftUIPublished: View {
     
-    @StateViewModel var viewModel = TimeTravelViewModel()
+    @StateViewModel var viewModel = TimeTravelViewModelPublished()
+    
+    var body: some View {
+        ContentViewSwiftUI(viewModel: viewModel)
+            .navigationTitle(Text("Published"))
+            .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct ContentViewSwiftUIPublishedObservable: View {
+    
+    @StateViewModel var viewModel = TimeTravelViewModelPublishedObservable()
+    
+    var body: some View {
+        ContentViewSwiftUI(viewModel: viewModel)
+            .navigationTitle(Text("Published + Observable"))
+            .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct ContentViewSwiftUIObservable: View {
+    
+    @StateViewModel var viewModel = TimeTravelViewModelObservable()
+    
+    var body: some View {
+        ContentViewSwiftUI(viewModel: viewModel)
+            .navigationTitle(Text("Observable"))
+            .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct ContentViewSwiftUI: View {
+    
+    @ObservedViewModel var viewModel: TimeTravelViewModel
     @StateObject var counter = Counter()
 
     var body: some View {
         Spacer()
         ChangeCounter(counter.incrementAndGet()) {
-            VStack {
+            VStack(spacing: 24) {
                 ActualTimeView(viewModel: viewModel)
-                Spacer().frame(height: 24)
                 TravelEffectView(viewModel: viewModel)
-                Spacer().frame(height: 24)
                 CurrentTimeView(viewModel: viewModel)
-                Spacer().frame(height: 24)
                 IsFixedTimeView(viewModel: viewModel)
-                Spacer().frame(height: 24)
-                Button("Time travel") {
-                    viewModel.timeTravel()
-                }
-                Spacer().frame(height: 24)
-                Button("Reset") {
-                    viewModel.resetTime()
-                }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
+                ButtonsView(viewModel: viewModel)
             }.frame(minWidth: 0, maxWidth: .infinity)
         }.padding(.horizontal, 8)
         Spacer()
     }
 }
 
-struct ActualTimeView: View {
+private struct ActualTimeView: View {
     
     @ObservedViewModel var viewModel: TimeTravelViewModel
     @StateObject var counter = Counter()
@@ -54,7 +78,7 @@ struct ActualTimeView: View {
     }
 }
 
-struct TravelEffectView: View {
+private struct TravelEffectView: View {
     
     @ObservedViewModel var viewModel: TimeTravelViewModel
     @StateObject var counter = Counter()
@@ -70,7 +94,7 @@ struct TravelEffectView: View {
     }
 }
 
-struct CurrentTimeView: View {
+private struct CurrentTimeView: View {
     
     @ObservedViewModel var viewModel: TimeTravelViewModel
     @StateObject var counter = Counter()
@@ -86,7 +110,7 @@ struct CurrentTimeView: View {
     }
 }
 
-struct IsFixedTimeView: View {
+private struct IsFixedTimeView: View {
     
     @ObservedViewModel var viewModel: TimeTravelViewModel
     @StateObject var counter = Counter()
@@ -111,8 +135,27 @@ struct IsFixedTimeView: View {
     }
 }
 
+private struct ButtonsView: View {
+    
+    @ObservedViewModel var viewModel: TimeTravelViewModel
+    @StateObject var counter = Counter()
+    
+    var body: some View {
+        ChangeCounter(counter.incrementAndGet()) {
+            VStack(spacing: 24) {
+                Button("Time travel") {
+                    viewModel.timeTravel()
+                }
+                Button("Reset") {
+                    viewModel.resetTime()
+                }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
+            }
+        }
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentViewSwiftUIPublished()
     }
 }
