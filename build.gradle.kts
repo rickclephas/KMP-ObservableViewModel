@@ -8,5 +8,5 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-BETA-15"
+    version = "1.0.0"
 }
