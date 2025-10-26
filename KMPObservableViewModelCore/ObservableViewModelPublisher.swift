@@ -18,9 +18,18 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
     private let publisher: ObservableObjectPublisher
     private let subscriptionCount: any SubscriptionCount
     
+    private var _observableProperties: Any? = nil
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    private var observableProperties: ObservableProperties? {
+        _observableProperties as! ObservableProperties?
+    }
+    
     internal init(_ viewModel: any ViewModel) {
         self.publisher = viewModel.objectWillChange
         self.subscriptionCount = viewModel.viewModelScope.subscriptionCount
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *), viewModel is Observable {
+            _observableProperties = ObservableProperties()
+        }
     }
     
     public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
@@ -28,8 +37,34 @@ public final class ObservableViewModelPublisher: Combine.Publisher, KMPObservabl
         publisher.receive(subscriber: ObservableViewModelSubscriber(subscriptionCount, subscriber))
     }
     
-    public func send() {
-        publisher.send()
+    public func access(_ property: any Property) {
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *), let observableProperties {
+            observableProperties.access(property)
+        }
+    }
+    
+    public func willSet(_ property: any Property) {
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *), let observableProperties {
+            observableProperties.willSet(property)
+        } else {
+            publisher.send()
+        }
+    }
+    
+    public func didSet(_ property: any Property) {
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *), let observableProperties {
+            observableProperties.didSet(property)
+        }
+    }
+}
+
+internal extension KMPObservableViewModelCoreObjC.Publisher {
+    /// Casts this `Publisher` to an `ObservableViewModelPublisher`.
+    func cast() -> ObservableViewModelPublisher {
+        guard let publisher = self as? ObservableViewModelPublisher else {
+            fatalError("Publisher must be an ObservableViewModelPublisher")
+        }
+        return publisher
     }
 }
 

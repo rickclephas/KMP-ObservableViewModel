@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 /**
  * A [MutableStateFlow] wrapper that emits state change events through the [NativeViewModelScope]
- * and it accounts for the [NativeViewModelScope.subscriptionCount].
+ * and accounts for the [NativeViewModelScope.subscriptionCount].
  */
 @OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 internal class ObservableMutableStateFlow<T>(
@@ -17,17 +17,24 @@ internal class ObservableMutableStateFlow<T>(
     private val stateFlow: MutableStateFlow<T>
 ): MutableStateFlow<T> {
 
+    private val property = StateFlowProperty(stateFlow)
+
     override var value: T
-        get() = stateFlow.value
+        get() {
+            viewModelScope.publisher?.access(property)
+            return stateFlow.value
+        }
         set(value) {
-            if (stateFlow.value != value) {
-                viewModelScope.publisher?.send()
-            }
+            val publisher = viewModelScope.publisher?.takeIf { stateFlow.value != value }
+            publisher?.willSet(property)
             stateFlow.value = value
+            publisher?.didSet(property)
         }
 
+    // Same implementation as in StateFlowImpl, but we need to go through our own value property.
+    // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/StateFlow.kt#L367
     override val replayCache: List<T>
-        get() = stateFlow.replayCache
+        get() = listOf(value)
 
     /**
      * The combined subscription count from the [NativeViewModelScope] and the actual [StateFlow].
@@ -38,10 +45,11 @@ internal class ObservableMutableStateFlow<T>(
         stateFlow.collect(collector)
 
     override fun compareAndSet(expect: T, update: T): Boolean {
-        if (stateFlow.value == expect && expect != update) {
-            viewModelScope.publisher?.send()
-        }
-        return stateFlow.compareAndSet(expect, update)
+        val publisher = viewModelScope.publisher?.takeIf { stateFlow.value == expect && expect != update }
+        publisher?.willSet(property)
+        val result = stateFlow.compareAndSet(expect, update)
+        publisher?.didSet(property)
+        return result
     }
 
     @ExperimentalCoroutinesApi

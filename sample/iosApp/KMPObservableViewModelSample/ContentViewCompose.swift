@@ -1,5 +1,5 @@
 //
-//  ContentViewMP.swift
+//  ContentViewCompose.swift
 //  KMPObservableViewModelSample
 //
 //  Created by Rick Clephas on 23/06/2024.
@@ -8,7 +8,16 @@
 import SwiftUI
 import KMPObservableViewModelSampleShared
 
-struct ContentViewMP: UIViewControllerRepresentable {
+struct ContentViewCompose: View {
+    
+    var body: some View {
+        ComposeViewController()
+            .navigationTitle(Text("Compose Multiplatform"))
+            .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct ComposeViewController: UIViewControllerRepresentable {
     
     @StateObject var viewModel = TimeTravelViewModel()
     

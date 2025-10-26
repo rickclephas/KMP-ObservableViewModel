@@ -176,7 +176,7 @@ Create a `KMPObservableViewModel.swift` file with the following contents:
 import KMPObservableViewModelCore
 import shared // This should be your shared KMP module
 
-extension Kmp_observableviewmodel_coreViewModel: ViewModel { }
+extension Kmp_observableviewmodel_coreViewModel: @retroactive ViewModel { }
 ```
 
 After that you can use your view model almost as if it were an `ObservableObject`.   
@@ -209,6 +209,31 @@ class TimeTravelViewModel: shared.TimeTravelViewModel {
     @Published var isResetDisabled: Bool = false
 }
 ```
+
+### Observation support
+
+When using `ObservableObject`s your SwiftUI views will likely rerender a lot.
+Luckily the [Observation](https://developer.apple.com/documentation/Observation) framework brings significant 
+improvements in terms of change tracking, allowing for more efficient rerendering.
+
+To add support for the Observation framework to all your Kotlin view models,
+simply add the following to your `KMPObservableViewModel.swift` file:
+```swift
+import Observation
+import shared // This should be your shared KMP module
+
+extension Kmp_observableviewmodel_coreViewModel: @retroactive Observable { }
+```
+
+Alternatively you can add the `Observable` conformance to specific Kotlin view models instead.
+
+> [!NOTE]
+> The `Observable` conformance is automatically added if you subclass your view model and use the `@Observable` macro.
+
+> [!NOTE]
+> As an added bonus your Kotlin view models will benefit from the Observable framework on supported OS versions
+> regardless of your app's deployment target. E.g. you can benefit from Observation support on iOS 17 and above
+> while still supporting iOS 16 and below using `ObservableObject`s.
 
 ### Child view models
 

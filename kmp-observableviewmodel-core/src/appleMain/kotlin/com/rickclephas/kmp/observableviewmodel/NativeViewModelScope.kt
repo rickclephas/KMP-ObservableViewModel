@@ -8,7 +8,7 @@ import platform.darwin.NSObject
  * Implementation of [ViewModelScope] for Apple platforms.
  * @property coroutineScope The [CoroutineScope] associated with the [ViewModel].
  */
-internal class NativeViewModelScope internal constructor(
+internal class NativeViewModelScope(
     val coroutineScope: CoroutineScope
 ): NSObject(), ViewModelScope {
 

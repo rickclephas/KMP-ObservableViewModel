@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 
 /**
- * A Kotlin Multiplatform Mobile ViewModel.
+ * A Kotlin Multiplatform ViewModel.
  */
 public actual abstract class ViewModel: AndroidXViewModel {
 
