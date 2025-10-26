@@ -26,4 +26,5 @@ internal class NativeViewModelScope(
 /**
  * Casts `this` [ViewModelScope] to a [NativeViewModelScope].
  */
+@Suppress("NOTHING_TO_INLINE")
 internal inline fun ViewModelScope.asNative(): NativeViewModelScope = this as NativeViewModelScope
