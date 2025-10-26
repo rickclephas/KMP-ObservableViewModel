@@ -71,8 +71,9 @@ private struct ActualTimeView: View {
         ChangeCounter(counter.incrementAndGet()) {
             VStack {
                 Text("Actual time:")
+                    .fontWeight(.thin)
                 Text(viewModel.actualTime)
-                    .font(.system(size: 20))
+                    .font(.system(size: 20, design: .monospaced))
             }
         }
     }
@@ -87,8 +88,9 @@ private struct TravelEffectView: View {
         ChangeCounter(counter.incrementAndGet()) {
             VStack {
                 Text("Travel effect:")
+                    .fontWeight(.thin)
                 Text(viewModel.travelEffect?.description ?? "nil")
-                    .font(.system(size: 20))
+                    .font(.system(size: 20, design: .monospaced))
             }
         }
     }
@@ -103,8 +105,9 @@ private struct CurrentTimeView: View {
         ChangeCounter(counter.incrementAndGet()) {
             VStack {
                 Text("Current time:")
+                    .fontWeight(.thin)
                 Text(viewModel.currentTime)
-                    .font(.system(size: 20))
+                    .font(.system(size: 20, design: .monospaced))
             }
         }
     }
@@ -128,8 +131,9 @@ private struct IsFixedTimeView: View {
     var body: some View {
         ChangeCounter(counter.incrementAndGet()) {
             HStack {
+                Text("Fixed time:")
+                    .fontWeight(.thin)
                 Toggle("", isOn: isFixedTimeBinding).labelsHidden()
-                Text("Fixed time")
             }
         }
     }
@@ -142,13 +146,16 @@ private struct ButtonsView: View {
     
     var body: some View {
         ChangeCounter(counter.incrementAndGet()) {
-            VStack(spacing: 24) {
+            HStack {
+                Spacer()
                 Button("Time travel") {
                     viewModel.timeTravel()
                 }
+                Spacer()
                 Button("Reset") {
                     viewModel.resetTime()
                 }.foregroundColor(viewModel.isResetDisabled ? Color.red : Color.green)
+                Spacer()
             }
         }
     }
