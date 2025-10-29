@@ -16,6 +16,7 @@ public inline val ViewModelScope.isActive: Boolean
 /**
  * @see kotlinx.coroutines.async
  */
+@Suppress("NOTHING_TO_INLINE")
 public inline fun <T> ViewModelScope.async(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
@@ -25,11 +26,13 @@ public inline fun <T> ViewModelScope.async(
 /**
  * @see kotlinx.coroutines.ensureActive
  */
+@Suppress("NOTHING_TO_INLINE")
 public inline fun ViewModelScope.ensureActive(): Unit = coroutineScope.ensureActive()
 
 /**
  * @see kotlinx.coroutines.launch
  */
+@Suppress("NOTHING_TO_INLINE")
 public inline fun ViewModelScope.launch(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
@@ -39,6 +42,7 @@ public inline fun ViewModelScope.launch(
 /**
  * @see kotlinx.coroutines.channels.produce
  */
+@Suppress("NOTHING_TO_INLINE")
 @ExperimentalCoroutinesApi
 public inline fun <E> ViewModelScope.produce(
     context: CoroutineContext = EmptyCoroutineContext,

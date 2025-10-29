@@ -8,7 +8,6 @@ atomicfu = "0.29.0"
 # Sample versions
 androidx-compose = "2023.10.01"
 androidx-fragment = "1.6.2"
-ksp = "2.2.21-RC-2.0.4"
 nativecoroutines = "1.0.0-ALPHA-47-kotlin-2.3.0-Beta1"
 
 [libraries]
@@ -39,5 +38,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-compose = { id = "org.jetbrains.compose", version = "1.6.11" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "android" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "nativecoroutines" }

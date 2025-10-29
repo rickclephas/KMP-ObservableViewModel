@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1D44EF78292C066B00465C43 /* KMPObservableViewModelSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF77292C066B00465C43 /* KMPObservableViewModelSampleApp.swift */; };
-		1D44EF7A292C066B00465C43 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF79292C066B00465C43 /* ContentView.swift */; };
+		1D44EF7A292C066B00465C43 /* ContentViewSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF79292C066B00465C43 /* ContentViewSwiftUI.swift */; };
 		1D44EF7C292C066C00465C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D44EF7B292C066C00465C43 /* Assets.xcassets */; };
 		1D44EF7F292C066C00465C43 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D44EF7E292C066C00465C43 /* Preview Assets.xcassets */; };
 		1D44EF89292C066C00465C43 /* KMPObservableViewModelSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF88292C066C00465C43 /* KMPObservableViewModelSampleTests.swift */; };
 		1D44EF93292C066C00465C43 /* KMPObservableViewModelSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF92292C066C00465C43 /* KMPObservableViewModelSampleUITests.swift */; };
 		1D44EF95292C066C00465C43 /* KMPObservableViewModelSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D44EF94292C066C00465C43 /* KMPObservableViewModelSampleUITestsLaunchTests.swift */; };
+		1DC34F6A2EAE33580063597A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC34F692EAE33550063597A /* RootView.swift */; };
 		1DCF89AB2933929400A4C54A /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DCF89AA2933929400A4C54A /* KMPObservableViewModelSwiftUI */; };
 		1DDAF2202935470A0049C114 /* KMPObservableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */; };
 		1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */; };
-		1DF227B02C2856BC00D8B3A7 /* ContentViewMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */; };
+		1DDE18852E114DE800227AE6 /* ChangeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDE18842E114DE500227AE6 /* ChangeCounter.swift */; };
+		1DF227B02C2856BC00D8B3A7 /* ContentViewCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF227AF2C2856BC00D8B3A7 /* ContentViewCompose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +43,7 @@
 		1D198B1A2933AFDE00EF778D /* KMPObservableViewModelCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KMPObservableViewModelCore.framework; path = "../../.build-core-xcf/KMPObservableViewModelCore.xcframework/ios-arm64_x86_64-simulator/KMPObservableViewModelCore.framework"; sourceTree = "<group>"; };
 		1D44EF74292C066B00465C43 /* KMPObservableViewModelSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KMPObservableViewModelSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D44EF77292C066B00465C43 /* KMPObservableViewModelSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModelSampleApp.swift; sourceTree = "<group>"; };
-		1D44EF79292C066B00465C43 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1D44EF79292C066B00465C43 /* ContentViewSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewSwiftUI.swift; sourceTree = "<group>"; };
 		1D44EF7B292C066C00465C43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D44EF7E292C066C00465C43 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1D44EF84292C066C00465C43 /* KMPObservableViewModelSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPObservableViewModelSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,10 +51,12 @@
 		1D44EF8E292C066C00465C43 /* KMPObservableViewModelSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPObservableViewModelSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D44EF92292C066C00465C43 /* KMPObservableViewModelSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModelSampleUITests.swift; sourceTree = "<group>"; };
 		1D44EF94292C066C00465C43 /* KMPObservableViewModelSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModelSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1DC34F692EAE33550063597A /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DCF89A82933928600A4C54A /* KMP-ObservableViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "KMP-ObservableViewModel"; path = ../..; sourceTree = "<group>"; };
 		1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModel.swift; sourceTree = "<group>"; };
 		1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelViewModel.swift; sourceTree = "<group>"; };
-		1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewMP.swift; sourceTree = "<group>"; };
+		1DDE18842E114DE500227AE6 /* ChangeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCounter.swift; sourceTree = "<group>"; };
+		1DF227AF2C2856BC00D8B3A7 /* ContentViewCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCompose.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +110,15 @@
 		1D44EF76292C066B00465C43 /* KMPObservableViewModelSample */ = {
 			isa = PBXGroup;
 			children = (
-				1D44EF77292C066B00465C43 /* KMPObservableViewModelSampleApp.swift */,
-				1D44EF79292C066B00465C43 /* ContentView.swift */,
 				1D44EF7B292C066C00465C43 /* Assets.xcassets */,
-				1D44EF7D292C066C00465C43 /* Preview Content */,
+				1DDE18842E114DE500227AE6 /* ChangeCounter.swift */,
+				1DF227AF2C2856BC00D8B3A7 /* ContentViewCompose.swift */,
+				1D44EF79292C066B00465C43 /* ContentViewSwiftUI.swift */,
 				1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */,
+				1D44EF77292C066B00465C43 /* KMPObservableViewModelSampleApp.swift */,
+				1D44EF7D292C066C00465C43 /* Preview Content */,
+				1DC34F692EAE33550063597A /* RootView.swift */,
 				1DDAF221293548A60049C114 /* TimeTravelViewModel.swift */,
-				1DF227AF2C2856BC00D8B3A7 /* ContentViewMP.swift */,
 			);
 			path = KMPObservableViewModelSample;
 			sourceTree = "<group>";
@@ -316,8 +322,10 @@
 			files = (
 				1DDAF2202935470A0049C114 /* KMPObservableViewModel.swift in Sources */,
 				1DDAF222293548A60049C114 /* TimeTravelViewModel.swift in Sources */,
-				1D44EF7A292C066B00465C43 /* ContentView.swift in Sources */,
-				1DF227B02C2856BC00D8B3A7 /* ContentViewMP.swift in Sources */,
+				1DDE18852E114DE800227AE6 /* ChangeCounter.swift in Sources */,
+				1D44EF7A292C066B00465C43 /* ContentViewSwiftUI.swift in Sources */,
+				1DC34F6A2EAE33580063597A /* RootView.swift in Sources */,
+				1DF227B02C2856BC00D8B3A7 /* ContentViewCompose.swift in Sources */,
 				1D44EF78292C066B00465C43 /* KMPObservableViewModelSampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

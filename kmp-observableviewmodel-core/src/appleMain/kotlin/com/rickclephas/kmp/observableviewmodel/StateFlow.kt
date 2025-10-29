@@ -11,81 +11,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 public actual fun <T> MutableStateFlow(
     viewModelScope: ViewModelScope,
     value: T
-): MutableStateFlow<T> = MutableStateFlowImpl(viewModelScope.asImpl(), MutableStateFlow(value))
-
-/**
- * A [MutableStateFlow] that triggers [ViewModelScopeImpl.sendObjectWillChange]
- * and accounts for the [ViewModelScopeImpl.subscriptionCount].
- */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
-private class MutableStateFlowImpl<T>(
-    private val viewModelScope: ViewModelScopeImpl,
-    private val stateFlow: MutableStateFlow<T>
-): MutableStateFlow<T> {
-
-    override var value: T
-        get() = stateFlow.value
-        set(value) {
-            if (stateFlow.value != value) {
-                viewModelScope.sendObjectWillChange()
-            }
-            stateFlow.value = value
-        }
-
-    override val replayCache: List<T>
-        get() = stateFlow.replayCache
-
-    override val subscriptionCount: StateFlow<Int> =
-        SubscriptionCountFlow(viewModelScope.subscriptionCount, stateFlow.subscriptionCount)
-
-    override suspend fun collect(collector: FlowCollector<T>): Nothing =
-        stateFlow.collect(collector)
-
-    override fun compareAndSet(expect: T, update: T): Boolean {
-        if (stateFlow.value == expect && expect != update) {
-            viewModelScope.sendObjectWillChange()
-        }
-        return stateFlow.compareAndSet(expect, update)
-    }
-
-    @ExperimentalCoroutinesApi
-    override fun resetReplayCache() = stateFlow.resetReplayCache()
-
-    // Same implementation as in StateFlowImpl, but we need to go through our own value property.
-    // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/StateFlow.kt#L369
-    override fun tryEmit(value: T): Boolean {
-        this.value = value
-        return true
-    }
-
-    // Same implementation as in StateFlowImpl, but we need to go through our own value property.
-    // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/StateFlow.kt#L374
-    override suspend fun emit(value: T) {
-        this.value = value
-    }
-}
-
-/**
- * A [StateFlow] that combines the subscription counts of a [ViewModelScopeImpl] and [StateFlow].
- */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
-private class SubscriptionCountFlow(
-    private val viewModelScopeSubscriptionCount: StateFlow<Int>,
-    private val stateFlowSubscriptionCount: StateFlow<Int>
-): StateFlow<Int> {
-    override val value: Int
-        get() = viewModelScopeSubscriptionCount.value + stateFlowSubscriptionCount.value
-
-    override val replayCache: List<Int>
-        get() = listOf(value)
-
-    override suspend fun collect(collector: FlowCollector<Int>): Nothing {
-        viewModelScopeSubscriptionCount.combine(stateFlowSubscriptionCount) { count1, count2 ->
-            count1 + count2
-        }.collect(collector)
-        throw IllegalStateException("SubscriptionCountFlow collect completed")
-    }
-}
+): MutableStateFlow<T> = ObservableMutableStateFlow(viewModelScope.asNative(), MutableStateFlow(value))
 
 /**
  * @see kotlinx.coroutines.flow.stateIn
@@ -97,10 +23,10 @@ public actual fun <T> Flow<T>.stateIn(
 ): StateFlow<T> {
     // Similar to kotlinx.coroutines, but using our custom MutableStateFlowImpl and CoroutineContext logic.
     // https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L135
-    val scope = viewModelScope.asImpl()
-    val state = MutableStateFlowImpl(scope, MutableStateFlow(initialValue))
+    val scope = viewModelScope.asNative()
+    val state = ObservableMutableStateFlow(scope, MutableStateFlow(initialValue))
     val job = scope.coroutineScope.launchSharing(EmptyCoroutineContext, this, state, started, initialValue)
-    return ReadonlyStateFlow(state, job)
+    return ObservableStateFlow(state, job)
 }
 
 /**
@@ -136,14 +62,3 @@ private fun <T> CoroutineScope.launchSharing(
         }
     }
 }
-
-/**
- * Similar to the kotlinx.coroutines implementation, used to return a read-only StateFlow with an optional Job.
- * https://github.com/Kotlin/kotlinx.coroutines/blob/6dfabf763fe9fc91fbb73eb0f2d5b488f53043f1/kotlinx-coroutines-core/common/src/flow/operators/Share.kt#L379
- */
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
-private class ReadonlyStateFlow<T>(
-    flow: StateFlow<T>,
-    @Suppress("unused")
-    private val job: Job?
-): StateFlow<T> by flow

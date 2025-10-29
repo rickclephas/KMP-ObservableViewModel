@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 
 /**
- * A Kotlin Multiplatform Mobile ViewModel.
+ * A Kotlin Multiplatform ViewModel.
  */
 public actual abstract class ViewModel: AndroidXViewModel {
 
@@ -70,7 +70,7 @@ public actual abstract class ViewModel: AndroidXViewModel {
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
 public actual inline fun ViewModel.addCloseable(key: String, closeable: AutoCloseable): Unit =
     addCloseable(key, closeable)
 
@@ -81,7 +81,7 @@ public actual inline fun ViewModel.addCloseable(key: String, closeable: AutoClos
  * If [onCleared][ViewModel.onCleared] has already been called,
  * the provided resource will not be added and will be closed immediately.
  */
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
 public actual inline fun ViewModel.addCloseable(closeable: AutoCloseable): Unit =
     addCloseable(closeable)
 
@@ -89,6 +89,6 @@ public actual inline fun ViewModel.addCloseable(closeable: AutoCloseable): Unit 
  * Returns the [AutoCloseable] resource associated to the given [key],
  * or `null` if such a [key] is not present in this [ViewModel].
  */
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
 public actual inline fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T? =
     getCloseable(key)
