@@ -51,6 +51,7 @@
 		1D44EF8E292C066C00465C43 /* KMPObservableViewModelSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPObservableViewModelSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D44EF92292C066C00465C43 /* KMPObservableViewModelSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModelSampleUITests.swift; sourceTree = "<group>"; };
 		1D44EF94292C066C00465C43 /* KMPObservableViewModelSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModelSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1D60525F2EBF979B008B7573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1DC34F692EAE33550063597A /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DCF89A82933928600A4C54A /* KMP-ObservableViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "KMP-ObservableViewModel"; path = ../..; sourceTree = "<group>"; };
 		1DDAF21F2935470A0049C114 /* KMPObservableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModel.swift; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		1D44EF76292C066B00465C43 /* KMPObservableViewModelSample */ = {
 			isa = PBXGroup;
 			children = (
+				1D60525F2EBF979B008B7573 /* Info.plist */,
 				1D44EF7B292C066C00465C43 /* Assets.xcassets */,
 				1DDE18842E114DE500227AE6 /* ChangeCounter.swift */,
 				1DF227AF2C2856BC00D8B3A7 /* ContentViewCompose.swift */,
@@ -488,6 +490,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KMPObservableViewModelSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -522,6 +525,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KMPObservableViewModelSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
