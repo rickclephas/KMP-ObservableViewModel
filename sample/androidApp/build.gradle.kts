@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.rickclephas.kmp.observableviewmodel.sample"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.rickclephas.kmp.observableviewmodel.sample"
         minSdk = 28
