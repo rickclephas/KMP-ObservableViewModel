@@ -168,7 +168,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', '1.0.2'
+pod 'KMPObservableViewModelSwiftUI', git: 'https://github.com/rickclephas/KMP-ObservableViewModel.git', tag: 'v1.0.2'
 ```
 </p>
 </details>
