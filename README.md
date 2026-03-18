@@ -21,12 +21,13 @@ but not all targets support AndroidX and/or SwiftUI interop:
 | JS         |      ✅      |    -     |    -    |
 | Wasm       |      ✅      |    -     |    -    |
 
-The latest version of the library uses Kotlin version `2.3.10`.  
+The latest version of the library uses Kotlin version `2.3.20`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   | Coroutines | AndroidX Lifecycle |
 |---------------|-----------------|:----------:|:----------:|:------------------:|
-| **_latest_**  | **_no suffix_** | **2.3.10** | **1.10.1** |     **2.8.7**      |
+| **_latest_**  | **_no suffix_** | **2.3.20** | **1.10.1** |     **2.8.7**      |
+| 1.0.2         | _no suffix_     |   2.3.10   |   1.10.1   |       2.8.7        |
 | 1.0.1         | _no suffix_     |   2.3.0    |   1.10.1   |       2.8.7        |
 | 1.0.0         | _no suffix_     |   2.2.21   |   1.10.1   |       2.8.7        |
 | 1.0.0-BETA-13 | _no suffix_     |   2.2.10   |   1.10.1   |       2.8.7        |
@@ -49,7 +50,7 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.2")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.3")
             }
         }
     }
@@ -156,7 +157,7 @@ After you have configured your `shared` Kotlin module and created a ViewModel it
 Start by adding the Swift package to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.2")
+    .package(url: "https://github.com/rickclephas/KMP-ObservableViewModel.git", from: "1.0.3")
 ]
 ```
 
@@ -168,7 +169,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you like you can also use CocoaPods instead of SPM:
 ```ruby
-pod 'KMPObservableViewModelSwiftUI', git: 'https://github.com/rickclephas/KMP-ObservableViewModel.git', tag: 'v1.0.2'
+pod 'KMPObservableViewModelSwiftUI', git: 'https://github.com/rickclephas/KMP-ObservableViewModel.git', tag: 'v1.0.3'
 ```
 </p>
 </details>
