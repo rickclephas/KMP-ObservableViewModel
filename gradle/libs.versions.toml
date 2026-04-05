@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.3.20"
 kotlinx-coroutines = "1.10.1"
-android = "8.2.2"
+android = "8.5.2"
 androidx-lifecycle = "2.8.7"
 atomicfu = "0.29.0"
 
