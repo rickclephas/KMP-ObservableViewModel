@@ -21,8 +21,6 @@ kotlin {
                 withJvm()
                 withLinuxX64()
                 group("macos")
-            }
-            group("nonAndroidx") {
                 withJs()
                 withLinuxArm64()
                 group("mingw")
