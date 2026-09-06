@@ -1,53 +1,70 @@
 package com.rickclephas.kmp.observableviewmodel
 
+import androidx.lifecycle.ViewModel as AndroidXViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewmodel.CreationExtras
 import kotlinx.coroutines.CoroutineScope
+import kotlin.reflect.KClass
 
 /**
  * A Kotlin Multiplatform ViewModel.
  */
-public expect abstract class ViewModel {
+public abstract class ViewModel: AndroidXViewModel {
 
     /**
      * The [ViewModelScope] containing the [CoroutineScope] of this ViewModel.
      */
     public val viewModelScope: ViewModelScope
 
-    public constructor()
+    public constructor(): this(DefaultCoroutineScope())
 
-    public constructor(coroutineScope: CoroutineScope)
+    public constructor(coroutineScope: CoroutineScope): super(coroutineScope) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
 
-    public constructor(vararg closeables: AutoCloseable)
+    public constructor(vararg closeables: AutoCloseable): this(DefaultCoroutineScope(), *closeables)
 
-    public constructor(coroutineScope: CoroutineScope, vararg closeables: AutoCloseable)
+    public constructor(
+        coroutineScope: CoroutineScope,
+        vararg closeables: AutoCloseable
+    ): super(coroutineScope, *closeables) {
+        viewModelScope = ViewModelScope(coroutineScope)
+    }
 
     /**
-     * Called when this ViewModel is no longer used and will be destroyed.
+     * Internal KMP-ObservableViewModel function used by the Swift implementation to clear the ViewModel.
+     * Warning: you should NOT call this yourself!
      */
-    public open fun onCleared()
+    @InternalKMPObservableViewModelApi
+    public fun clear() {
+        // We can't directly call the internal clear function from AndroidX.
+        // To call it indirectly we use the public Store and Provider APIs instead.
+        val store = ViewModelStore()
+        ViewModelProvider.create(
+            store = store,
+            factory = object : ViewModelProvider.Factory {
+                override fun <T : AndroidXViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
+                    @Suppress("UNCHECKED_CAST")
+                    return this@ViewModel as T
+                }
+            }
+        )[ViewModel::class]
+        store.clear()
+    }
 }
 
-/**
- * Adds an [AutoCloseable] resource with an associated [key] to this [ViewModel].
- * The resource will be closed right before the [onCleared][ViewModel.onCleared] method is called.
- *
- * If the [key] already has a resource associated with it, the old resource will be replaced and closed immediately.
- *
- * If [onCleared][ViewModel.onCleared] has already been called,
- * the provided resource will not be added and will be closed immediately.
- */
-public expect fun ViewModel.addCloseable(key: String, closeable: AutoCloseable)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE", "DeprecatedCallableAddReplaceWith")
+@Deprecated("Use addCloseable on AndroidX ViewModel directly")
+public inline fun ViewModel.addCloseable(key: String, closeable: AutoCloseable): Unit =
+    addCloseable(key, closeable)
 
-/**
- * Adds an [AutoCloseable] resource to this [ViewModel].
- * The resource will be closed right before the [onCleared][ViewModel.onCleared] method is called.
- *
- * If [onCleared][ViewModel.onCleared] has already been called,
- * the provided resource will not be added and will be closed immediately.
- */
-public expect fun ViewModel.addCloseable(closeable: AutoCloseable)
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE", "DeprecatedCallableAddReplaceWith")
+@Deprecated("Use addCloseable on AndroidX ViewModel directly")
+public inline fun ViewModel.addCloseable(closeable: AutoCloseable): Unit =
+    addCloseable(closeable)
 
-/**
- * Returns the [AutoCloseable] resource associated to the given [key],
- * or `null` if such a [key] is not present in this [ViewModel].
- */
-public expect fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T?
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE", "DeprecatedCallableAddReplaceWith")
+@Deprecated("Use getCloseable on AndroidX ViewModel directly")
+public inline fun <T : AutoCloseable> ViewModel.getCloseable(key: String): T? =
+    getCloseable(key)
