@@ -15,21 +15,6 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     applyDefaultHierarchyTemplate {
         common {
-            group("androidx") {
-                withAndroidTarget()
-                group("ios")
-                withJvm()
-                withLinuxX64()
-                group("macos")
-            }
-            group("nonAndroidx") {
-                withJs()
-                withLinuxArm64()
-                group("mingw")
-                group("tvos")
-                withWasmJs()
-                group("watchos")
-            }
             group("nonApple") {
                 withAndroidTarget()
                 withJvm()
@@ -90,17 +75,12 @@ kotlin {
         commonMain {
             dependencies {
                 api(libs.kotlinx.coroutines.core)
+                api(libs.androidx.lifecycle.viewmodel)
             }
         }
         commonTest {
             dependencies {
                 implementation(libs.kotlin.test)
-            }
-        }
-
-        val androidxMain by getting {
-            dependencies {
-                api(libs.androidx.lifecycle.viewmodel)
             }
         }
     }
